@@ -13,11 +13,6 @@ namespace Mentor.Controllers
             return View();
         }
 
-        public ActionResult Start()
-        {
-            return View();
-        }
-
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";

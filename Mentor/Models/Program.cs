@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Mentor.Models.DomainModel
+namespace Mentor.Models
 {
     public enum Visibility
     {
@@ -20,7 +20,7 @@ namespace Mentor.Models.DomainModel
 
 
         public Visibility Visibility { get; set; }
-        public string Name { get; set; }
+        public string Name { get; set; } 
         public int Rating { get; set; }
         public byte[] Picture { get; set; }
 

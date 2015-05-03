@@ -29,9 +29,7 @@ namespace Mentor.Models
 
         public virtual ICollection<Interest> Interests { get; set; }
         public virtual Mentee Mentee { get; set; }
-        /* I dont quite understand why the following piece of code needs a ModelDomain 
-         prefix, when Mentee doesn't. We have the "using ModelDomain" */
-        public virtual DomainModel.Mentor Mentor { get; set; }
+        public virtual Mentor Mentor { get; set; }
 
 
 
@@ -50,11 +48,17 @@ namespace Mentor.Models
         {
         }
 
+        DbSet<ApplicationUser> ApplicationUserDbSet { get; set; }
+        DbSet<Interest> InterestDbSet { get; set; }
+        DbSet<Program> ProgramDbSet { get; set; }
+
+       
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             /* Many-to-many between Mentor and Program, One mentor can be part of many programs, 
              and a program can have many mentors part of it.*/
-            modelBuilder.Entity<DomainModel.Mentor>()
+            modelBuilder.Entity<Mentor>()
                         .HasMany<Program>(s => s.Programs)
                         .WithMany(c => c.Mentors)
                         .Map(cs =>
@@ -73,7 +77,7 @@ namespace Mentor.Models
                         {
                             cs.MapLeftKey("MenteeRefId");
                             cs.MapRightKey("ProgramRefId");
-                            cs.ToTable("MentorPrograms");
+                            cs.ToTable("MenteePrograms");
                         });
 
             /* one-to-many between Interest and Program, one interest can have many programs, but one 
@@ -90,9 +94,9 @@ namespace Mentor.Models
                       .WithMany(c => c.ApplicationUsers)
                       .Map(cs =>
                       {
-                          cs.MapLeftKey("MenteeRefId");
-                          cs.MapRightKey("ProgramRefId");
-                          cs.ToTable("MentorPrograms");
+                          cs.MapLeftKey("ApplicationUserRefId");
+                          cs.MapRightKey("InterestRefId");
+                          cs.ToTable("ApplicationUserInterest");
                       });
 
 

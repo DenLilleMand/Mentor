@@ -8,12 +8,9 @@ namespace Mentor.Models
 {
     public class Interest
     {
-        [Key, ForeignKey("ApplicationUser")]
         public int Id { get; set; }
         public string Name { get; set; }
         public virtual ICollection<Program> Programs { get; set; }
         public virtual ICollection<ApplicationUser> ApplicationUsers { get; set; }
-
-
     }
 }
