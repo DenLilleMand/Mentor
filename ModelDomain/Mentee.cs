@@ -13,6 +13,6 @@ namespace ModelDomain
         [Key,ForeignKey("ApplicationUser")]
         public int Id { get; set; }
         public string ProfileText { get; set; }
-        public virtual ICollection<MentorProgram> MentorPrograms { get; set; }
+        public virtual ICollection<Program> Programs { get; set; }
     }
 }

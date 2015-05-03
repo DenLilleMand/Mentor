@@ -15,6 +15,6 @@ namespace ModelDomain
         public int Rating { get; set; }
         public string MentorProfileText { get; set; }
         
-        public virtual  ICollection<MentorProgram> MentorPrograms { get; set; }
+        public virtual  ICollection<Program> Programs { get; set; }
     }
 }
