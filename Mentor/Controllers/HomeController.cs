@@ -13,10 +13,8 @@ namespace Mentor.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Start()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 

@@ -3,42 +3,64 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <title>WeYouMentor - social learning</title>
+    @Styles.Render("~/Content/css/bootstrap.css")
+    @Styles.Render("~/Content/css/footer.css")
+    @Styles.Render("~/Content/css/header.css")
 
+        @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/css/bootstrap.css" rel="stylesheet"/>
+    <link href="~/Content/css/font-awesome.css" rel="stylesheet" />
+    <link href="~/Content/css/footer.css" rel="stylesheet" />
+    <link href="~/Content/css/header.css" rel="stylesheet" />
+    <link href="~/Content/css/index.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
+    <div id="header">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- vores logo i øvre venstre hjørne -->
+                <a id="logo" href="/" class="col-md-2 nav-bar-item "></a>
+                <div class="col-md-2 pull-right nav-bar-item  div-btn">
+                    <button class="btn btn-special pull-right">Become A Mentor</button>
+                </div>
+                @Html.ActionLink("Sign up", "Register", "Account", routeValues: null, htmlAttributes: new { @class = "col-md-1 nav-bar-item pull-right", id = "signUpLink" })
+                @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { @class = "col-md-1 nav-bar-item pull-right", id = "loginLink" })
+                <div class="nav-bar-item pull-right">
+                    <i class="col-md-1 fa fa-search"></i>
+                    <input class="no-border" placeholder="Search Mentors" type="text">
+                </div>
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+<div>
+    @RenderBody()
+</div>
+
+    <footer class="footer-distributed">
+            <div class="footer-right">
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-linkedin"></i></a>
+                <a href="#"><i class="fa fa-github"></i></a>
+            </div>
+            <div class="footer-left">
+                <p class="footer-links">
+                    <a href="#">Home</a>
+                    ·
+                    <a href="#">Blog</a>
+                    ·
+                    <a href="#">About</a>
+                    ·
+                    <a href="#">Contact</a>
+                </p>
+                <p>WeYouMentor &copy; 2015</p>
+            </div>
+        </footer>
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
 </body>
 </html>

@@ -1,0 +1,151 @@
+
+body{
+    font: 13px/1.4 Helvetica, arial, nimbussansl, liberationsans, freesans, clean, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+p{
+    font-size: 15px;
+}
+
+a{
+    text-decoration: none;
+
+}
+
+h1, h2{
+    color: #fff;
+}
+
+.bg {
+    background: url("/Images/background4.jpg") no-repeat;
+    background-size: 100%;
+}
+
+/* align text in the middle of the screen*/
+.center-align-text{
+    text-align:center;
+}
+
+
+.middle-page{
+    margin-top: 10em;
+}
+
+.btn--large {
+    font-size: 16px;
+    padding: 18px 30px;
+}
+
+.btn--green{
+    background-color: #2bde73;
+    color: white;
+    font-weight: bold;
+    margin-top: 4em;
+}
+
+.page-wrapper{
+    /* fucking brilliant css: 100% of view port, so simplesmart */
+    height: 100vh;
+}
+
+#tagline{
+    font-size: 4em;
+}
+
+.circle-on-icon{
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    border: 1px solid #E5E5E5;
+
+    /*vertical align */
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    align-items: center;
+
+    /* place horizontally in center relative to parent div*/
+    margin: 0 auto;
+}
+
+.vertical-align{
+    /*vertical align */
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.presentation-text{
+
+}
+
+
+
+
+.bullseye-icon:before {
+    font-family: FontAwesome;
+    content: '\f140';
+    margin-left: 24px;
+    margin-top: 16px;
+    color: #007a87;
+}
+
+.users-icon:before{
+    font-family: FontAwesome;
+    content:'\f0c0';
+    margin-left: 20px;
+    margin-top: 16px;
+    color: #007a87;
+}
+
+.knowledge-icon:before{
+    font-family: FontAwesome;
+    content:'\f19d';
+    margin-left: 16px;
+    margin-top: 18px;
+    color: #007a87;
+}
+
+.middle-page-wrapper{
+    margin: 2em auto;
+    width:60vw;
+    height: 80vh;
+}
+
+.upper-left{
+    width:50%;
+    float: left;
+}
+
+.upper-rigth{
+    width:50%;
+    float: right;
+}
+
+.bottom-icon{
+    margin: 0 auto;
+}
+
+
+
+/*
+.btn-semi-transparent {
+    background: rgba(255,255,255,0.5);
+    border-style: none;
+}
+
+.btn-contrast {
+    border-color: #565a5c;
+    border-bottom-color: #383b3c;
+    color: #fff;
+}
+*/

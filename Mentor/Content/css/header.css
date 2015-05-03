@@ -1,0 +1,54 @@
+﻿#header{
+    background-color: #fff;
+    border-bottom: solid 1px #d9d9de;
+}
+
+/*The size of the div containing the button in the top div */
+.div-btn{
+    width:12em;
+}
+
+/*the button in the top nav */
+.btn-special {
+    border-color: #007a87;
+    border-bottom-color: #004f58;
+    background-color: #007a87;
+    color: #fff;
+}
+/*Remove the outline and focus from the input*/
+.no-border{
+    background-color: transparent;
+    border: 0;
+    outline: 0;
+}
+
+
+/*Give some distance to the search icon from the search box*/
+i.fa.fa-search {
+    margin-right: 1em;
+}
+
+#logo{
+    background-image: url("/images/mentorLogo.png");
+    background-repeat: no-repeat;
+    display:block;
+    width: 150px;
+    margin: 7px 0 0 15px;
+}
+
+/* height and margin for the items in header */
+.nav-bar-item{
+    height: 56px;
+    margin: 7px 0 0 0;
+    padding: 0 0;
+
+    /*vertical align */
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    align-items: center;
+}
