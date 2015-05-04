@@ -172,6 +172,13 @@ namespace Mentor.Controllers
             return View(model);
         }
 
+        [AllowAnonymous]
+        public ViewResult NewAccountCheckEmail()
+        {
+            return View();
+        }
+
+
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]

@@ -1,41 +1,69 @@
 ﻿@model Mentor.Models.RegisterViewModel
-@{
-    ViewBag.Title = "Register";
-}
 
-<h2>@ViewBag.Title.</h2>
+<link href="~/Content/css/register.css" rel="stylesheet" />
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-    <h4>Create a new account.</h4>
-    <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Register" />
-        </div>
-    </div>
-}
+<div class="page-wrapper">
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "center-align form-group", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="container">
+            <div class="center-div rounded-content center-horizontal">
+                <h2 class="title">
+                    Sign up
+                </h2>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+                <div class="row">
+                    <div class="form-group col-md-10 center-horizontal input-margin">
+                        @Html.ValidationSummary("", new {@class = "text-danger"})
+                        @Html.TextBoxFor(m => m.Email, new {@id = "user_email", @class = "form-control", @placeholder = "Email"})
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-10 center-horizontal input-margin">
+                        @Html.TextBoxFor(m => m.ConfirmEmail, new {@id = "user_email_confirmation", @class = "form-control", @placeholder = "Re-enter Email"})
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-10 center-horizontal input-margin">
+                        @Html.PasswordFor(m => m.Password, new {@id = "user_password", @class = "form-control", @placeholder = "Password"})
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-10 center-horizontal input-margin">
+                        @Html.PasswordFor(m => m.ConfirmPassword, new {@id = "user_password_confirmation", @class = "form-control", @placeholder = "Re-enter Password"})
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-10 center-horizontal input-margin check">
+                        @Html.CheckBoxFor(m => m.ReceiveNewsLetter, new {@id = "user_newsletter_opt_in", @class = "col-md-1"})
+                        @Html.LabelFor(m => m.ReceiveNewsLetter, new {@id = "user_newsletter", @class = "col-md-11",})
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="btn btn--green btn--large col-md-10 center-horizontal input-margin">
+                            Sign me up!
+                        </div>
+                    </div>
+                    <p>
+                        By signing up, you agree to our <a class="popup" href="/terms-of-use" target="_blank">terms of use</a>, <a class="popup" href="/privacy" target="_blank">privacy policy</a>, and <a class="popup" href="/privacy#technology" target="_blank">cookie policy</a>.
+                    </p>
+                    <div>
+                        <div class="line"></div>
+                        <div class="text">or</div>
+                    </div>
+                    <a href="/signup with facebook here" class="btn btn--facebook"><span class="ksr-icon__facebook"></span> Log in with Facebook</a>
+                    <p class="center h6 grey-dark">
+                        We'll never post anything on Facebook<br>without your permission.
+                    </p>
+
+                </div>
+            </div>
+        s</div>
+    }
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

@@ -62,6 +62,7 @@ namespace Mentor
             };
 
             // Configure user lockout defaults
+            //UserLockoutEnabledByDefault betyder at det er muligt for en oprettet user at blive locked ud
             manager.UserLockoutEnabledByDefault = true;
             manager.DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(5);
             manager.MaxFailedAccessAttemptsBeforeLockout = 5;
