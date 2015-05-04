@@ -10,7 +10,8 @@ namespace Mentor.Models
         public int Id { get; set; }
         public int Rating { get; set; }
         public string MentorProfileText { get; set; }
-        
+
+        public virtual ApplicationUser ApplicationUser { get; set; }
         public virtual  ICollection<Program> Programs { get; set; }
     }
 }

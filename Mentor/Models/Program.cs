@@ -24,6 +24,7 @@ namespace Mentor.Models
         public int Rating { get; set; }
         public byte[] Picture { get; set; }
 
+        public virtual ApplicationUser ApplicationUser { get; set; }
         public virtual Interest Interest { get; set; }
         public virtual ICollection<Mentor> Mentors { get; set; }
         public virtual ICollection<Mentee> Mentees { get; set; }

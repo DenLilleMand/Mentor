@@ -9,6 +9,8 @@ namespace Mentor.Models
         [Key,ForeignKey("ApplicationUser")]
         public int Id { get; set; }
         public string ProfileText { get; set; }
+
+        public virtual ApplicationUser ApplicationUser { get; set; }
         public virtual ICollection<Program> Programs { get; set; }
     }
 }

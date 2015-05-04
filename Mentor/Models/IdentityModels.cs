@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Security.Claims;
-﻿using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -14,12 +13,9 @@ namespace Mentor.Models
     {
         /*
          *  IdentityUser allready has an attribut called 'Id', so we dont have to make one,
-         *  Thats why we're still able to create foreignkeys on this entity, and thereby connecting
-         *  it to other classes.
+         *  Thats why we're still able to create foreignkey relationships to other entities with this entity.
          */
-        [Required]
         public string FirstName { get; set; }
-        [Required]
         public string LastName { get; set; }
         public int Age { get; set; }
         public byte[] Picture { get; set; }
@@ -46,9 +42,11 @@ namespace Mentor.Models
     {
         public ApplicationDbContext(): base("DefaultConnection")
         {
+            Database.SetInitializer<ApplicationDbContext>(new ApplicationDbContextInitializer());
+            /*Disable initializer if we feel like it at some point:  */
+            /*Database.SetInitializer<SchoolDBContext>(null); */
         }
 
-        DbSet<ApplicationUser> ApplicationUserDbSet { get; set; }
         DbSet<Interest> InterestDbSet { get; set; }
         DbSet<Program> ProgramDbSet { get; set; }
 
@@ -56,6 +54,9 @@ namespace Mentor.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder); /*Initializes the inherited classes (relationships) such as CustomUserLogin,
+                                                 *  CustomUserRole & CustomUserClaim*/
+
             /* Many-to-many between Mentor and Program, One mentor can be part of many programs, 
              and a program can have many mentors part of it.*/
             modelBuilder.Entity<Mentor>()
@@ -88,7 +89,7 @@ namespace Mentor.Models
                         .HasForeignKey(s => s.InterestId);
 
             /* Many-to-many relationship between ApplicationUser and Interests. One ApplicationUser can 
-             * have many Interests, and one Interest can be adopted by many ApplicationUsers */
+             * have many Interests, and one Interest can be gained by many ApplicationUsers */
             modelBuilder.Entity<ApplicationUser>()
                       .HasMany<Interest>(s => s.Interests)
                       .WithMany(c => c.ApplicationUsers)
