@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 namespace Mentor.Models
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
-    public class ApplicationUser : IdentityUser<int, CustomUserLogin, CustomUserRole,CustomUserClaim>
+    public class ApplicationUser : IdentityUser<int, CustomUserLogin, CustomUserRole, CustomUserClaim>
     {
         /*
          *  IdentityUser allready has an attribut called 'Id', so we dont have to make one,
@@ -21,13 +22,15 @@ namespace Mentor.Models
         public byte[] Picture { get; set; }
         public bool IsMentor { get; set; }
         public bool IsMentee { get; set; }
+        public string ProfileText { get; set; }
 
 
         public virtual ICollection<Interest> Interests { get; set; }
+        
+
         public virtual Mentee Mentee { get; set; }
+
         public virtual Mentor Mentor { get; set; }
-
-
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser, int> manager)
         {
@@ -38,30 +41,35 @@ namespace Mentor.Models
         }
     }
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, CustomRole,int, CustomUserLogin, CustomUserRole, CustomUserClaim>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, CustomRole, int, CustomUserLogin, CustomUserRole, CustomUserClaim>
     {
-        public ApplicationDbContext(): base("DefaultConnection")
+        public ApplicationDbContext()
+            : base("DefaultConnection")
         {
-            Database.SetInitializer<ApplicationDbContext>(new ApplicationDbContextInitializer());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Migrations.Configuration>("DefaultConnection"));
             /*Disable initializer if we feel like it at some point:  */
-            /*Database.SetInitializer<SchoolDBContext>(null); */
+            /*Database.SetInitializer<ApplicationDbContext>(null); */
         }
 
         DbSet<Interest> InterestDbSet { get; set; }
         DbSet<Program> ProgramDbSet { get; set; }
+ /*       DbSet<Mentor> MentorDbSet { get; set; }
+        DbSet<Mentee> MenteeDbSet { get; set; }*/
 
-       
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder); /*Initializes the inherited classes (relationships) such as CustomUserLogin,
                                                  *  CustomUserRole & CustomUserClaim*/
 
+
+
             /* Many-to-many between Mentor and Program, One mentor can be part of many programs, 
              and a program can have many mentors part of it.*/
             modelBuilder.Entity<Mentor>()
-                        .HasMany<Program>(s => s.Programs)
-                        .WithMany(c => c.Mentors)
+                        .HasMany<Program>(p => p.Programs)
+                        .WithMany(m => m.Mentors)
                         .Map(cs =>
                         {
                             cs.MapLeftKey("MentorRefId");
@@ -72,8 +80,8 @@ namespace Mentor.Models
             /* Many-to-many between Mentee and Program, One mentee can be part of many programs, 
              * and a program can have many mentees part of it.*/
             modelBuilder.Entity<Mentee>()
-                        .HasMany<Program>(s => s.Programs)
-                        .WithMany(c => c.Mentees)
+                        .HasMany<Program>(p => p.Programs)
+                        .WithMany(m => m.Mentees)
                         .Map(cs =>
                         {
                             cs.MapLeftKey("MenteeRefId");
@@ -82,17 +90,17 @@ namespace Mentor.Models
                         });
 
             /* one-to-many between Interest and Program, one interest can have many programs, but one 
-             * program can only have one interest.*/ 
+             * program can only have one interest.*/
             modelBuilder.Entity<Program>()
-                        .HasRequired<Interest>(s => s.Interest)
-                        .WithMany(s => s.Programs)
-                        .HasForeignKey(s => s.InterestId);
+                        .HasRequired<Interest>(i => i.Interest)
+                        .WithMany(p => p.Programs)
+                        .HasForeignKey(i => i.InterestId);
 
             /* Many-to-many relationship between ApplicationUser and Interests. One ApplicationUser can 
              * have many Interests, and one Interest can be gained by many ApplicationUsers */
             modelBuilder.Entity<ApplicationUser>()
-                      .HasMany<Interest>(s => s.Interests)
-                      .WithMany(c => c.ApplicationUsers)
+                      .HasMany<Interest>(i => i.Interests)
+                      .WithMany(a => a.ApplicationUsers)
                       .Map(cs =>
                       {
                           cs.MapLeftKey("ApplicationUserRefId");
@@ -100,7 +108,14 @@ namespace Mentor.Models
                           cs.ToTable("ApplicationUserInterest");
                       });
 
+/*             modelBuilder.Entity<Mentee>().HasKey(m => m.MenteeId);
+             modelBuilder.Entity<Mentor>().HasKey(m => m.MentorId);*/
+/*
+            modelBuilder.Entity<ApplicationUser>()
+                .HasRequired(m => m.Mentor);
 
+            modelBuilder.Entity<ApplicationUser>()
+                .HasRequired(m => m.Mentee);*/
 
 
         }
@@ -124,14 +139,16 @@ namespace Mentor.Models
 
     public class CustomUserStore : UserStore<ApplicationUser, CustomRole, int, CustomUserLogin, CustomUserRole, CustomUserClaim>
     {
-        public CustomUserStore(ApplicationDbContext context): base(context)
+        public CustomUserStore(ApplicationDbContext context)
+            : base(context)
         {
         }
     }
 
     public class CustomRoleStore : RoleStore<CustomRole, int, CustomUserRole>
     {
-        public CustomRoleStore(ApplicationDbContext context): base(context)
+        public CustomRoleStore(ApplicationDbContext context)
+            : base(context)
         {
         }
     }
