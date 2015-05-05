@@ -169,8 +169,6 @@
     <Compile Include="Models\Interest.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Mentee.cs" />
-    <Compile Include="Models\Mentor.cs" />
     <Compile Include="Models\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />

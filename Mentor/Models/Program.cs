@@ -17,16 +17,14 @@ namespace Mentor.Models
 
         [ForeignKey("Interest")]
         public int InterestId { get; set; }
-
-
+        
         public Visibility Visibility { get; set; }
         public string Name { get; set; } 
-        public int Rating { get; set; }
         public byte[] Picture { get; set; }
 
         public virtual ApplicationUser ApplicationUser { get; set; }
         public virtual Interest Interest { get; set; }
-        public virtual ICollection<Mentor> Mentors { get; set; }
-        public virtual ICollection<Mentee> Mentees { get; set; }
+        public virtual ICollection<ApplicationUser> Mentors { get; set; }
+        public virtual ICollection<ApplicationUser> Mentees { get; set; }
     }
 }

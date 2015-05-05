@@ -24,13 +24,9 @@ namespace Mentor.Models
         public bool IsMentee { get; set; }
         public string ProfileText { get; set; }
 
-
         public virtual ICollection<Interest> Interests { get; set; }
-        
-
-        public virtual Mentee Mentee { get; set; }
-
-        public virtual Mentor Mentor { get; set; }
+        public virtual ICollection<Program> MenteePrograms {get; set; }
+        public virtual ICollection<Program> MentorPrograms { get; set; } 
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser, int> manager)
         {
@@ -43,19 +39,15 @@ namespace Mentor.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, CustomRole, int, CustomUserLogin, CustomUserRole, CustomUserClaim>
     {
-        public ApplicationDbContext()
-            : base("DefaultConnection")
+        public ApplicationDbContext(): base("DefaultConnection")
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Migrations.Configuration>("DefaultConnection"));
             /*Disable initializer if we feel like it at some point:  */
             /*Database.SetInitializer<ApplicationDbContext>(null); */
         }
 
-        DbSet<Interest> InterestDbSet { get; set; }
-        DbSet<Program> ProgramDbSet { get; set; }
- /*       DbSet<Mentor> MentorDbSet { get; set; }
-        DbSet<Mentee> MenteeDbSet { get; set; }*/
-
+        DbSet<Interest> Interests { get; set; }
+        DbSet<Program> Programs { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -63,37 +55,35 @@ namespace Mentor.Models
             base.OnModelCreating(modelBuilder); /*Initializes the inherited classes (relationships) such as CustomUserLogin,
                                                  *  CustomUserRole & CustomUserClaim*/
 
-
-
             /* Many-to-many between Mentor and Program, One mentor can be part of many programs, 
              and a program can have many mentors part of it.*/
-            modelBuilder.Entity<Mentor>()
-                        .HasMany<Program>(p => p.Programs)
-                        .WithMany(m => m.Mentors)
+            modelBuilder.Entity<ApplicationUser>()
+                        .HasMany<Program>(a => a.MentorPrograms)
+                        .WithMany(p => p.Mentors)
                         .Map(cs =>
                         {
                             cs.MapLeftKey("MentorRefId");
-                            cs.MapRightKey("ProgramRefId");
+                            cs.MapRightKey("MentorProgramRefId");
                             cs.ToTable("MentorPrograms");
                         });
 
-            /* Many-to-many between Mentee and Program, One mentee can be part of many programs, 
-             * and a program can have many mentees part of it.*/
-            modelBuilder.Entity<Mentee>()
-                        .HasMany<Program>(p => p.Programs)
-                        .WithMany(m => m.Mentees)
-                        .Map(cs =>
-                        {
-                            cs.MapLeftKey("MenteeRefId");
-                            cs.MapRightKey("ProgramRefId");
-                            cs.ToTable("MenteePrograms");
-                        });
+            modelBuilder.Entity<ApplicationUser>()
+                      .HasMany<Program>(p => p.MenteePrograms)
+                      .WithMany(m => m.Mentees)
+                      .Map(cs =>
+                      {
+                          cs.MapLeftKey("MenteeRefId");
+                          cs.MapRightKey("MenteeProgramRefId");
+                          cs.ToTable("MenteePrograms");
+                      });
+
+
 
             /* one-to-many between Interest and Program, one interest can have many programs, but one 
              * program can only have one interest.*/
             modelBuilder.Entity<Program>()
-                        .HasRequired<Interest>(i => i.Interest)
-                        .WithMany(p => p.Programs)
+                        .HasRequired<Interest>(p => p.Interest)
+                        .WithMany(i => i.Programs)
                         .HasForeignKey(i => i.InterestId);
 
             /* Many-to-many relationship between ApplicationUser and Interests. One ApplicationUser can 
@@ -107,16 +97,6 @@ namespace Mentor.Models
                           cs.MapRightKey("InterestRefId");
                           cs.ToTable("ApplicationUserInterest");
                       });
-
-/*             modelBuilder.Entity<Mentee>().HasKey(m => m.MenteeId);
-             modelBuilder.Entity<Mentor>().HasKey(m => m.MentorId);*/
-/*
-            modelBuilder.Entity<ApplicationUser>()
-                .HasRequired(m => m.Mentor);
-
-            modelBuilder.Entity<ApplicationUser>()
-                .HasRequired(m => m.Mentee);*/
-
 
         }
 
