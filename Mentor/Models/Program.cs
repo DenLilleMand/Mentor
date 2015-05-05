@@ -12,19 +12,24 @@ namespace Mentor.Models
 
     public class Program
     {
-        [Key, ForeignKey("ApplicationUser")]
+
+        public Program()
+        {
+            this.Mentors = new HashSet<ApplicationUser>();
+            this.Mentee = new HashSet<ApplicationUser>();
+            this.Admins = new HashSet<ApplicationUser>();
+        }
+
         public int Id { get; set; }
-
-        [ForeignKey("Interest")]
-        public int InterestId { get; set; }
-        
         public Visibility Visibility { get; set; }
-        public string Name { get; set; } 
-        public byte[] Picture { get; set; }
+        public string Name { get; set; }
 
-        public virtual ApplicationUser ApplicationUser { get; set; }
-        public virtual Interest Interest { get; set; }
+
+        public virtual ICollection<ApplicationUser> Admins { get; set; }
         public virtual ICollection<ApplicationUser> Mentors { get; set; }
-        public virtual ICollection<ApplicationUser> Mentees { get; set; }
+        public virtual ICollection<ApplicationUser> Mentee  { get; set; } 
+
+
+
     }
 }

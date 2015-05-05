@@ -8,9 +8,17 @@ namespace Mentor.Models
 {
     public class Interest
     {
-        public int Id { get; set; }
+
+        public Interest()
+        {
+            this.ApplicationUsers = new HashSet<ApplicationUser>();
+        }
+
+        public int InterestId { get; set; }
         public string Name { get; set; }
-        public virtual ICollection<Program> Programs { get; set; }
-        public virtual ICollection<ApplicationUser> ApplicationUsers { get; set; }
+
+
+        public virtual ICollection<ApplicationUser> ApplicationUsers { get; set; } 
+
     }
 }

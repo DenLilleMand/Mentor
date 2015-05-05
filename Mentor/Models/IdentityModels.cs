@@ -25,8 +25,9 @@ namespace Mentor.Models
         public string ProfileText { get; set; }
 
         public virtual ICollection<Interest> Interests { get; set; }
-        public virtual ICollection<Program> MenteePrograms {get; set; }
-        public virtual ICollection<Program> MentorPrograms { get; set; } 
+        public virtual ICollection<Program> MentorPrograms { get; set; }
+        public virtual ICollection<Program> MenteePrograms { get; set; }
+        public virtual ICollection<Program> AdminForPrograms { get; set; } 
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser, int> manager)
         {
@@ -41,53 +42,22 @@ namespace Mentor.Models
     {
         public ApplicationDbContext(): base("DefaultConnection")
         {
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Migrations.Configuration>("DefaultConnection"));
+           // Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Migrations.Configuration>("DefaultConnection"));
             /*Disable initializer if we feel like it at some point:  */
             /*Database.SetInitializer<ApplicationDbContext>(null); */
         }
 
-        DbSet<Interest> Interests { get; set; }
-        DbSet<Program> Programs { get; set; }
+        DbSet<Interest> Interests   { get; set; }
+        DbSet<Program> Programs     { get; set; }
+       
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder); /*Initializes the inherited classes (relationships) such as CustomUserLogin,
                                                  *  CustomUserRole & CustomUserClaim*/
-
-            /* Many-to-many between Mentor and Program, One mentor can be part of many programs, 
-             and a program can have many mentors part of it.*/
-            modelBuilder.Entity<ApplicationUser>()
-                        .HasMany<Program>(a => a.MentorPrograms)
-                        .WithMany(p => p.Mentors)
-                        .Map(cs =>
-                        {
-                            cs.MapLeftKey("MentorRefId");
-                            cs.MapRightKey("MentorProgramRefId");
-                            cs.ToTable("MentorPrograms");
-                        });
-
-            modelBuilder.Entity<ApplicationUser>()
-                      .HasMany<Program>(p => p.MenteePrograms)
-                      .WithMany(m => m.Mentees)
-                      .Map(cs =>
-                      {
-                          cs.MapLeftKey("MenteeRefId");
-                          cs.MapRightKey("MenteeProgramRefId");
-                          cs.ToTable("MenteePrograms");
-                      });
-
-
-
-            /* one-to-many between Interest and Program, one interest can have many programs, but one 
-             * program can only have one interest.*/
-            modelBuilder.Entity<Program>()
-                        .HasRequired<Interest>(p => p.Interest)
-                        .WithMany(i => i.Programs)
-                        .HasForeignKey(i => i.InterestId);
-
             /* Many-to-many relationship between ApplicationUser and Interests. One ApplicationUser can 
-             * have many Interests, and one Interest can be gained by many ApplicationUsers */
+           * have many Interests, and one Interest can be gained by many ApplicationUsers */
             modelBuilder.Entity<ApplicationUser>()
                       .HasMany<Interest>(i => i.Interests)
                       .WithMany(a => a.ApplicationUsers)
@@ -98,6 +68,53 @@ namespace Mentor.Models
                           cs.ToTable("ApplicationUserInterest");
                       });
 
+            modelBuilder.Entity<ApplicationUser>()
+                      .HasMany<Program>(a => a.MentorPrograms)
+                      .WithMany(p => p.Mentors)
+                      .Map(cs =>
+                      {
+                          cs.MapLeftKey("MentorRefId");
+                          cs.MapRightKey("ProgramRefId");
+                          cs.ToTable("MentorProgram");
+                      });
+
+            modelBuilder.Entity<ApplicationUser>()
+                      .HasMany<Program>(a => a.MenteePrograms)
+                      .WithMany(p => p.Mentee)
+                      .Map(cs =>
+                      {
+                          cs.MapLeftKey("MenteeRefId");
+                          cs.MapRightKey("ProgramRefId");
+                          cs.ToTable("MenteeProgram");
+                      });
+
+            modelBuilder.Entity<ApplicationUser>()
+                     .HasMany<Program>(a => a.MenteePrograms)
+                     .WithMany(p => p.Mentee)
+                     .Map(cs =>
+                     {
+                         cs.MapLeftKey("MenteeRefId");
+                         cs.MapRightKey("ProgramRefId");
+                         cs.ToTable("MenteeProgram");
+                     });
+            modelBuilder.Entity<ApplicationUser>()
+                    .HasMany<Program>(a => a.AdminForPrograms)
+                    .WithMany(p => p.Admins)
+                    .Map(cs =>
+                    {
+                        cs.MapLeftKey("AdminRefId");
+                        cs.MapRightKey("ProgramRefId");
+                        cs.ToTable("AdminProgram");
+                    });
+
+
+
+
+            
+
+
+
+         
         }
 
 
