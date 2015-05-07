@@ -62,14 +62,34 @@ namespace Mentor.Models
             /* Many-to-many relationship between ApplicationUser and Interests. One ApplicationUser can 
            * have many Interests, and one Interest can be gained by many ApplicationUsers */
             modelBuilder.Entity<ApplicationUser>()
-                      .HasMany<Interest>(i => i.Interests)
-                      .WithMany(a => a.ApplicationUsers)
+                      .HasMany<Interest>(i => i.MenteeInterests)
+                      .WithMany(a => a.MenteesApplicationUsers)
+                      .Map(cs =>
+                      {
+                          cs.MapLeftKey("ApplicationUserRefId");
+                          cs.MapRightKey("MenteeInterestRefId");
+                          cs.ToTable("ApplicationUserMenteeInterest");
+                      });
+
+            modelBuilder.Entity<ApplicationUser>()
+                      .HasMany<Interest>(i => i.MentorInterests)
+                      .WithMany(a => a.MentorApplicationUsers)
                       .Map(cs =>
                       {
                           cs.MapLeftKey("ApplicationUserRefId");
                           cs.MapRightKey("InterestRefId");
-                          cs.ToTable("ApplicationUserInterest");
+                          cs.ToTable("ApplicationUserMentorInterest");
                       });
+
+            modelBuilder.Entity<ApplicationUser>()
+                    .HasMany<Interest>(i => i.UndefinedInterests)
+                    .WithMany(a => a.UndefinedApplicationUsers)
+                    .Map(cs =>
+                    {
+                        cs.MapLeftKey("ApplicationUserRefId");
+                        cs.MapRightKey("InterestRefId");
+                        cs.ToTable("ApplicationUserUndefinedInterests");
+                    });
 
             modelBuilder.Entity<ApplicationUser>()
                       .HasMany<Program>(a => a.MentorPrograms)
@@ -100,6 +120,7 @@ namespace Mentor.Models
                          cs.MapRightKey("ProgramRefId");
                          cs.ToTable("MenteeProgram");
                      });
+            
             modelBuilder.Entity<ApplicationUser>()
                     .HasMany<Program>(a => a.AdminForPrograms)
                     .WithMany(p => p.Admins)
@@ -110,14 +131,11 @@ namespace Mentor.Models
                         cs.ToTable("AdminProgram");
                     });
 
+            modelBuilder.Entity<Program>()
+                .HasRequired<Interest>(p => p.Interest)
+                .WithMany(i => i.ProgramInterests)
+                .HasForeignKey(p => p.InterestId);
 
-
-
-            
-
-
-
-         
         }
 
 

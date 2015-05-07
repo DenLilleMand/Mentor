@@ -1,0 +1,302 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" content="width=device-width, initial-scale=1">
+    <title>Welcome to my WeYouMentor</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <link href="../../Content/css/bootstrap.css" rel="stylesheet" />
+
+    <link href="../../Content/css/profile.css" rel="stylesheet" />
+</head>
+<body style="height: 1000px" id="profileBody">
+
+
+    <nav class="navbar navbar-default" style="background-color:  #3B5998;">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div style="display: inline" class="navbar-header">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand asizeColor" href="#">Dashboard/Logo</a>
+                </div>
+
+
+
+            </div>
+            <form class="navbar-form navbar-left" role="search">
+                <div class="form-group has-feedback ">
+
+                    <input id="inputSearch" style="width: 350px;" type="text" class="form-control inputClass" data-toggle="dropdown" role="button" aria-expanded="false" onkeyup="searchForThings()" placeholder="Search for Mentors, Mentees and Mentor Programs">
+                    <i class=" glyphicon glyphicon-search form-control-feedback"></i>
+                   
+                    <ul id="searchField" class="dropdown-menu" role="menu">
+                        <li class="searchHeaders">Mentors</li>
+                        <li><a class="outputSearch" href=""><img src="~/pictures/b.png" class="searchPicture" />Matti Lund</a></li>
+                        <li><a class="outputSearch" href=""><img src="~/pictures/b.png" class="searchPicture" />Jon Arnfred</a></li>
+
+                        <li class="searchHeaders">Mentees</li>
+                        <li><a class="outputSearch" href=""><img src="~/pictures/b.png" class="searchPicture" />Martin Berg Petersen</a></li>
+                        <li><a class="outputSearch" href=""><img src="~/pictures/b.png" class="searchPicture" />Peter Hansen</a></li>
+                        <li class="searchHeaders">Mentor Programs</li>
+                        <li><a class="outputSearch" href=""><img src="~/pictures/b.png" alt="" class="searchPicture" />Badtminton</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#" id="searchResult" style="text-align: center">Se flere resultater for:</a></li>
+                    </ul>
+
+
+
+                </div>
+
+            </form>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+
+                    <!-- Messages messages -->
+
+                    <li>
+                        <a id="message" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="glyphicon glyphicon-comment"> 2</span></a>
+                        <ul id="messageField " class="dropdown-menu popUpBoxes " role="menu">
+                            <li class="MessagesHeaders">Messages</li>
+
+                            <li>
+                                <a href="">
+                                    Matti Lund
+                                    <p> Jeg er en glad lille nisse</p>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="">
+                                    Jon Arnfred
+                                    <p>Jeg er en glad lille nisse</p>
+                                </a>
+                            </li>
+
+                        </ul>
+
+                        <!-- Notifications messages -->
+                    <li>
+                        <a id="notifications" href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-exclamation-sign"> 2</span></a>
+
+                        <ul id="notificationsMessage " class="dropdown-menu popUpBoxes inboxMessagesAndNotifications" role="menu">
+                            <li class="MessagesHeaders">Notification</li>
+
+
+                            <li>
+                                <a href="">
+                                    Mentor Program
+
+                                    <p>Jesper synes godt om dig</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    Mentor Program
+
+                                    <p>Peter har tildmeldt din klasse</p>
+                                </a>
+                            </li>
+
+                        </ul>
+
+
+
+
+                    </li>
+
+                </ul>
+
+
+
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a id="profileInfo" class="navbar-brand asizeColor" href="#">Martin </a>
+                        <img id="pictureInfo" src="../pictures/b.png" height="25px" width="25px" />
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle asizeColor" data-toggle="dropdown" role="button" aria-expanded="false">Settings<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a class="asizeColor" href="#">TEST</a></li>
+                            <li><a class="asizeColor" href="#">TEST</a></li>
+                            <li><a class="asizeColor" href="#">TEST</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">LOG UD</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+
+
+    <div style="margin-left: 10%;margin-right: 10%;">
+        <div class="profileClass">
+            <div style="margin: 5px;   text-align:center;">
+                <img style=";margin-bottom: 5px;margin-top:5px;display: block;margin-left: auto;
+    margin-right: auto;" height="160" width="160" src="~/pictures/b.png" alt="" />
+
+                <h3>Martin Berg Petersen</h3>
+                <a class="btn btn-social-icon btn-lg btn-linkedin"><i class="fa fa-linkedin"></i></a>
+                <a class="btn btn-social-icon btn-lg btn-twitter"><i class="fa fa-twitter"></i></a>
+                <a class="btn btn-social-icon btn-lg btn-facebook"><i class="fa fa-facebook"></i></a>
+                <a class="btn btn-social-icon btn-lg btn-instagram"><i class="fa fa-instagram"></i></a>
+                <br />
+                <div style="background-color: transparent; overflow: auto;">
+                    <p style="padding: 5px;">Mentor Rating</p>
+                    <p style="text-align: left;">Possitive feedback: 99.2%</p>
+                    <a href=""><p style="text-align: left">See other peoples reviews</p></a>
+
+
+                </div>
+                <br />
+                <button style="width:100px;margin: 0 auto;">Message</button>
+
+
+            </div>
+
+        </div>
+
+
+
+        <div class="profileMentor">
+            <h3 style="text-align: center" class="mentorPicHeaderh3">Mentor Programs</h3>
+
+            <div class="containerPic" style="display: inline-block">
+                <a href="">
+                    <img style="margin-left: auto;
+    margin-right: auto; display: inline-block" src="~/pictures/480px-Soccer_ball.svg.png" alt="" />
+                </a>
+                <h3 class="textBoxHeader">Soccer</h3>
+            </div>
+
+            <div class="containerPic" style="display: inline-block">
+                <a href="">
+                    <img style="margin-left: auto;
+    margin-right: auto;display: inline-block" src="~/pictures/20120503202942.gif" alt="" />
+                </a>
+                <h3 class="textBoxHeader">ASP.NET</h3>
+
+            </div>
+
+            <div class="containerPic" style="display: inline-block">
+                <a href="">
+                    <img style="margin-left: auto;
+    margin-right: auto;display: inline-block" src="~/pictures/badtminton.jpg" alt="" />
+                </a>
+                <h3 class="textBoxHeader">Badtminton</h3>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="profileText">
+
+            <h4 style="padding: 5px;color: #000000;">Profile Text</h4>
+            <p style="padding: 5px;color:#000000;">
+                jeg er en gammel mandjeg er en gammel mandjeg er en gammel mandjeg er en gammel mandjeg er en gammel mandjeg er en gammel mandjeg er en gammel mandjeg er en gammel mand
+                g er en gammel mandjeg er en gammel mandjeg er en gammel mandjeg er en gammel mandjeg er en gammel mandjeg er en gammel mandjeg er en gammel mandjeg er en gammel mag er en gammel mandjeg er en gammel mandjeg er en gammel mandjeg er en gammel mandjeg er en gammel mandjeg er en gammel mandjeg er en gammel mandjeg er en gammel ma
+            </p>
+
+            <p style="padding: 5px;color:#000000;">
+                jeg er en gammel mandjeg er en gammel mandjeg er en gammel mandjeg er en gammel mandjeg er en gammel mandjeg er en gammel mandjeg er en gammel mandjeg er en gammel mand
+                g er en gammel mandjeg er en gammel mandjeg er en gammel mandjeg er en gammel mandjeg er en gammel mandjeg er en gammel mandjeg er en gammel mandjeg er en gammel mag er en gammel mandjeg er en gammel mandjeg er en gammel mandjeg er en gammel mandjeg er en gammel mandjeg er en gammel mandjeg er en gammel mandjeg er en gammel ma
+            </p>
+            <p style="padding: 5px;color:#000000;">
+                jeg er en gammel mandjeg er en gammel mandjeg er en gammel mandjeg er en gammel mandjeg er en gammel mandjeg er en gammel mandjeg er en gammel mandjeg er en gammel mand
+                g er en gammel mandjeg er en gammel mandjeg er en gammel mandjeg er en gammel mandjeg er en gammel mandjeg er en gammel mandjeg er en gammel mandjeg er en gammel mag er en gammel mandjeg er en gammel mandjeg er en gammel mandjeg er en gammel mandjeg er en gammel mandjeg er en gammel mandjeg er en gammel mandjeg er en gammel ma
+            </p>
+
+        </div>
+    </div>
+
+
+    <script src="~/Scripts/jquery-2.1.3.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+
+    <script>
+
+    function searchForThings(){
+        //show the searches
+        var inputSearchText = $("#inputSearch").val();
+       // alert('You pressed Seach button');
+
+        if(inputSearchText===""){
+            $('#searchField').hide();
+        }
+        else{
+            $('#searchField').show();
+           $ ('#searchResult').text("Show more results for: " + inputSearchText);
+        }
+
+
+    }
+    $(document).ready(function(){
+
+        $('.containerPic').on('click',function(){
+            var info = $(this).children('.textBoxHeader').text();
+            alert(info);
+
+        });
+        //we want to get the ID of the USER
+        //This is the searchInput Click
+        //to retrive the ID so we can send it to the
+        //persons "page"
+        $('a.outputSearch').on('click',function(){
+           var inputId =  $(this).text();
+            alert(inputId);
+        });
+
+        //The function thats open the messages
+        $('#message').on('click',function(){
+            $('#messageField').show();
+
+        });
+        //the Functions that opens the Notifications
+        $('#notifications').on('click',function(){
+            $('#notificationsMessage').show();
+
+        });
+        //we want to get the ID of the USER
+        //This is the mentor programs Click
+        //to retrive the ID so we can send it to the
+        //mentor Programs "page"
+        $("tr.mentorPrograms").click(function() {s
+           alert( $(this).text());
+        });
+        $( ".mentorImageDiv" ).hover(function() {
+
+            $(this).children('.textBoxHeader').hide();
+            // $(this).hide();
+
+        });
+        $('.mentorImageDiv').mouseleave(function(){
+            $(".mentorImageDiv").children('.textBoxHeader').show();
+        });
+
+
+
+
+      //  $('a.menteeHover').hover(function(e) {
+      //      var target = '#' + ($(this).attr('data-popbox'));
+
+      //      $('#menteeHoverBox').show();
+      //  });
+
+
+    });
+
+
+    </script>
+
+</body>
+</html>

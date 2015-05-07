@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Mentor.Models
 {
-    #region haps
+    #region testingRegions
     public enum Visibility
     {
         Private,
@@ -25,6 +25,11 @@ namespace Mentor.Models
         public Visibility Visibility { get; set; }
         public string Name { get; set; }
 
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int InterestId { get; set; }
+
+
+        [ForeignKey("InterestId")]
         public virtual Interest Interest { get; set; }
         public virtual ICollection<ApplicationUser> Admins { get; set; }
         public virtual ICollection<ApplicationUser> Mentors { get; set; }

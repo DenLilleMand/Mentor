@@ -39,7 +39,15 @@ namespace Mentor.Migrations
                               "vitae nostrud cotidieque, cibo liber mel te.",
                 IsMentor = true,
                 IsMentee = false,
-                Interests = new List<Interest>
+                UndefinedInterests = new List<Interest>
+                {
+                    
+                },
+                MentorInterests = new List<Interest>
+                {
+                    
+                },
+                MenteeInterests = new List<Interest>
                 {
                     
                 },
@@ -72,56 +80,99 @@ namespace Mentor.Migrations
                               "vitae nostrud cotidieque, cibo liber mel te.",
                 IsMentor = false,
                 IsMentee = true,
-                Interests = new List<Interest>
+                UndefinedInterests = new List<Interest>
                 {
 
                 },
-                MentorPrograms = new List<Program>()
+                MenteeInterests = new List<Interest>
+                {
+                    
+                },
+                MentorInterests = new List<Interest>
+                {
+                    
+                },
+                MentorPrograms = new List<Program>
                 {
 
                 },
-                MenteePrograms = new List<Program>()
+                MenteePrograms = new List<Program>
                 {
 
                 },
-                AdminForPrograms = new List<Program>()
+                AdminForPrograms = new List<Program>
                 {
 
                 }
             };
 
-            Interest interest1 = new Interest()
+            Interest interest1 = new Interest
             {
                 Name = "Meteor",
-                ApplicationUsers = new List<ApplicationUser>()
+                UndefinedApplicationUsers = new List<ApplicationUser>
                 {
-                    user1,user2
+                    
+                },
+                MentorApplicationUsers = new List<ApplicationUser>
+                {
+                    user1
+                },
+                MenteesApplicationUsers = new List<ApplicationUser>
+                {
+                    user2
                 }
+
             };
+
+
             Interest interest2 = new Interest()
             {
                 Name = "asp.net mvc",
-                ApplicationUsers = new List<ApplicationUser>()
+                UndefinedApplicationUsers = new List<ApplicationUser>
                 {
-                    user1,user2
+                   user1
+                },
+                MentorApplicationUsers = new List<ApplicationUser>
+                {
+                     user2
+                },
+                MenteesApplicationUsers = new List<ApplicationUser>
+                {
+
                 }
             };
+
+           
             Interest interest3 = new Interest()
             {
                 Name = "php",
-                ApplicationUsers = new List<ApplicationUser>()
+                UndefinedApplicationUsers = new List<ApplicationUser>
                 {
-                    user1,user2
+                    user2
+                },
+                MentorApplicationUsers = new List<ApplicationUser>
+                {
+
+                },
+                MenteesApplicationUsers = new List<ApplicationUser>
+                {
+                    user1
                 }
             };
-            
             //not entirely sure if these are nessecery.
-            user1.Interests.Add(interest1);
-            user1.Interests.Add(interest2);
-            user1.Interests.Add(interest3);
-            user2.Interests.Add(interest1);
-            user2.Interests.Add(interest2);
-            user2.Interests.Add(interest3);
+            user1.MentorInterests.Add(interest1);
+
+            user1.UndefinedInterests.Add(interest2);
+
+            user1.MenteeInterests.Add(interest3);
+
+            user2.MenteeInterests.Add(interest1);
+
+            user2.MentorInterests.Add(interest2);
+
+            user2.UndefinedInterests.Add(interest3);
+            
+           
 
             Program program1 = new Program()
             {
@@ -138,7 +189,8 @@ namespace Mentor.Migrations
                 {
                     user1
                 },
-                Visibility = Visibility.Private
+                Visibility = Visibility.Private,
+                Interest = interest1
             };
 
             user1.MentorPrograms.Add(program1);

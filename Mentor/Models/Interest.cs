@@ -11,7 +11,10 @@ namespace Mentor.Models
 
         public Interest()
         {
-            this.ApplicationUsers = new HashSet<ApplicationUser>();
+            this.MentorApplicationUsers = new HashSet<ApplicationUser>();
+            this.MenteesApplicationUsers = new HashSet<ApplicationUser>();
+            this.UndefinedApplicationUsers = new HashSet<ApplicationUser>();
+
             this.ProgramInterests = new HashSet<Program>();
         }
 
@@ -19,9 +22,10 @@ namespace Mentor.Models
         public string Name { get; set; }
 
 
-        public virtual ICollection<ApplicationUser> ApplicationUsers { get; set; }
-        public virtual ICollection<Program> ProgramInterests { get; set; } 
-        public virtual ICollection<ApplicationUser>  
+        public virtual ICollection<Program> ProgramInterests { get; set; }
+        public virtual ICollection<ApplicationUser> MentorApplicationUsers { get; set; }
+        public virtual ICollection<ApplicationUser> MenteesApplicationUsers { get; set; }
+        public virtual ICollection<ApplicationUser> UndefinedApplicationUsers { get; set; } 
 
     }
 }
