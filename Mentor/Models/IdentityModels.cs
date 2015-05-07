@@ -25,7 +25,9 @@ namespace Mentor.Models
         public bool IsMentee { get; set; }
         public string ProfileText { get; set; }
 
-        public virtual ICollection<Interest> Interests { get; set; }
+        public virtual ICollection<Interest> UndefinedInterests { get; set; }
+        public virtual ICollection<Interest> MentorInterests { get; set; }
+        public virtual ICollection<Interest> MenteeInterests { get; set; } 
         public virtual ICollection<Program> MentorPrograms { get; set; }
         public virtual ICollection<Program> MenteePrograms { get; set; }
         public virtual ICollection<Program> AdminForPrograms { get; set; } 

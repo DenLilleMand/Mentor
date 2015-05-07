@@ -21,6 +21,7 @@ namespace Mentor.Models
 
         public virtual ICollection<ApplicationUser> ApplicationUsers { get; set; }
         public virtual ICollection<Program> ProgramInterests { get; set; } 
+        public virtual ICollection<ApplicationUser>  
 
     }
 }
