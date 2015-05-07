@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Mentor.Models
 {
+    #region haps
     public enum Visibility
     {
         Private,
@@ -12,7 +13,7 @@ namespace Mentor.Models
 
     public class Program
     {
-
+        
         public Program()
         {
             this.Mentors = new HashSet<ApplicationUser>();
@@ -24,12 +25,13 @@ namespace Mentor.Models
         public Visibility Visibility { get; set; }
         public string Name { get; set; }
 
-
+        public virtual Interest Interest { get; set; }
         public virtual ICollection<ApplicationUser> Admins { get; set; }
         public virtual ICollection<ApplicationUser> Mentors { get; set; }
-        public virtual ICollection<ApplicationUser> Mentee  { get; set; } 
-
+        public virtual ICollection<ApplicationUser> Mentee  { get; set; }
+        
 
 
     }
+    #endregion
 }
