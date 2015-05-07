@@ -23,7 +23,7 @@ namespace Mentor.Migrations
         protected override void Seed(Mentor.Models.ApplicationDbContext context)
         {
             var passwordHasher = new PasswordHasher();
-            ApplicationUser user1 = new ApplicationUser()
+            User user1 = new User()
             {
                 UserName = "mattinielsen5@hotmail.com",
                 PasswordHash = passwordHasher.HashPassword("Denlilleiceman20!"),
@@ -39,7 +39,15 @@ namespace Mentor.Migrations
                               "vitae nostrud cotidieque, cibo liber mel te.",
                 IsMentor = true,
                 IsMentee = false,
-                Interests = new List<Interest>
+                UndefinedInterests = new List<Interest>
+                {
+                    
+                },
+                MentorInterests = new List<Interest>
+                {
+                    
+                },
+                MenteeInterests = new List<Interest>
                 {
                     
                 },
@@ -56,7 +64,7 @@ namespace Mentor.Migrations
                     
                 }
             };
-            ApplicationUser user2 = new ApplicationUser()
+            User user2 = new User()
             {
                 UserName = "martinbergpetersen@hotmail.com",
                 PasswordHash = passwordHasher.HashPassword("Denlilleiceman20!"),
@@ -72,73 +80,117 @@ namespace Mentor.Migrations
                               "vitae nostrud cotidieque, cibo liber mel te.",
                 IsMentor = false,
                 IsMentee = true,
-                Interests = new List<Interest>
+                UndefinedInterests = new List<Interest>
                 {
 
                 },
-                MentorPrograms = new List<Program>()
+                MenteeInterests = new List<Interest>
+                {
+                    
+                },
+                MentorInterests = new List<Interest>
+                {
+                    
+                },
+                MentorPrograms = new List<Program>
                 {
 
                 },
-                MenteePrograms = new List<Program>()
+                MenteePrograms = new List<Program>
                 {
 
                 },
-                AdminForPrograms = new List<Program>()
+                AdminForPrograms = new List<Program>
                 {
 
                 }
             };
 
-            Interest interest1 = new Interest()
+            Interest interest1 = new Interest
             {
                 Name = "Meteor",
-                ApplicationUsers = new List<ApplicationUser>()
+                UndefinedUsers = new List<User>
                 {
-                    user1,user2
+                    
+                },
+                MentorUsers = new List<User>
+                {
+                    user1
+                },
+                MenteeUsers = new List<User>
+                {
+                    user2
                 }
+
             };
+
+
             Interest interest2 = new Interest()
             {
                 Name = "asp.net mvc",
-                ApplicationUsers = new List<ApplicationUser>()
+                UndefinedUsers = new List<User>
                 {
-                    user1,user2
+                   user1
+                },
+                MentorUsers = new List<User>
+                {
+                     user2
+                },
+                MenteeUsers = new List<User>
+                {
+
                 }
             };
+
+           
             Interest interest3 = new Interest()
             {
                 Name = "php",
-                ApplicationUsers = new List<ApplicationUser>()
+                UndefinedUsers = new List<User>
                 {
-                    user1,user2
+                    user2
+                },
+                MentorUsers = new List<User>
+                {
+
+                },
+                MenteeUsers = new List<User>
+                {
+                    user1
                 }
             };
-            
             //not entirely sure if these are nessecery.
-            user1.Interests.Add(interest1);
-            user1.Interests.Add(interest2);
-            user1.Interests.Add(interest3);
-            user2.Interests.Add(interest1);
-            user2.Interests.Add(interest2);
-            user2.Interests.Add(interest3);
+            user1.MentorInterests.Add(interest1);
+
+            user1.UndefinedInterests.Add(interest2);
+
+            user1.MenteeInterests.Add(interest3);
+
+            user2.MenteeInterests.Add(interest1);
+
+            user2.MentorInterests.Add(interest2);
+
+            user2.UndefinedInterests.Add(interest3);
+            
+           
 
             Program program1 = new Program()
             {
                 Name = "My Meteor program",
-                Mentors = new List<ApplicationUser>()
+                Mentors = new List<User>()
                 {
                     user1
                 },
-                Mentee = new List<ApplicationUser>()
+                Mentee = new List<User>()
                 {
                     user2
                 },
-                Admins = new List<ApplicationUser>()
+                Admins = new List<User>()
                 {
                     user1
                 },
-                Visibility = Visibility.Private
+                Visibility = Visibility.Private,
+                Interest = interest1
             };
 
             user1.MentorPrograms.Add(program1);
