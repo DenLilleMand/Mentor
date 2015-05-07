@@ -22,8 +22,6 @@ namespace Mentor.Controllers
 
         public ActionResult Profile()
         {
-           
-
             return View();
         }
 

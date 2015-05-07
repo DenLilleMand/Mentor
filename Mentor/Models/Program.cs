@@ -16,9 +16,9 @@ namespace Mentor.Models
         
         public Program()
         {
-            this.Mentors = new HashSet<ApplicationUser>();
-            this.Mentee = new HashSet<ApplicationUser>();
-            this.Admins = new HashSet<ApplicationUser>();
+            this.Mentors = new HashSet<User>();
+            this.Mentee = new HashSet<User>();
+            this.Admins = new HashSet<User>();
         }
 
         public int Id { get; set; }
@@ -31,9 +31,9 @@ namespace Mentor.Models
 
         [ForeignKey("InterestId")]
         public virtual Interest Interest { get; set; }
-        public virtual ICollection<ApplicationUser> Admins { get; set; }
-        public virtual ICollection<ApplicationUser> Mentors { get; set; }
-        public virtual ICollection<ApplicationUser> Mentee  { get; set; }
+        public virtual ICollection<User> Admins { get; set; }
+        public virtual ICollection<User> Mentors { get; set; }
+        public virtual ICollection<User> Mentee { get; set; }
         
 
 

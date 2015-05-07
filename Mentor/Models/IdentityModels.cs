@@ -11,7 +11,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 namespace Mentor.Models
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
-    public class ApplicationUser : IdentityUser<int, CustomUserLogin, CustomUserRole, CustomUserClaim>
+    public class User : IdentityUser<int, CustomUserLogin, CustomUserRole, CustomUserClaim>
     {
         /*
          *  IdentityUser allready has an attribut called 'Id', so we dont have to make one,
@@ -32,7 +32,7 @@ namespace Mentor.Models
         public virtual ICollection<Program> MenteePrograms { get; set; }
         public virtual ICollection<Program> AdminForPrograms { get; set; } 
 
-        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser, int> manager)
+        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User, int> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
@@ -41,7 +41,7 @@ namespace Mentor.Models
         }
     }
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, CustomRole, int, CustomUserLogin, CustomUserRole, CustomUserClaim>
+    public class ApplicationDbContext : IdentityDbContext<User, CustomRole, int, CustomUserLogin, CustomUserRole, CustomUserClaim>
     {
         public ApplicationDbContext(): base("DefaultConnection")
         {
@@ -59,39 +59,39 @@ namespace Mentor.Models
         {
             base.OnModelCreating(modelBuilder); /*Initializes the inherited classes (relationships) such as CustomUserLogin,
                                                  *  CustomUserRole & CustomUserClaim*/
-            /* Many-to-many relationship between ApplicationUser and Interests. One ApplicationUser can 
-           * have many Interests, and one Interest can be gained by many ApplicationUsers */
-            modelBuilder.Entity<ApplicationUser>()
+
+
+            modelBuilder.Entity<User>()
                       .HasMany<Interest>(i => i.MenteeInterests)
-                      .WithMany(a => a.MenteesApplicationUsers)
+                      .WithMany(a => a.MenteeUsers)
                       .Map(cs =>
                       {
-                          cs.MapLeftKey("ApplicationUserRefId");
+                          cs.MapLeftKey("UserRefId");
                           cs.MapRightKey("MenteeInterestRefId");
-                          cs.ToTable("ApplicationUserMenteeInterest");
+                          cs.ToTable("UserMenteeInterest");
                       });
 
-            modelBuilder.Entity<ApplicationUser>()
+            modelBuilder.Entity<User>()
                       .HasMany<Interest>(i => i.MentorInterests)
-                      .WithMany(a => a.MentorApplicationUsers)
+                      .WithMany(a => a.MentorUsers)
                       .Map(cs =>
                       {
-                          cs.MapLeftKey("ApplicationUserRefId");
+                          cs.MapLeftKey("UserRefId");
                           cs.MapRightKey("InterestRefId");
-                          cs.ToTable("ApplicationUserMentorInterest");
+                          cs.ToTable("UserMentorInterest");
                       });
 
-            modelBuilder.Entity<ApplicationUser>()
+            modelBuilder.Entity<User>()
                     .HasMany<Interest>(i => i.UndefinedInterests)
-                    .WithMany(a => a.UndefinedApplicationUsers)
+                    .WithMany(a => a.UndefinedUsers)
                     .Map(cs =>
                     {
-                        cs.MapLeftKey("ApplicationUserRefId");
+                        cs.MapLeftKey("UserRefId");
                         cs.MapRightKey("InterestRefId");
-                        cs.ToTable("ApplicationUserUndefinedInterests");
+                        cs.ToTable("UserUndefinedInterests");
                     });
 
-            modelBuilder.Entity<ApplicationUser>()
+            modelBuilder.Entity<User>()
                       .HasMany<Program>(a => a.MentorPrograms)
                       .WithMany(p => p.Mentors)
                       .Map(cs =>
@@ -101,7 +101,7 @@ namespace Mentor.Models
                           cs.ToTable("MentorProgram");
                       });
 
-            modelBuilder.Entity<ApplicationUser>()
+            modelBuilder.Entity<User>()
                       .HasMany<Program>(a => a.MenteePrograms)
                       .WithMany(p => p.Mentee)
                       .Map(cs =>
@@ -111,7 +111,7 @@ namespace Mentor.Models
                           cs.ToTable("MenteeProgram");
                       });
 
-            modelBuilder.Entity<ApplicationUser>()
+            modelBuilder.Entity<User>()
                      .HasMany<Program>(a => a.MenteePrograms)
                      .WithMany(p => p.Mentee)
                      .Map(cs =>
@@ -120,8 +120,8 @@ namespace Mentor.Models
                          cs.MapRightKey("ProgramRefId");
                          cs.ToTable("MenteeProgram");
                      });
-            
-            modelBuilder.Entity<ApplicationUser>()
+
+            modelBuilder.Entity<User>()
                     .HasMany<Program>(a => a.AdminForPrograms)
                     .WithMany(p => p.Admins)
                     .Map(cs =>
@@ -155,7 +155,7 @@ namespace Mentor.Models
         public CustomRole(string name) { Name = name; }
     }
 
-    public class CustomUserStore : UserStore<ApplicationUser, CustomRole, int, CustomUserLogin, CustomUserRole, CustomUserClaim>
+    public class CustomUserStore : UserStore<User, CustomRole, int, CustomUserLogin, CustomUserRole, CustomUserClaim>
     {
         public CustomUserStore(ApplicationDbContext context)
             : base(context)

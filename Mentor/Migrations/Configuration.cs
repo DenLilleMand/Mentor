@@ -23,7 +23,7 @@ namespace Mentor.Migrations
         protected override void Seed(Mentor.Models.ApplicationDbContext context)
         {
             var passwordHasher = new PasswordHasher();
-            ApplicationUser user1 = new ApplicationUser()
+            User user1 = new User()
             {
                 UserName = "mattinielsen5@hotmail.com",
                 PasswordHash = passwordHasher.HashPassword("Denlilleiceman20!"),
@@ -64,7 +64,7 @@ namespace Mentor.Migrations
                     
                 }
             };
-            ApplicationUser user2 = new ApplicationUser()
+            User user2 = new User()
             {
                 UserName = "martinbergpetersen@hotmail.com",
                 PasswordHash = passwordHasher.HashPassword("Denlilleiceman20!"),
@@ -109,15 +109,15 @@ namespace Mentor.Migrations
             Interest interest1 = new Interest
             {
                 Name = "Meteor",
-                UndefinedApplicationUsers = new List<ApplicationUser>
+                UndefinedUsers = new List<User>
                 {
                     
                 },
-                MentorApplicationUsers = new List<ApplicationUser>
+                MentorUsers = new List<User>
                 {
                     user1
                 },
-                MenteesApplicationUsers = new List<ApplicationUser>
+                MenteeUsers = new List<User>
                 {
                     user2
                 }
@@ -128,15 +128,15 @@ namespace Mentor.Migrations
             Interest interest2 = new Interest()
             {
                 Name = "asp.net mvc",
-                UndefinedApplicationUsers = new List<ApplicationUser>
+                UndefinedUsers = new List<User>
                 {
                    user1
                 },
-                MentorApplicationUsers = new List<ApplicationUser>
+                MentorUsers = new List<User>
                 {
                      user2
                 },
-                MenteesApplicationUsers = new List<ApplicationUser>
+                MenteeUsers = new List<User>
                 {
 
                 }
@@ -146,15 +146,15 @@ namespace Mentor.Migrations
             Interest interest3 = new Interest()
             {
                 Name = "php",
-                UndefinedApplicationUsers = new List<ApplicationUser>
+                UndefinedUsers = new List<User>
                 {
                     user2
                 },
-                MentorApplicationUsers = new List<ApplicationUser>
+                MentorUsers = new List<User>
                 {
 
                 },
-                MenteesApplicationUsers = new List<ApplicationUser>
+                MenteeUsers = new List<User>
                 {
                     user1
                 }
@@ -177,15 +177,15 @@ namespace Mentor.Migrations
             Program program1 = new Program()
             {
                 Name = "My Meteor program",
-                Mentors = new List<ApplicationUser>()
+                Mentors = new List<User>()
                 {
                     user1
                 },
-                Mentee = new List<ApplicationUser>()
+                Mentee = new List<User>()
                 {
                     user2
                 },
-                Admins = new List<ApplicationUser>()
+                Admins = new List<User>()
                 {
                     user1
                 },
