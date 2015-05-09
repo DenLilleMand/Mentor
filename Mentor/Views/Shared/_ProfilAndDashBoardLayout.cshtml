@@ -22,7 +22,7 @@
   
 </head>
 <body>
-<nav class="navbar navbar-default" style="background-color: #3B5998;">
+<nav style="position: fixed;background-color: #3B5998; width: 100%;margin:0px" class="navbar navbar-default">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div style="display: inline" class="navbar-header">
@@ -59,7 +59,7 @@
                                 <p id="noResultMentorPrograms" class="noResult">No searchresult</p>
                             </li>
                         </div>
-                    <li style="background-color: #3b5998;"><a href="#" id="searchResult" style="text-align: center;color:white">Se flere resultater for:</a></li>
+                    <li style="background-color: lightgray; height: 40px;"><a href="#" id="searchResult" style="text-align: center; color: #3b5998; padding: 15px;font-size: x-small">Se flere resultater for:</a></li>
 </ul>
 
 
@@ -132,11 +132,11 @@
             <ul class="nav navbar-nav navbar-right">
                 <li>
                 <a style="font-size:x-small" id="profileInfo" class="navbar-brand asizeColor" href="/Profile/index/@Model.Id"> @Model.FirstName @Model.LastName</a>
-                <img style="border-radius: 10px;" id="pictureInfo" src="@Model.Picture" height="25px" width="25px"/>
+                    <img class="img-circle" id="pictureInfo" src="~/pictures/b.png" height="25px" width="25px" />
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle asizeColor" data-toggle="dropdown" role="button" aria-expanded="false">Settings<span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a class="asizeColor" href="#">TEST</a></li>
+                        <li><a class="asizeColor" href="#">Create a Mentor Program</a></li>
                         <li><a class="asizeColor" href="#">TEST</a></li>
                         <li><a class="asizeColor" href="#">TEST</a></li>
                         <li class="divider"></li>
@@ -148,9 +148,9 @@
     </div><!-- /.container-fluid -->
 </nav>
 
-<div>
-    @RenderBody()
-</div>
+    <div style="padding-top: 70px;">
+        @RenderBody()
+    </div>
     <script>
     $(document).ready(function () {
         $('#message').on('click', function () {
