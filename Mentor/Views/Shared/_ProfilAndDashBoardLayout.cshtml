@@ -41,12 +41,22 @@
                 <input id="inputSearch" style="width: 350px;" type="text" class="form-control inputClass" data-toggle="dropdown" role="button" aria-expanded="false" onkeyup=" searchForThings() " autocomplete="off" placeholder="Search for Mentors, Mentees and Mentor Programs">
                 <i class=" glyphicon glyphicon-search form-control-feedback"></i>
 
-                <ul class="dropdown-menu searchField" role="menu">
+                <ul class="dropdown-menu searchField" role="menu" style="min-width: 350px; min-height: 350px;">
+                    <div>
+                        <li style="min-height: 150px; margin-left: 10px;" class="searchHeaders Persons">Persons</li>
 
-                    <li class="searchHeaders Persons">Persons</li>
-                    <li class="searchHeaders Interest">Mentor Programs</li>
-                    <li><a href="#" id="searchResult" style="text-align: center">Se flere resultater for:</a></li>
-                </ul>
+                        <li class="searchFuck">
+                            <p id="noResultPerson" class="noResult">No searchresult</p>
+                        </li>
+                    </div>
+                        <div style="border-top: thin ridge black; margin: 10px;">
+                            <li style="min-height: 150px;" class="searchHeaders Interest">Mentor Programs</li>
+                            <li>
+                                <p id="noResultMentorPrograms" class="noResult">No searchresult</p>
+                            </li>
+                        </div>
+                        <li><a href="#" id="searchResult" style="text-align: center">Se flere resultater for:</a></li>
+</ul>
 
 
 
@@ -117,7 +127,7 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                <a style="font-size:x-small" id="profileInfo" class="navbar-brand asizeColor" href="/Profile/index/@Model.Id"> @Model.FirstName</a>
+                <a style="font-size:x-small" id="profileInfo" class="navbar-brand asizeColor" href="/Profile/index/@Model.Id"> @Model.FirstName @Model.LastName</a>
                 <img style="border-radius: 10px;" id="pictureInfo" src="@Model.Picture" height="25px" width="25px"/>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle asizeColor" data-toggle="dropdown" role="button" aria-expanded="false">Settings<span class="caret"></span></a>

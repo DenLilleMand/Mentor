@@ -14,15 +14,18 @@
    
 </head>
 <body style="height: 1000px" id="profileBody">
-
+    @{
+        System.Drawing.Image e = ViewBag.ProfilePcture;
+        
+    }
 
 
 <div style="margin-left: 10%; margin-right: 10%;">
     <div class="profileClass">
         <div style="margin: 5px; text-align: center;">
-            <img style="; margin-bottom: 5px; margin-top: 5px; display: block; margin-left: auto;
+            <img style="margin-bottom: 5px; margin-top: 5px; display: block; margin-left: auto;" alt="@e"src=""
                                                                                                                                                                                                                                                                    margin-right: auto;" height="160" width="160" src="@Model.Picture"alt=""/>
-
+            @e
             <h3>@Model.FirstName @Model.LastName</h3>
             <a class="btn btn-social-icon btn-lg btn-linkedin"><i class="fa fa-linkedin"></i></a>
             <a class="btn btn-social-icon btn-lg btn-twitter"><i class="fa fa-twitter"></i></a>
