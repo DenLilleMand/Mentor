@@ -44,7 +44,7 @@ function searchForThings() {
         var test = { 'input': inputSearchText };
         $.ajax({
             type: 'POST',
-            url: '/User/GetSearchData',
+            url: '/Utility/GetSearchData',
             data: JSON.stringify(test),
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
