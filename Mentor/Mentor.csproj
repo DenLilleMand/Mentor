@@ -190,8 +190,12 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Program.cs" />
+    <Compile Include="Models\Repositories\Concrete_Implementation\ProgramRepository.cs" />
+    <Compile Include="Models\Repositories\Concrete_Implementation\UserRepository.cs" />
+    <Compile Include="Models\Repositories\Interfaces\IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\ProfileViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
