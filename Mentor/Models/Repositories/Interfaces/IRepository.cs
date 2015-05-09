@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Mentor.Models.Repositories.Interfaces
 {
-    interface IRepository<T>
+    public interface IRepository<T>
     {
 
         IEnumerable<T> GetDatabase();

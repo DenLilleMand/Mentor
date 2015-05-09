@@ -5,16 +5,16 @@ using System.Linq;
 using System.Web;
 using Mentor.Models.Repositories.Interfaces;
 
-namespace Mentor.Models.Repositories
+namespace Mentor.Models.Repositories.Concrete_Implementation
 {
     public class UserRepository : IRepository<User>
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-      public IEnumerable<User> GetDatabase()
-      {
-          return db.Users;
-      }
+        public IEnumerable<User> GetDatabase()
+        {
+            return db.Users;
+        }
 
         public bool IsDatabaseEmpty()
         {

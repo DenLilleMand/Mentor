@@ -143,6 +143,7 @@ namespace Mentor.Models
         {
             return new ApplicationDbContext();
         }
+
     }
 
     public class CustomUserRole : IdentityUserRole<int> { }

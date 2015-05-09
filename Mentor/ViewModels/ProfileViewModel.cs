@@ -10,5 +10,7 @@ namespace Mentor.ViewModels
     {
         public List<Program> Programs { get; set; }
         public List<User> Users { get; set; }
+        public User CurrentUser { get; set; }
+        public User User { get; set; }
     }
 }

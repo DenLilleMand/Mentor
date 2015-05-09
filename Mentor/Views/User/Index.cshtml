@@ -1,5 +1,5 @@
-﻿@using Mentor.Models
-@model Mentor.Models.User
+﻿@using System.Net.Mime
+@model Mentor.ViewModels.ProfileViewModel
 
 @{
     Layout = "~/Views/Shared/_ProfilAndDashBoardLayout.cshtml";
@@ -14,17 +14,13 @@
 
 </head>
 <body id ="testBody">
-    @{
-        System.Drawing.Image e = ViewBag.ProfilePcture;
-
-    }
-
+   
         <div style="margin-left: 10%; margin-right: 10%;">
-            <div class="profileClass" style="color">
+            <div class="profileClass" >
                 <div style="margin: 5px;">
                     <img src="~/pictures/b.png" height="160" width="160" class="img-circle" style="display: block;margin-left: auto;margin-right: auto; " />
 
-                    <h3 style="text-align: center; margin: 30px;">@Model.FirstName @Model.LastName</h3>
+                    <h3 style="text-align: center; margin: 30px;">@Model.User.FirstName @Model.User.LastName</h3>
                     <div style="text-align: center">
                         <a style="text-align: center;" class="btn btn-social-icon btn-lg btn-linkedin"><i class="fa fa-linkedin"></i></a>
                         <a style="text-align: center;" class="btn btn-social-icon btn-lg btn-twitter"><i class="fa fa-twitter"></i></a>
@@ -39,93 +35,114 @@
                         </a>
 
 
+
                     </div>
                     <br />
                     <button style="width: 100px; margin: 0 auto;">Message</button>
 
+                </div>
+            </div>
+                    <div class="profileMentor">
+                        <div style="float: left; width: 50%; height: 500px; text-align: left">
+                            <h5 style="margin-left: 10px;" class="mentorPicHeaderh3">Mentor Offers</h5>
+
+                            @foreach (var item in @Model.User.MentorInterests)
+                            {
+                                <div class="containerPic" style="display: inline-block">
+                                    <a href="">
+                                        <img src="~/pictures/480px-Soccer_ball.svg.png" alt="" />
+                                    </a>
+                                    <p style="text-align: center" class="textBoxHeader">@item.Name</p>
+                                </div>
+
+
+
+                            }
+
+                            <h5 style="margin-left: 10px; margin-top: 50px;" class="mentorPicHeaderh3">Mentee Interrest</h5>
+
+
+
+                            @foreach (var item in @Model.User.MenteeInterests)
+                            {
+                                <div class="containerPic" style="display: inline-block">
+                                    <a href="">
+                                        <img src="~/pictures/480px-Soccer_ball.svg.png" alt="" />
+                                    </a>
+                                    <p style="text-align: center" class="textBoxHeader">@item.Name</p>
+                                </div>
+
+                            }
+
+                        </div>
+                        <div style="float: right; width: 50%; height: 500px; overflow: auto">
+                            <h3 style="text-align: center" class="mentorPicHeaderh3">Current Mentor Programs</h3>
+
+
+                            @foreach (var item in @Model.User.MenteePrograms)
+                            {
+                                <div class="containerPic" style="display: inline-block">
+                                    <a href="">
+                                        <img src="~/pictures/480px-Soccer_ball.svg.png" alt="" />
+                                    </a>
+                                    <p class="textBoxHeader">@item.Name</p>
+                                </div>
+
+                            }
+
+                        </div>
+
+
+
+
+                        <div class="profileMentor">
+                            <h3 style="text-align: center" class="mentorPicHeaderh3">Mentor Programs</h3>
+                            @foreach (var item in @Model.User.MentorPrograms)
+                            {
+                                <div class="containerPic" style="display: inline-block">
+                                    <a href="">
+                                        <img style="margin-left: auto;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         margin-right: auto; display: inline-block" src="~/pictures/480px-Soccer_ball.svg.png" alt="" />
+                                    </a>
+                                    <h3 class="textBoxHeader">@item.Name</h3>
+
+                                </div>
+
+                            }
+                        </div>
+
+                    </div>
+
+                    <div class="profileText">
+
+                        <h4 style="padding: 5px; color: #000000;">Profile Text</h4>
+                        <p style="padding: 5px; color: #000000;">
+                            @Model.User.ProfileText;
+                        </p>
+
+                        <p style="padding: 5px; color: #000000;">
+                        </p>
+                        <p style="padding: 5px; color: #000000;">
+                        </p>
+
+                    </div>
 
                 </div>
-
-            </div>
-
-            <div class="profileMentor">
-                <div style="float: left; width: 50%; height: 500px;text-align: left">
-                    <h5 style="margin-left: 10px;" class="mentorPicHeaderh3">Mentor Offers</h5>
-                   
-                    @foreach (var item in @Model.MentorInterests)
-                    {
-                        <div class="containerPic" style="display: inline-block">
-                            <a href="">
-                                <img src="~/pictures/480px-Soccer_ball.svg.png" alt="" />
-                            </a>
-                            <p style="text-align: center" class="textBoxHeader">@item.Name</p>
-                        </div>
-                        
-                       
-                      
-                    }
-                    
-                    <h5 style="margin-left: 10px; margin-top: 50px;" class="mentorPicHeaderh3">Mentee Interrest</h5>
-                   
-
-
-                    @foreach (var item in @Model.MenteeInterests)
-                    {
-                        <div class="containerPic" style="display: inline-block">
-                            <a href="">
-                                <img src="~/pictures/480px-Soccer_ball.svg.png" alt="" />
-                            </a>
-                            <p style="text-align: center" class="textBoxHeader">@item.Name</p>
-                        </div>
-                       
-                    }
-
-                </div>
-                <div style="float: right;width: 50%; height: 500px;overflow: auto">
-                    <h3 style="text-align: center" class="mentorPicHeaderh3">Current Mentor Programs</h3>
-                    
-                    
-                    @foreach (var item in @Model.MentorPrograms)
-                    {
-                        <div class="containerPic" style="display: inline-block">
-                            <a href="">
-                                <img src="~/pictures/480px-Soccer_ball.svg.png" alt="" />
-                            </a>
-                            <p class="textBoxHeader">@item.Name</p>
-                        </div>
-                       
-                    }
-
-                </div>
-
-
-            </div>
-
-            <div class="profileText">
-
-                <h4 style="padding: 5px; color: #000000;">Profile Text</h4>
-                <p style="padding: 5px; color: #000000;">
-                    @Model.ProfileText;
-                </p>
-
-                <p style="padding: 5px; color: #000000;">
-                </p>
-                <p style="padding: 5px; color: #000000;">
-                </p>
-
-            </div>
-        </div>
-
+          
     <script src="~/Scripts/bootstrap.js"></script>
     <script src="~/Scripts/jquery-2.1.3.js"></script>
-    <script>
 
-
+<script>  
         $(document).ready(function () {
+
 
             $('.containerPic').on('click', function () {
                 var info = $(this).children('.textBoxHeader').text();
                 alert(info);
+
+        //<h4 style="padding: 5px; color: #000000;">Profile MediaTypeNames.Text</h4>
+       // <p style="padding: 5px; color: #000000;">@Model.User.ProfileText;</p>
+
 
             });
             //we want to get the ID of the USER
@@ -143,7 +160,6 @@
             //to retrive the ID so we can send it to the
             //mentor Programs "page"
             $("tr.mentorPrograms").click(function () {
-                s
                 alert($(this).text());
             });
             $(".mentorImageDiv").hover(function () {
