@@ -16,22 +16,36 @@
 </div>
     <div class="jumbotron">
         <div class="container">
-                <ul class="list-group">
-                    @foreach (var mentor in Model.Program.Mentors)
-                    {
-                        <li class="list-group-item list-group-item-success">@mentor.FirstName</li>
-                        <li class="list-group-item list-group-item-success">@mentor.FirstName</li>
-                    }
-                </ul>
-                <div class="list-group">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Mentors</th>
+                        <th>Mentees</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                        @foreach (var mentor in Model.Program.Mentors)
+                        {
+                            <tr>
+                                <td>
+                                    @mentor.FirstName
+                                </td>
+                            </tr>
+                        }
+                          
+                    
                     @foreach (var mentee in Model.Program.Mentee)
                     {
-                        <a href="#" class="list-group-item list-group-item-success">@mentee.FirstName</a>
+                        <tr>
+                            <td>
+                                @mentee.FirstName
+                            </td>
+                        </tr>
                     }
-                </div>
-
-            
-
+                        
+                </tbody>
+            </table>
         </div>
 
 
