@@ -1,5 +1,4 @@
-﻿@using Mentor.Models
-@model Mentor.Models.User
+﻿@model Mentor.ViewModels.ProfileViewModel
 
 @{
     Layout = "~/Views/Shared/_ProfilAndDashBoardLayout.cshtml";
@@ -23,10 +22,9 @@
 <div style="margin-left: 10%; margin-right: 10%;">
     <div class="profileClass">
         <div style="margin: 5px; text-align: center;">
-            <img style="margin-bottom: 5px; margin-top: 5px; display: block; margin-left: auto;" alt="@e"src=""
-                                                                                                                                                                                                                                                                   margin-right: auto;" height="160" width="160" src="@Model.Picture"alt=""/>
+            <img style="margin-bottom: 5px; margin-top: 5px; display: block; margin-left: auto; alt=@e; margin-right: auto; height=160px; width="160"; src="@Model.User.Picture" alt="" />
             @e
-            <h3>@Model.FirstName @Model.LastName</h3>
+            <h3>@Model.User.FirstName @Model.User.LastName</h3>
             <a class="btn btn-social-icon btn-lg btn-linkedin"><i class="fa fa-linkedin"></i></a>
             <a class="btn btn-social-icon btn-lg btn-twitter"><i class="fa fa-twitter"></i></a>
             <a class="btn btn-social-icon btn-lg btn-facebook"><i class="fa fa-facebook"></i></a>
@@ -50,12 +48,12 @@
 
     <div class="profileMentor">
         <h3 style="text-align: center" class="mentorPicHeaderh3">Mentor Programs</h3>
-        @foreach (var item in @Model.MentorPrograms)
+        @foreach (var item in @Model.User.MentorPrograms)
         {
             <div class="containerPic" style="display: inline-block">
                 <a href="">
                     <img style="margin-left: auto;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                margin-right: auto; display: inline-block" src="~/pictures/480px-Soccer_ball.svg.png" alt=""/>
+                margin-right: auto; display: inline-block" src="~/pictures/480px-Soccer_ball.svg.png" alt=""/>
                 </a>
                 <h3 class="textBoxHeader">@item.Name</h3>
             </div>
@@ -74,7 +72,7 @@
 
         <h4 style="padding: 5px; color: #000000;">Profile Text</h4>
         <p style="padding: 5px; color: #000000;">
-            @Model.ProfileText;
+            @Model.User.ProfileText;
         </p>
 
         <p style="padding: 5px; color: #000000;">

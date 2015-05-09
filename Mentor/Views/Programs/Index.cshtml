@@ -1,6 +1,41 @@
 ﻿@model Mentor.ViewModels.ProgramViewModel
-@{
-    Layout = "~/Views/Shared/_ProfilAndDashBoardLayout.cshtml";
-}
+<head>
+    <title>Program</title>
+</head>
+<body>
+<link href="~/Content/css/program.css" rel="stylesheet"/>
 
-<h1>Program</h1>
+<div class="jumbotron">
+    <div class="container">
+        <h1>@Model.Program.Name</h1>
+        <p>
+            <a class="btn btn-primary btn-lg" href="#" role="button">Request as mentor</a>
+            <a class="btn btn-primary btn-lg" href="#" role="button">Request as mentee</a>
+        </p>
+    </div>
+</div>
+    <div class="jumbotron">
+        <div class="container">
+                <ul class="list-group">
+                    @foreach (var mentor in Model.Program.Mentors)
+                    {
+                        <li class="list-group-item list-group-item-success">@mentor.FirstName</li>
+                        <li class="list-group-item list-group-item-success">@mentor.FirstName</li>
+                    }
+                </ul>
+                <div class="list-group">
+                    @foreach (var mentee in Model.Program.Mentee)
+                    {
+                        <a href="#" class="list-group-item list-group-item-success">@mentee.FirstName</a>
+                    }
+                </div>
+
+            
+
+        </div>
+
+
+    </div>
+
+</body>
+

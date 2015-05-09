@@ -1,7 +1,4 @@
-﻿@using Mentor.Models
-@model Mentor.Models.User
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width"/>
@@ -18,7 +15,7 @@
   
 </head>
 <body>
-<nav class="navbar navbar-default" style="background-color: #3B5998;">
+<nav class="navbar navbar-default" style="background-color: #3B5998; margin-bottom: 0">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div style="display: inline" class="navbar-header">
@@ -41,21 +38,21 @@
                 <input id="inputSearch" style="width: 350px;" type="text" class="form-control inputClass" data-toggle="dropdown" role="button" aria-expanded="false" onkeyup=" searchForThings() " autocomplete="off" placeholder="Search for Mentors, Mentees and Mentor Programs">
                 <i class=" glyphicon glyphicon-search form-control-feedback"></i>
 
-                <ul class="dropdown-menu searchField" role="menu" style="min-width: 350px; min-height: 350px;">
+                <ul class="dropdown-menu searchField" role="menu" style="min-width: 350px;">
                     <div>
-                        <li style="min-height: 150px; margin-left: 10px;" class="searchHeaders Persons">Persons</li>
+                        <li style=" margin-left: 10px;" class="searchHeaders Persons">Persons</li>
 
                         <li class="searchFuck">
                             <p id="noResultPerson" class="noResult">No searchresult</p>
                         </li>
                     </div>
                         <div style="border-top: thin ridge black; margin: 10px;">
-                            <li style="min-height: 150px;" class="searchHeaders Interest">Mentor Programs</li>
+                            <li style="" class="searchHeaders Interest">Mentor Programs</li>
                             <li>
                                 <p id="noResultMentorPrograms" class="noResult">No searchresult</p>
                             </li>
                         </div>
-                        <li><a href="#" id="searchResult" style="text-align: center">Se flere resultater for:</a></li>
+                    <li style="background-color: #3b5998;"><a href="#" id="searchResult" style="text-align: center;color:white">Se flere resultater for:</a></li>
 </ul>
 
 
@@ -114,10 +111,6 @@
                         </li>
 
                     </ul>
-
-
-
-
                 </li>
 
             </ul>
@@ -127,8 +120,11 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                <a style="font-size:x-small" id="profileInfo" class="navbar-brand asizeColor" href="/Profile/index/@Model.Id"> @Model.FirstName @Model.LastName</a>
-                <img style="border-radius: 10px;" id="pictureInfo" src="@Model.Picture" height="25px" width="25px"/>
+               @* These following 2 lines, has to get its data via AJAX,
+                if we implement a strongly typed view as is, other views cannot inherit this
+                header as a layout. maybe there is a smarter way, but this way is acceptable.*@
+                @*<a style="font-size:x-small" id="profileInfo" class="navbar-brand asizeColor" href="/Profile/index/@Model.CurrentUser.Id"> @Model.CurrentUser.FirstName @Model.CurrentUser.LastName</a>
+                <img style="border-radius: 10px;" id="pictureInfo" src="@Model.CurrentUser.Picture" height="25px" width="25px"/>*@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle asizeColor" data-toggle="dropdown" role="button" aria-expanded="false">Settings<span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
