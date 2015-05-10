@@ -1,0 +1,57 @@
+﻿@model Mentor.Models.User
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/Content/css/dashboard.css" rel="stylesheet" />
+</head>
+<body>
+<div style="margin-left: 50px;">
+    <table style="position: fixed;background-color: lightgray; width: 10%;height: 100%">
+        <tr>
+            <td style="margin-bottom: 20px"><a style="font-size: xx-small"href="/User/index/@Model.Id"><img src="~/pictures/b.png" class="img-circle" alt="" width="30" height="30"/></a></td>
+            <td><a href="/User/index/@Model.Id">@Model.FirstName @Model.LastName</a></td><br/>
+
+
+        </tr>
+
+       <tr>
+ 
+            <td style="display: block; font-size: xx-small; padding-bottom: 10px;">Mentor Programs</td>
+            @foreach (var mentorPrograms in @Model.MentorPrograms)
+            {
+                <td style="float: left"><a href="/Programs/index/@mentorPrograms.Id"></a>@mentorPrograms.Name</td>
+            }
+
+
+        </tr>
+       
+        <tr>
+            <th style="display: block; font-size: xx-small; padding-bottom: 10px;">Mentor Interest</th>
+            @foreach (var mentorOffer in @Model.MentorInterests)
+            {
+                <td style="float: left"><a href="/Programs/index/??."></a>@mentorOffer.Name</td>
+            }
+
+        </tr>
+
+     
+        <tr>
+            <th style="display: block; font-size: xx-small; padding-bottom: 10px;">Mentee Interest</th>
+            @foreach (var menteeInterest in @Model.MentorInterests)
+            {
+                <td style="float: left"><a href="/Programs/index/??."> <@menteeInterest.Name</td></a>
+            }
+
+        </tr>
+        
+    
+    </table>
+
+</div>
+    <div style="height: 1000px; border: 2px black solid;float: right"></div>
+</body>
+</html>

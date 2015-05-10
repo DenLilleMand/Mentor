@@ -54,7 +54,7 @@ function searchForThings() {
                 searchMentorPrograms(data.Programs);
 
             }, error: function (data, succes, error) {
-                alert('err');
+                alert('Something went wrong, try and search again');
             }
         });
 

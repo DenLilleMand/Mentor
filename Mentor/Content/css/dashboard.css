@@ -1,0 +1,9 @@
+﻿
+.leftContainer {
+    
+    position: fixed;
+    max-width: 30%;
+    min-height: 100%;
+    border: 2px solid black
+       
+}

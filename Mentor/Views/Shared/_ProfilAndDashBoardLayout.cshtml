@@ -15,7 +15,7 @@
 
 
 </head>
-<body>
+<body style="background-color: lightgray">
 
 <nav style="position: fixed;background-color: #3B5998; width: 100%;margin:0px" class="navbar navbar-default">
 
@@ -71,31 +71,27 @@
                 <!-- Messages messages -->
 
                 <li>
-                <a id="message" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="glyphicon glyphicon-comment"> 2</span></a>
-                <ul id="messageField " class="dropdown-menu popUpBoxes " role="menu">
-                    <li class="MessagesHeaders">Messages</li>
+                    <a  href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-comment"> 2</span></a>
+                   
+                        <ul  class="dropdown-menu" role="menu">
+                            <li class="MessagesHeaders">Messages</li>
 
-                    <li>
-                        <a href="">
-                            Matti Lund
-                            <p> Jeg er en glad lille nisse</p>
-                        </a>
-                    </li>
+                            <li>
+                                <a href="">
+                                    Matti Lund
+                                    <p> Jeg er en glad lille nisse</p>
+                                </a>
+                            </li>
 
-                    <li>
-                        <a href="">
-                            Jon Arnfred
-                            <p>Jeg er en glad lille nisse</p>
-                        </a>
-                    </li>
 
-                </ul>
 
+                        </ul>
+                </li>
                 <!-- Notifications messages -->
                 <li>
-                    <a id="notifications" href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-exclamation-sign"> 2</span></a>
+                    <a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-exclamation-sign"> 2</span></a>
 
-                    <ul id="notificationsMessage " class="dropdown-menu popUpBoxes inboxMessagesAndNotifications" role="menu">
+                    <ul  class="dropdown-menu" role="menu">
                         <li class="MessagesHeaders">Notification</li>
 
 
@@ -106,14 +102,7 @@
                                 <p>Jesper synes godt om dig</p>
                             </a>
                         </li>
-                        <li>
-                            <a href="">
-                                Mentor Program
-
-                                <p>Peter har tildmeldt din klasse</p>
-                            </a>
-                        </li>
-
+                       
                     </ul>
                 </li>
 
@@ -125,9 +114,9 @@
             <ul class="nav navbar-nav navbar-right">
                 <li>
 
-                <a style="font-size:x-small" id="profileInfo" class="navbar-brand asizeColor" href="/Profile/index/@Model.Id"> @Model.FirstName @Model.LastName</a>
-                    <img class="img-circle" id="pictureInfo" src="~/pictures/b.png" height="25px" width="25px" />
-
+                    <a style="font-size:x-small" id="profileInfo" class="navbar-brand asizeColor" href="/Profile/index/1">HUSK AT LAVE AJAX CALL HER</a>
+                    <img class="img-circle" id="pictureInfo" src="~/pictures/b.png" height="25" width="25"alt=""/>
+                </li>
                @* These following 2 lines, has to get its data via AJAX,
                 if we implement a strongly typed view as is, other views cannot inherit this
                 header as a layout. maybe there is a smarter way, but this way is acceptable.*@
@@ -153,18 +142,8 @@
         @RenderBody()
     </div>
     <script>
-    $(document).ready(function () {
-        $('#message').on('click', function () {
-
-            $('#messageField').show();
-
-        });
-        //the Functions that opens the Notifications
-        $('#notifications').on('click', function () {
-            $('#notificationsMessage').show();
-
-        });
-    })
+        $(document).ready(function () {
+        })
 
     </script>
 

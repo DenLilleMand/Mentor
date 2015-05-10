@@ -11,8 +11,8 @@ namespace Mentor.Controllers
 {
     public class UtilityController : Controller
     {
-        private UserRepository _userRepository = new UserRepository();
-        private ProgramRepository _programRepository = new ProgramRepository();
+       private UtilityRepository _utilityRepository = new UtilityRepository();
+
 
         // GET: Utility
         public ActionResult Index()
@@ -22,16 +22,11 @@ namespace Mentor.Controllers
         [HttpPost]
         public ActionResult GetSearchData(string input)
         {
-            ProfileViewModel profileViewModel = new ProfileViewModel();
-            profileViewModel.Programs = _programRepository.Search(input).ToList();
-            profileViewModel.Users = _userRepository.Search(input).ToList();
-            var finishSearchList = JsonConvert.SerializeObject(profileViewModel, Formatting.None, new JsonSerializerSettings()
-            {
-                ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-            });
-            return Content(finishSearchList, "application/json");
+
+            return Content(_utilityRepository.Search(input), "application/json");
 
         }
+       
 
     }
 }
