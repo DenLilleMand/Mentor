@@ -199,12 +199,18 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DashBoardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProgramsController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\UtilityController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201505091648511_new.cs" />
+    <Compile Include="Migrations\201505091648511_new.Designer.cs">
+      <DependentUpon>201505091648511_new.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -214,6 +220,7 @@
     <Compile Include="Models\Program.cs" />
     <Compile Include="Models\Repositories\Concrete_Implementation\ProgramRepository.cs" />
     <Compile Include="Models\Repositories\Concrete_Implementation\UserRepository.cs" />
+    <Compile Include="Models\Repositories\Concrete_Implementation\UtilityRepository.cs" />
     <Compile Include="Models\Repositories\Interfaces\IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -222,6 +229,8 @@
     <Compile Include="ViewModels\ProgramViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\dashboard.css" />
+    <Content Include="pictures\bigstock_Background_concept_word_cloud__18089900_1.jpg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -291,9 +300,11 @@
     <Content Include="Views\Shared\_ProfilAndDashBoardLayout.cshtml" />
     <Content Include="Views\Programs\Index.cshtml" />
     <Content Include="Views\Programs\NonMemberProgram.cshtml" />
+    <Content Include="Views\DashBoard\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Utility\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -304,6 +315,11 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201505091648511_new.resx">
+      <DependentUpon>201505091648511_new.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -8,6 +8,7 @@ namespace Mentor.ViewModels
 {
     public class ProgramViewModel
     {
+
         public List<User> Users { get; set; }
         public User CurrentUser { get; set; }
         public Program Program { get; set; }

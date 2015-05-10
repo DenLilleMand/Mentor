@@ -19,9 +19,9 @@ function searchMentorPrograms(dataPrograms) {
     if (dataPrograms.length !== 0) {
         for (var i = 0; i < dataPrograms.length; i++) {
             $('.Interest').append('<li><a class="outputSearch" href="/Program/index' + dataPrograms[i].Id + '"><img src="~/pictures/b.png" class="searchPicture"/>' + dataPrograms[i].Name + '</a></li>');
-
             $('#noResultMentorPrograms').hide();
         }
+        $('.Interest').append('<li><p class="outputSearch">Number of Searches: ' + dataPrograms.length + '</p></li>');
     } else {
 
         $('#noResultMentorPrograms').show();
@@ -44,7 +44,7 @@ function searchForThings() {
         var test = { 'input': inputSearchText };
         $.ajax({
             type: 'POST',
-            url: '/User/GetSearchData',
+            url: '/Utility/GetSearchData',
             data: JSON.stringify(test),
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
@@ -54,7 +54,7 @@ function searchForThings() {
                 searchMentorPrograms(data.Programs);
 
             }, error: function (data, succes, error) {
-                alert('err');
+                alert('Something went wrong, try and search again');
             }
         });
 

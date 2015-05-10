@@ -29,7 +29,10 @@ namespace Mentor.Models.Repositories.Concrete_Implementation
 
         public User Read(int? id)
         {
-           return db.Users.Find(id);
+            User s = new User();
+            s = db.Users.Find(id);
+
+           return s;
             
         }
 
