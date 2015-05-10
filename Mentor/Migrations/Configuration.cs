@@ -41,15 +41,15 @@ namespace Mentor.Migrations
                 IsMentee = false,
                 UndefinedInterests = new List<Interest>
                 {
-                    
+
                 },
                 MentorInterests = new List<Interest>
                 {
-                    
+
                 },
                 MenteeInterests = new List<Interest>
                 {
-                    
+
                 },
                 MentorPrograms = new List<Program>()
                 {
@@ -60,6 +60,10 @@ namespace Mentor.Migrations
 
                 },
                 AdminForPrograms = new List<Program>()
+                {
+
+                },
+                CreatorForPrograms = new List<Program>()
                 {
                     
                 }
@@ -86,11 +90,11 @@ namespace Mentor.Migrations
                 },
                 MenteeInterests = new List<Interest>
                 {
-                    
+
                 },
                 MentorInterests = new List<Interest>
                 {
-                    
+
                 },
                 MentorPrograms = new List<Program>
                 {
@@ -103,6 +107,10 @@ namespace Mentor.Migrations
                 AdminForPrograms = new List<Program>
                 {
 
+                },
+                CreatorForPrograms = new List<Program>()
+                {
+                    
                 }
             };
 
@@ -111,7 +119,7 @@ namespace Mentor.Migrations
                 Name = "Meteor",
                 UndefinedUsers = new List<User>
                 {
-                    
+
                 },
                 MentorUsers = new List<User>
                 {
@@ -142,7 +150,7 @@ namespace Mentor.Migrations
                 }
             };
 
-           
+
             Interest interest3 = new Interest()
             {
                 Name = "php",
@@ -171,8 +179,8 @@ namespace Mentor.Migrations
             user2.MentorInterests.Add(interest2);
 
             user2.UndefinedInterests.Add(interest3);
-            
-           
+
+
 
             Program program1 = new Program()
             {
@@ -189,11 +197,13 @@ namespace Mentor.Migrations
                 {
                     user1
                 },
+                Creator = user1,
                 Visibility = Visibility.Private,
                 Interest = interest1
             };
 
             user1.MentorPrograms.Add(program1);
+            user1.CreatorForPrograms.Add(program1);
             user2.MenteePrograms.Add(program1);
             context.Users.AddOrUpdate(u => u.UserName, user1);
             context.Users.AddOrUpdate(u => u.UserName, user2);

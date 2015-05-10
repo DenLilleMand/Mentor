@@ -232,6 +232,7 @@
     <Content Include="Content\css\header.css" />
     <Content Include="Content\css\index.css" />
     <Content Include="Content\css\register.css" />
+    <Content Include="Content\css\NonMemberProgram.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -248,6 +249,7 @@
     <Content Include="Scripts\npm.js" />
     <Content Include="Scripts\SearchFunction.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Views\favicon.ico" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -288,6 +290,7 @@
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\Shared\_ProfilAndDashBoardLayout.cshtml" />
     <Content Include="Views\Programs\Index.cshtml" />
+    <Content Include="Views\Programs\NonMemberProgram.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
