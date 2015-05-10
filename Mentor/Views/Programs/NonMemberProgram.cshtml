@@ -1,0 +1,53 @@
+﻿@model Mentor.ViewModels.ProgramViewModel
+<head>
+    <title>Program</title>
+</head>
+<body>
+    <link href="~/Content/css/NonMemberProgram.css" rel="stylesheet" />
+
+    <div class="jumbotron">
+        <div class="container">
+            <h1>@Model.Program.Name</h1>
+            <p>
+                <a class="btn btn-primary btn-lg" href="#" role="button">Request membership as mentor</a>
+                <a class="btn btn-primary btn-lg" href="#" role="button">Request membership as mentee</a>
+            </p>
+            <p>
+                <div>
+                    Mentee: @Model.IsMentee
+                </div>
+                <div>
+                    Mentor: @Model.IsMentor
+                </div>
+                <div>
+                    Admin: @Model.IsAdmin
+                </div>
+            </p>
+        </div>
+    </div>
+    <div class="jumbotron">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-6">
+                    <h3>Mentors</h3>
+                    <ul class="list-group">
+                        @foreach (var item in Model.Program.Mentors)
+                        {
+                            <li class="list-group-item"> @item.FirstName </li>
+                        }
+                    </ul>
+                </div>
+                <div class="col-xs-6">
+                    <h3>Mentees</h3>
+                    <ul class="list-group">
+                        @foreach (var item in Model.Program.Mentee)
+                        {
+                            <li class="list-group-item"> @item.FirstName </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
