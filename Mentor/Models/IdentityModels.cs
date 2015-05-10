@@ -30,7 +30,8 @@ namespace Mentor.Models
         public virtual ICollection<Interest> MenteeInterests { get; set; } 
         public virtual ICollection<Program> MentorPrograms { get; set; }
         public virtual ICollection<Program> MenteePrograms { get; set; }
-        public virtual ICollection<Program> AdminForPrograms { get; set; } 
+        public virtual ICollection<Program> AdminForPrograms { get; set; }
+        public virtual ICollection<Notification> Notifications { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User, int> manager)
         {

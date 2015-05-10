@@ -50,6 +50,7 @@ namespace Mentor.Models.Repositories.Concrete_Implementation
 
         public IEnumerable<User> Search(string search)
         {
+           // IEnumerable<User> test = 
             return db.Users.Where(n => n.FirstName.Contains(search) || n.LastName.Contains(search));
         }
     }

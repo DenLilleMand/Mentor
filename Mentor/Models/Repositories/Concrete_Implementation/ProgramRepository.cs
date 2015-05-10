@@ -47,7 +47,8 @@ namespace Mentor.Models.Repositories.Concrete_Implementation
 
         public IEnumerable<Program> Search(string search)
         {
-           return db.Set<Program>().Where(n => n.Name.Contains(search));
+            
+            return db.Set<Program>().Where(n => n.Name.Contains(search));
         }
     }
 }
