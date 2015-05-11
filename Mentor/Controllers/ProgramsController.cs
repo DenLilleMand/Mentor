@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Mentor.Models;
+using Mentor.Models.Repositories.Concrete_Implementation;
 using Mentor.ViewModels;
 using Mentor.Models.Repositories.Interfaces;
 using Microsoft.Ajax.Utilities;
@@ -15,6 +16,7 @@ namespace Mentor.Controllers
     public class ProgramsController : Controller
     {
         private readonly IRepository<Program> _programRepository;
+        private readonly IRepository<User> _useRepository = new UserRepository(); 
 
         public ProgramsController(IRepository<Program> programRepository)
         {
