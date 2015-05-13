@@ -19,9 +19,7 @@ namespace Mentor.Controllers
         // GET: Profile
         public ActionResult Index(int id)
         {
-
             return View(_userRepository.Read(id));
-
         }
 
         //                [HttpPost]

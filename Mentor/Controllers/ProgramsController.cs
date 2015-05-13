@@ -16,24 +16,25 @@ namespace Mentor.Controllers
     public class ProgramsController : Controller
     {
         private readonly IRepository<Program> _programRepository;
-        private readonly IRepository<User> _useRepository = new UserRepository(); 
+        private readonly IRepository<User> _userRepository;
 
         public ProgramsController(IRepository<Program> programRepository)
         {
             _programRepository = programRepository;
+            _userRepository = new UserRepository(); 
         }
 
 
         // GET: Programs
         public ActionResult Index(int? id)
         {
-            
             if (id.HasValue)
             {
                 ProgramViewModel programViewModel = new ProgramViewModel();
                 programViewModel.Program = _programRepository.Read(id);
                 string currentUserIdAsString = User.Identity.GetUserId();
-                var currentUserId = Convert.ToInt32(currentUserIdAsString);
+                int currentUserId = Convert.ToInt32(currentUserIdAsString);
+                programViewModel.CurrentUser = _userRepository.Read(currentUserId);
                 if (programViewModel.Program != null)
                 {
                     foreach (var user in programViewModel.Program.Mentee)

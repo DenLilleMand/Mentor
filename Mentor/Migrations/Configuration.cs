@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Mentor.Models;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Mentor.Migrations
 {
@@ -65,7 +66,7 @@ namespace Mentor.Migrations
                 },
                 CreatorForPrograms = new List<Program>()
                 {
-                    
+
                 }
             };
             User user2 = new User()
@@ -110,7 +111,7 @@ namespace Mentor.Migrations
                 },
                 CreatorForPrograms = new List<Program>()
                 {
-                    
+
                 }
             };
 
@@ -205,9 +206,20 @@ namespace Mentor.Migrations
             user1.MentorPrograms.Add(program1);
             user1.CreatorForPrograms.Add(program1);
             user2.MenteePrograms.Add(program1);
-            context.Users.AddOrUpdate(u => u.UserName, user1);
-            context.Users.AddOrUpdate(u => u.UserName, user2);
+
+
+
+            if (!context.Users.Any(u => u.UserName == "mattinielsen5@hotmail.com"))
+            {
+                var store = new UserStore<User, CustomRole, int, CustomUserLogin, CustomUserRole, CustomUserClaim>(context);
+                var manager = new UserManager<User, int>(store);
+                manager.Create(user2, "Denlilleiceman20!");
+                manager.Create(user1, "Denlilleiceman20!");
+            }
             context.SaveChanges();
+
+
+
         }
     }
 }

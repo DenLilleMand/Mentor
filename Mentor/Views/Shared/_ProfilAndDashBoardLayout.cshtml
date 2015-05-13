@@ -6,18 +6,15 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link href="../../Content/css/bootstrap.css" rel="stylesheet"/>
     <link href="../../Content/css/profile.css" rel="stylesheet"/>
-    <script src="~/Scripts/jquery-2.1.3.js"></script>
+
+    <script src="~/Scripts/jquery-2.1.3.min.js"></script>
     <script src="~/Scripts/bootstrap.js"></script>
+
     <title>WeYouMentor</title>
-
-    <script src="~/Scripts/SearchFunction.js"></script>
-
-
-
 </head>
 <body style="background-color: lightgray">
 
-<nav style="position: fixed;background-color: #3B5998; width: 100%;margin:0px" class="navbar navbar-default">
+<nav style="position: fixed;background-color: #3B5998; width: 100%;margin:0px" class="navbar navbar-default navbar-fixed-top">
 
 
     <div class="container-fluid">
@@ -141,16 +138,14 @@
     <div style="padding-top: 70px;">
         @RenderBody()
     </div>
-    <script>
-        $(document).ready(function () {
-        })
-
-    </script>
 
 
-
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/signalr")
+    @Scripts.Render("~/signalr/hubs")
+    @RenderSection("scripts", required: false)
+    @RenderSection("FullCalendar", required:false)
+    @RenderSection("SignalR", required:false)
 </body>
-
-
-
 </html>

@@ -176,11 +176,29 @@ namespace Mentor.Models
     public class CustomUserClaim : IdentityUserClaim<int> { }
     public class CustomUserLogin : IdentityUserLogin<int> { }
 
-    public class CustomRole : IdentityRole<int, CustomUserRole>
+    public class CustomRole : IdentityRole<int, CustomUserRole>, IRole<int>
+    {
+        public string Description { get; set; }
+
+        public CustomRole() : base() { }
+        public CustomRole(string name)
+            : this()
+        {
+            this.Name = name;
+        }
+
+        public CustomRole(string name, string description)
+            : this(name)
+        {
+            this.Description = description;
+        }
+    }
+
+/*    public class CustomRole : IdentityRole<int, CustomUserRole>
     {
         public CustomRole() { }
         public CustomRole(string name) { Name = name; }
-    }
+    }*/
 
     public class CustomUserStore : UserStore<User, CustomRole, int, CustomUserLogin, CustomUserRole, CustomUserClaim>
     {
@@ -190,9 +208,26 @@ namespace Mentor.Models
         }
     }
 
-    public class CustomRoleStore : RoleStore<CustomRole, int, CustomUserRole>
+   /* public class CustomRoleStore : RoleStore<CustomRole, int, CustomUserRole>
     {
         public CustomRoleStore(ApplicationDbContext context)
+            : base(context)
+        {
+        }
+    }*/
+
+    public class CustomRoleStore
+    : RoleStore<CustomRole, int, CustomUserRole>,
+    IQueryableRoleStore<CustomRole, int>,
+    IRoleStore<CustomRole, int>, IDisposable
+    {
+        public CustomRoleStore()
+            : base(new IdentityDbContext())
+        {
+            base.DisposeContext = true;
+        }
+
+        public CustomRoleStore(DbContext context)
             : base(context)
         {
         }
