@@ -13,12 +13,12 @@ namespace Mentor.Models
 
     public class Program
     {
-        
         public Program()
         {
             this.Mentors = new HashSet<User>();
             this.Mentee = new HashSet<User>();
             this.Admins = new HashSet<User>();
+            this.ProgramMessages = new HashSet<ProgramMessage>();
         }
 
         public int Id { get; set; }
@@ -32,14 +32,17 @@ namespace Mentor.Models
         public int InterestId { get; set; }
 
 
-        [ForeignKey("InterestId")]
-        public virtual Interest Interest { get; set; }
         public virtual ICollection<User> Admins { get; set; }
         public virtual ICollection<User> Mentors { get; set; }
         public virtual ICollection<User> Mentee { get; set; }
-        
+        public virtual ICollection<ProgramMessage> ProgramMessages { get; set; }
+
+
         [ForeignKey("CreatorId")]
         public virtual User Creator { get; set; }
+
+        [ForeignKey("InterestId")]
+        public virtual Interest Interest { get; set; }
     }
     #endregion
 }

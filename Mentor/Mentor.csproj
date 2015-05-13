@@ -225,6 +225,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MockRepositories\MockProgramRepository.cs" />
     <Compile Include="Models\Program.cs" />
+    <Compile Include="Models\ProgramMessage.cs" />
     <Compile Include="Models\Repositories\Concrete_Implementation\ProgramRepository.cs" />
     <Compile Include="Models\Repositories\Concrete_Implementation\UserRepository.cs" />
     <Compile Include="Models\Repositories\Concrete_Implementation\UtilityRepository.cs" />

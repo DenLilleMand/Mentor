@@ -32,7 +32,8 @@ namespace Mentor.Models
         public virtual ICollection<Program> MentorPrograms { get; set; }
         public virtual ICollection<Program> MenteePrograms { get; set; }
         public virtual ICollection<Program> AdminForPrograms { get; set; }
-        public virtual ICollection<Program> CreatorForPrograms { get; set; } 
+        public virtual ICollection<Program> CreatorForPrograms { get; set; }
+        public virtual ICollection<ProgramMessage> ProgramMessages { get; set; } 
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User, int> manager)
         {
@@ -80,10 +81,25 @@ namespace Mentor.Models
               .HasRequired<User>(p => p.Creator)
               .WithMany(u => u.CreatorForPrograms)
               .HasForeignKey(p => p.CreatorId).WillCascadeOnDelete(false); /*i suppose that a program shouldnt be deleted just because the creator is,
-                                                                           but we have to realize that the id, might eventually return false if some1
+                                                                           but we have to realize that the id, might eventually return null if some1
                                                                             * deletes a profile. But maybe we just keep profiles, and make sure that people
-                                                                            can activate them again? kind of like facebook i suppose?*/
+         /*                                                                  can activate them again? kind of like facebook i suppose?
+            modelBuilder.Entity<DeliveryRate>()
+            .HasRequired(e => e.Destination)
+            .WithMany()
+            .HasForeignKey(e => e.DestinationId)
+            .WillCascadeOnDelete(false);
+            
+            */
+            modelBuilder.Entity<ProgramMessage>()
+             .HasRequired<User>(pm => pm.User)
+             .WithMany(u => u.ProgramMessages)
+             .HasForeignKey(pm => pm.UserId).WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<ProgramMessage>()
+           .HasRequired<Program>(pm => pm.Program)
+           .WithMany(u => u.ProgramMessages)
+           .HasForeignKey(pm => pm.ProgramId).WillCascadeOnDelete(false);
 
             modelBuilder.Entity<User>()
                       .HasMany<Interest>(i => i.MenteeInterests)
