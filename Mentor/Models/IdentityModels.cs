@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -32,6 +33,10 @@ namespace Mentor.Models
         public virtual ICollection<Program> MenteePrograms { get; set; }
         public virtual ICollection<Program> AdminForPrograms { get; set; }
         public virtual ICollection<Notification> Notifications { get; set; }
+        public virtual ICollection<Notification> NotificationsCreated { get; set; }
+
+        public virtual ICollection<Program> CreatorForPrograms { get; set; } 
+
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User, int> manager)
         {
@@ -39,6 +44,20 @@ namespace Mentor.Models
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
             // Add custom user claims here
             return userIdentity;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+            User p = obj as User;
+            if ((System.Object)p == null)
+            {
+                return false;
+            }
+            return Id == p.Id;
         }
     }
 
@@ -60,6 +79,14 @@ namespace Mentor.Models
         {
             base.OnModelCreating(modelBuilder); /*Initializes the inherited classes (relationships) such as CustomUserLogin,
                                                  *  CustomUserRole & CustomUserClaim*/
+
+            modelBuilder.Entity<Program>()
+              .HasRequired<User>(p => p.Creator)
+              .WithMany(u => u.CreatorForPrograms)
+              .HasForeignKey(p => p.CreatorId).WillCascadeOnDelete(false); /*i suppose that a program shouldnt be deleted just because the creator is,
+                                                                           but we have to realize that the id, might eventually return false if some1
+                                                                            * deletes a profile. But maybe we just keep profiles, and make sure that people
+                                                                            can activate them again? kind of like facebook i suppose?*/
 
 
             modelBuilder.Entity<User>()
@@ -137,6 +164,25 @@ namespace Mentor.Models
                 .WithMany(i => i.ProgramInterests)
                 .HasForeignKey(p => p.InterestId);
 
+            modelBuilder.Entity<Notification>()
+               .HasRequired<Program>(n => n.Program)
+               .WithMany(p => p.Notifications)
+               .HasForeignKey(n => n.ProgramId);
+
+            modelBuilder.Entity<Notification>()
+              .HasRequired<User>(n => n.NotificationCreator)
+              .WithMany(u => u.NotificationsCreated)
+              .HasForeignKey(n => n.CreatorId).WillCascadeOnDelete(false); ;
+            
+            modelBuilder.Entity<User>()
+                    .HasMany<Notification>(u => u.Notifications)
+                    .WithMany(n => n.Users)
+                    .Map(cs =>
+                    {
+                        cs.MapLeftKey("UserRefId");
+                        cs.MapRightKey("NotificationRefId");
+                        cs.ToTable("NotificationUser");
+                    });
         }
 
 

@@ -20,7 +20,7 @@ namespace Mentor.Models
 
         public string Text { get; set; }
 
-
+        public int CreatorId { get; set; }
 
         //[DatabaseGenerated(DatabaseGeneratedOption.None)]
         //public int InterestId { get; set; }
@@ -28,11 +28,12 @@ namespace Mentor.Models
 
         //
         public virtual ICollection<User> Users { get; set; }
-            [ForeignKey("ProgramId")]
-          public virtual Program Program { get; set; }
+        [ForeignKey("ProgramId")]
+        public virtual Program Program { get; set; }
+         [ForeignKey("CreatorId")]
+        public virtual User NotificationCreator { get; set; }
 
 
     }
 
     }
-}

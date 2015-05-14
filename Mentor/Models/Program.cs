@@ -25,6 +25,9 @@ namespace Mentor.Models
         public Visibility Visibility { get; set; }
         public string Name { get; set; }
 
+       
+        public int CreatorId { get; set; }
+
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int InterestId { get; set; }
 
@@ -36,8 +39,8 @@ namespace Mentor.Models
         public virtual ICollection<User> Mentee { get; set; }
         public virtual ICollection<Notification> Notifications { get; set; }
         
-
-
+        [ForeignKey("CreatorId")]
+        public virtual User Creator { get; set; }
     }
     #endregion
 }
