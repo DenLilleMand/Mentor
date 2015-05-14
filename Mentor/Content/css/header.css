@@ -29,7 +29,7 @@ i.fa.fa-search {
 }
 
 #logo{
-    background-image: url("/images/mentorLogo.png");
+    background-image: url('data:image/gif;base64,R0lGODdhggAtAPUAAAAAAAAAMwArAAArMwCAZjMAADMAMzMrADMrMzNVMzOAZjOAmTOqmTOqzGZVM2ZVZmaAZmaAmWaqmWaqzGbVzJlVZplVmZmAZpmAmZmqmZmqzJnVmZnVzJnV/5n/zMxVZsyAZsyAmcyqZsyqmcyqzMzVzMzV/8z/zMz///+AZv+Amf+qZv+qmf+qzP/Vmf/VzP/V////zP///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACwAAAAAggAtAAAG/0CZcEgsGo/IpHLJbDqf0Kh0Sq1ar9isdsvter9gI2vMerFCGQ0HFW67n6wRW9aRTDyoF0hjL73/gDIZIBMaJQuIGkUtLzIaDIGRXgwRLEMTHJcSMmYsIJYyC5KjVyURMqChMUMxYyCnQi8pYxBzpLdOHBOoMhwcCxrBEhgXJkImm0IjQi0guM9MmyQSihpsLyuNKCUcaRMKxrxCFavQ5kSiEyJCKBOyjUkL1BnwEirl59DIGi/wECktmmxCcWFXiQ4p8plb4AcUiIBPRAWUgEycwlvJSIyBFEVCiUaHZDi7SIqhkBQvOISLsgBUIYtP/JCsUmKCsU8yYE25IGQCt/9UTB4AACDAQAISRhAAyFAEgQAAR4RCJUICwAAAShEgYEokw9AlSg8EKEp2qhoUCVlQsCWlBaRNGkYy0YogQdalTQVwHUIXQpEMAxAc+KtVrOEBDqhqXWL37l0h1i40YpGMSj87QvwyyaCUCAQESRFgKNIYgEwhB7QGKEJiwOAhGMTuzSAAtBKte4tsk5Ew55UYL0zAyp3k84O5W0nTtS3jgdYEBYqM6EzEeYIhJBYrSWCA+JASKFjsCoXFEgEhIFYmweAU6fYAxHFr9VuCaHYBRUrUJsycNnMkCAzgnRAlmLDCLhzIVQULKikigiJMYFXbAwPKIBhx3GVQHwIl4Cb/AwAGsDZAdERodZwQ2f13hF0PXBCBiy4yhcIIL5RQggQQWcHCKZAw6IRQWhWlGREZKseUc3TJ0CF+XSFQwDYlkGCXaUP4B5ZgI2ZZgG0VCMGABsBdQUImcckwnhMZICmABU0J2FRyMtQ21Yb5yamUa/AppqIRLGbg55/uwcKBIkBNwVF4jkzhHJN8HTAakd0RCGeHU2Fn4gMJtGiEldtFikQGbPCBaBUodMkbgk0Qd4IBlQrhYYlw5ucUYYwi0dqeb1Yow4EybNKSFRK80MoLPp2WhFAPnIYkaZ4OUaQRMBRVZ4hKZJAaYwI8egQLJNQkBE9UmEDoMhmcqcRnRQUm/6exFuqV6xF0UrWfEiTIOdS9/9E1FKv3xpKSKJzo1JEMI4BiUhMwfHYAiAmwa6EB2gqRAAARDxFtqzJswOoSVS1H13V8edwYcwlRpAzAUIi7ggpDoDxTICzAwAE1vLjcxAXOGPwyKQkpIgFXNifxwgcyWTKBwDsHskIDBEbAQUhKyOLWECNgkknSkrxQwQlCWFKCBsA8zZYeEzXtB9JYB/IBDF0PwUCBg/JxAQYcnDDBAoOS0EjQaQfiQBmMXMKBGdlcAmHNfeOCQgQxjJDCJ7OwAMHVQmRA+YGVJU4KCgD3Q4RwPi0QTgkgmKw5NBNIMDhQN6qhwQQQLHO6QjVJEB5BBBBEINMLLsQ8O9b90AjP78QXb/zxyCev/PJEBAEAOw==') /*/images/simple_logo_detail.gif*/;
     background-repeat: no-repeat;
     display:block;
     width: 150px;
@@ -40,7 +40,6 @@ i.fa.fa-search {
 .nav-bar-item{
     height: 56px;
     margin: 7px 0 0 0;
-    padding: 0 0;
 
     /*vertical align */
     display: -ms-flexbox;
@@ -51,4 +50,34 @@ i.fa.fa-search {
     -webkit-align-items: center;
     -webkit-box-align: center;
     align-items: center;
+}
+
+#envelopeLink {
+    color: black;
+}
+
+.profileImage {
+    border-radius: 90px;
+}
+
+.profileTab {
+    margin-left: 5em;
+}
+.half-col {
+    margin-left: 1em;
+    margin-right: 1em;
+    
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+ }
+
+.nav-bar-item.col-md-2 {
+    margin-left: 3em;
+    padding-right: 0; 
+}
+
+a#exploreLink {
+    padding: 0;
 }
