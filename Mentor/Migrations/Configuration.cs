@@ -201,25 +201,25 @@ namespace Mentor.Migrations
 
             };
 
-            Interest interest1 = new Interest
-            {
-                Name = "Meteor",
-                UndefinedUsers = new List<User>
+                Interest interest1 = new Interest
                 {
-
-                },
-                MentorUsers = new List<User>
+                    Name = "Meteor",
+                    UndefinedUsers = new List<User>
+                    {
 
                     },
                     MentorUsers = new List<User>
-                {
-                    user1
+
                 },
+                    MentorUsers = new List<User>
+                    {
+                        user1
+                    },
                     MenteeUsers = new List<User>
-                {
-                    user2
-                }
-                };
+                    {
+                        user2
+                    };
+            };
 
 
                 Interest interest2 = new Interest()
@@ -314,7 +314,7 @@ namespace Mentor.Migrations
             context.Users.AddOrUpdate(u => u.UserName, user2);
             context.SaveChanges();
                     Creator = user1,
-                    Visibility = Visibility.Private,
+            Visibility = Visibility.Private,
                     Interest = interest1,
             ProgramMessages = new List<ProgramMessage>()
             {
@@ -373,6 +373,6 @@ namespace Mentor.Migrations
                 }
                 throw;
             }
-        }
+        ;
     }
 }
