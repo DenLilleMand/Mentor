@@ -132,7 +132,6 @@ namespace Mentor.Migrations
                     UndefinedUsers = new List<User>
                     {
 
-<<<<<<< HEAD
                 },
                 CreatorForPrograms = new List<Program>()
                 {
@@ -210,10 +209,9 @@ namespace Mentor.Migrations
 
                 },
                 MentorUsers = new List<User>
-=======
+
                     },
                     MentorUsers = new List<User>
->>>>>>> 474622ea6863c3161e7519f8ee1f5914ff4f1797
                 {
                     user1
                 },
@@ -288,7 +286,6 @@ namespace Mentor.Migrations
                 {
                     user1
                 },
-<<<<<<< HEAD
                 Creator = user1,
                 Visibility = Visibility.Private,
                 Interest = interest1
@@ -316,15 +313,14 @@ namespace Mentor.Migrations
             context.Users.AddOrUpdate(u => u.UserName, user1);
             context.Users.AddOrUpdate(u => u.UserName, user2);
             context.SaveChanges();
-=======
                     Creator = user1,
                     Visibility = Visibility.Private,
                     Interest = interest1,
-                    ProgramMessages = new List<ProgramMessage>()
-                    {
+            ProgramMessages = new List<ProgramMessage>()
+            {
 
-                    }
-                };
+            };
+        };
 
                 ProgramMessage message1 = new ProgramMessage()
                 {
@@ -377,7 +373,6 @@ namespace Mentor.Migrations
                 }
                 throw;
             }
->>>>>>> 474622ea6863c3161e7519f8ee1f5914ff4f1797
         }
     }
 }

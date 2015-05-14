@@ -34,16 +34,13 @@ namespace Mentor.Models
 
         public virtual ICollection<User> Admins { get; set; }
         public virtual ICollection<User> Mentors { get; set; }
-<<<<<<< HEAD
         public virtual ICollection<User> Mentee { get; set; }
         public virtual ICollection<Notification> Notifications { get; set; }
         
-=======
         public virtual ICollection<User> Mentee { get; set; }//shouldve been mentees obviously :/  if any1 has time to fix.
         public virtual ICollection<ProgramMessage> ProgramMessages { get; set; }
 
 
->>>>>>> 474622ea6863c3161e7519f8ee1f5914ff4f1797
         [ForeignKey("CreatorId")]
         public virtual User Creator { get; set; }
 

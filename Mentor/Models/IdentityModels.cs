@@ -28,16 +28,16 @@ namespace Mentor.Models
 
         public virtual ICollection<Interest> UndefinedInterests { get; set; }
         public virtual ICollection<Interest> MentorInterests { get; set; }
-        public virtual ICollection<Interest> MenteeInterests { get; set; } 
+        public virtual ICollection<Interest> MenteeInterests { get; set; }
         public virtual ICollection<Program> MentorPrograms { get; set; }
         public virtual ICollection<Program> MenteePrograms { get; set; }
         public virtual ICollection<Program> AdminForPrograms { get; set; }
         public virtual ICollection<Notification> Notifications { get; set; }
         public virtual ICollection<Notification> NotificationsCreated { get; set; }
 
-        public virtual ICollection<Program> CreatorForPrograms { get; set; } 
         public virtual ICollection<Program> CreatorForPrograms { get; set; }
-        public virtual ICollection<ProgramMessage> ProgramMessages { get; set; } 
+        public virtual ICollection<Program> CreatorForPrograms { get; set; }
+        public virtual ICollection<ProgramMessage> ProgramMessages { get; set; }
 
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User, int> manager)
@@ -55,7 +55,7 @@ namespace Mentor.Models
                 return false;
             }
             User p = obj as User;
-            if ((System.Object)p == null)
+            if ((System.Object) p == null)
             {
                 return false;
             }
@@ -63,29 +63,32 @@ namespace Mentor.Models
         }
     }
 
-    public class ApplicationDbContext : IdentityDbContext<User, CustomRole, int, CustomUserLogin, CustomUserRole, CustomUserClaim>
+    public class ApplicationDbContext :
+        IdentityDbContext<User, CustomRole, int, CustomUserLogin, CustomUserRole, CustomUserClaim>
     {
-        public ApplicationDbContext(): base("DefaultConnection")
+        public ApplicationDbContext() : base("DefaultConnection")
         {
-           // Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Migrations.Configuration>("DefaultConnection"));
+            // Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Migrations.Configuration>("DefaultConnection"));
             /*Disable initializer if we feel like it at some point:  */
             /*Database.SetInitializer<ApplicationDbContext>(null); */
         }
 
-        DbSet<Interest> Interests   { get; set; }
-        DbSet<Program> Programs     { get; set; }
-       
+        private DbSet<Interest> Interests { get; set; }
+        private DbSet<Program> Programs { get; set; }
+
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder); /*Initializes the inherited classes (relationships) such as CustomUserLogin,
+            base.OnModelCreating(modelBuilder);
+            /*Initializes the inherited classes (relationships) such as CustomUserLogin,
                                                  *  CustomUserRole & CustomUserClaim*/
 
             modelBuilder.Entity<Program>()
-              .HasRequired<User>(p => p.Creator)
-              .WithMany(u => u.CreatorForPrograms)
-              .HasForeignKey(p => p.CreatorId).WillCascadeOnDelete(false); /*i suppose that a program shouldnt be deleted just because the creator is,
+                .HasRequired<User>(p => p.Creator)
+                .WithMany(u => u.CreatorForPrograms)
+                .HasForeignKey(p => p.CreatorId).WillCascadeOnDelete(false);
+            /*i suppose that a program shouldnt be deleted just because the creator is,
                                                                            but we have to realize that the id, might eventually return null if some1
                                                                             * deletes a profile. But maybe we just keep profiles, and make sure that people
          /*                                                                  can activate them again? kind of like facebook i suppose?
@@ -97,84 +100,84 @@ namespace Mentor.Models
             
             */
             modelBuilder.Entity<ProgramMessage>()
-             .HasRequired<User>(pm => pm.User)
-             .WithMany(u => u.ProgramMessages)
-             .HasForeignKey(pm => pm.UserId).WillCascadeOnDelete(false);
+                .HasRequired<User>(pm => pm.User)
+                .WithMany(u => u.ProgramMessages)
+                .HasForeignKey(pm => pm.UserId).WillCascadeOnDelete(false);
 
             modelBuilder.Entity<ProgramMessage>()
-           .HasRequired<Program>(pm => pm.Program)
-           .WithMany(u => u.ProgramMessages)
-           .HasForeignKey(pm => pm.ProgramId).WillCascadeOnDelete(false);
+                .HasRequired<Program>(pm => pm.Program)
+                .WithMany(u => u.ProgramMessages)
+                .HasForeignKey(pm => pm.ProgramId).WillCascadeOnDelete(false);
 
             modelBuilder.Entity<User>()
-                      .HasMany<Interest>(i => i.MenteeInterests)
-                      .WithMany(a => a.MenteeUsers)
-                      .Map(cs =>
-                      {
-                          cs.MapLeftKey("UserRefId");
-                          cs.MapRightKey("MenteeInterestRefId");
-                          cs.ToTable("UserMenteeInterest");
-                      });
+                .HasMany<Interest>(i => i.MenteeInterests)
+                .WithMany(a => a.MenteeUsers)
+                .Map(cs =>
+                {
+                    cs.MapLeftKey("UserRefId");
+                    cs.MapRightKey("MenteeInterestRefId");
+                    cs.ToTable("UserMenteeInterest");
+                });
 
             modelBuilder.Entity<User>()
-                      .HasMany<Interest>(i => i.MentorInterests)
-                      .WithMany(a => a.MentorUsers)
-                      .Map(cs =>
-                      {
-                          cs.MapLeftKey("UserRefId");
-                          cs.MapRightKey("InterestRefId");
-                          cs.ToTable("UserMentorInterest");
-                      });
+                .HasMany<Interest>(i => i.MentorInterests)
+                .WithMany(a => a.MentorUsers)
+                .Map(cs =>
+                {
+                    cs.MapLeftKey("UserRefId");
+                    cs.MapRightKey("InterestRefId");
+                    cs.ToTable("UserMentorInterest");
+                });
 
             modelBuilder.Entity<User>()
-                    .HasMany<Interest>(i => i.UndefinedInterests)
-                    .WithMany(a => a.UndefinedUsers)
-                    .Map(cs =>
-                    {
-                        cs.MapLeftKey("UserRefId");
-                        cs.MapRightKey("InterestRefId");
-                        cs.ToTable("UserUndefinedInterests");
-                    });
+                .HasMany<Interest>(i => i.UndefinedInterests)
+                .WithMany(a => a.UndefinedUsers)
+                .Map(cs =>
+                {
+                    cs.MapLeftKey("UserRefId");
+                    cs.MapRightKey("InterestRefId");
+                    cs.ToTable("UserUndefinedInterests");
+                });
 
             modelBuilder.Entity<User>()
-                      .HasMany<Program>(a => a.MentorPrograms)
-                      .WithMany(p => p.Mentors)
-                      .Map(cs =>
-                      {
-                          cs.MapLeftKey("MentorRefId");
-                          cs.MapRightKey("ProgramRefId");
-                          cs.ToTable("MentorProgram");
-                      });
+                .HasMany<Program>(a => a.MentorPrograms)
+                .WithMany(p => p.Mentors)
+                .Map(cs =>
+                {
+                    cs.MapLeftKey("MentorRefId");
+                    cs.MapRightKey("ProgramRefId");
+                    cs.ToTable("MentorProgram");
+                });
 
             modelBuilder.Entity<User>()
-                      .HasMany<Program>(a => a.MenteePrograms)
-                      .WithMany(p => p.Mentee)
-                      .Map(cs =>
-                      {
-                          cs.MapLeftKey("MenteeRefId");
-                          cs.MapRightKey("ProgramRefId");
-                          cs.ToTable("MenteeProgram");
-                      });
+                .HasMany<Program>(a => a.MenteePrograms)
+                .WithMany(p => p.Mentee)
+                .Map(cs =>
+                {
+                    cs.MapLeftKey("MenteeRefId");
+                    cs.MapRightKey("ProgramRefId");
+                    cs.ToTable("MenteeProgram");
+                });
 
             modelBuilder.Entity<User>()
-                     .HasMany<Program>(a => a.MenteePrograms)
-                     .WithMany(p => p.Mentee)
-                     .Map(cs =>
-                     {
-                         cs.MapLeftKey("MenteeRefId");
-                         cs.MapRightKey("ProgramRefId");
-                         cs.ToTable("MenteeProgram");
-                     });
+                .HasMany<Program>(a => a.MenteePrograms)
+                .WithMany(p => p.Mentee)
+                .Map(cs =>
+                {
+                    cs.MapLeftKey("MenteeRefId");
+                    cs.MapRightKey("ProgramRefId");
+                    cs.ToTable("MenteeProgram");
+                });
 
             modelBuilder.Entity<User>()
-                    .HasMany<Program>(a => a.AdminForPrograms)
-                    .WithMany(p => p.Admins)
-                    .Map(cs =>
-                    {
-                        cs.MapLeftKey("AdminRefId");
-                        cs.MapRightKey("ProgramRefId");
-                        cs.ToTable("AdminProgram");
-                    });
+                .HasMany<Program>(a => a.AdminForPrograms)
+                .WithMany(p => p.Admins)
+                .Map(cs =>
+                {
+                    cs.MapLeftKey("AdminRefId");
+                    cs.MapRightKey("ProgramRefId");
+                    cs.ToTable("AdminProgram");
+                });
 
             modelBuilder.Entity<Program>()
                 .HasRequired<Interest>(p => p.Interest)
@@ -182,43 +185,55 @@ namespace Mentor.Models
                 .HasForeignKey(p => p.InterestId);
 
             modelBuilder.Entity<Notification>()
-               .HasRequired<Program>(n => n.Program)
-               .WithMany(p => p.Notifications)
-               .HasForeignKey(n => n.ProgramId);
+                .HasRequired<Program>(n => n.Program)
+                .WithMany(p => p.Notifications)
+                .HasForeignKey(n => n.ProgramId);
 
             modelBuilder.Entity<Notification>()
-              .HasRequired<User>(n => n.NotificationCreator)
-              .WithMany(u => u.NotificationsCreated)
-              .HasForeignKey(n => n.CreatorId).WillCascadeOnDelete(false); ;
-            
+                .HasRequired<User>(n => n.NotificationCreator)
+                .WithMany(u => u.NotificationsCreated)
+                .HasForeignKey(n => n.CreatorId).WillCascadeOnDelete(false);
+            ;
+
             modelBuilder.Entity<User>()
-                    .HasMany<Notification>(u => u.Notifications)
-                    .WithMany(n => n.Users)
-                    .Map(cs =>
-                    {
-                        cs.MapLeftKey("UserRefId");
-                        cs.MapRightKey("NotificationRefId");
-                        cs.ToTable("NotificationUser");
-                    });
+                .HasMany<Notification>(u => u.Notifications)
+                .WithMany(n => n.Users)
+                .Map(cs =>
+                {
+                    cs.MapLeftKey("UserRefId");
+                    cs.MapRightKey("NotificationRefId");
+                    cs.ToTable("NotificationUser");
+                });
         }
+    
 
-
-        public static ApplicationDbContext Create()
+    public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
         }
 
     }
 
-    public class CustomUserRole : IdentityUserRole<int> { }
-    public class CustomUserClaim : IdentityUserClaim<int> { }
-    public class CustomUserLogin : IdentityUserLogin<int> { }
+    public class CustomUserRole : IdentityUserRole<int>
+    {
+    }
+
+    public class CustomUserClaim : IdentityUserClaim<int>
+    {
+    }
+
+    public class CustomUserLogin : IdentityUserLogin<int>
+    {
+    }
 
     public class CustomRole : IdentityRole<int, CustomUserRole>, IRole<int>
     {
         public string Description { get; set; }
 
-        public CustomRole() : base() { }
+        public CustomRole() : base()
+        {
+        }
+
         public CustomRole(string name)
             : this()
         {
@@ -246,7 +261,7 @@ namespace Mentor.Models
         }
     }
 
-   /* public class CustomRoleStore : RoleStore<CustomRole, int, CustomUserRole>
+    /* public class CustomRoleStore : RoleStore<CustomRole, int, CustomUserRole>
     {
         public CustomRoleStore(ApplicationDbContext context)
             : base(context)
@@ -255,9 +270,9 @@ namespace Mentor.Models
     }*/
 
     public class CustomRoleStore
-    : RoleStore<CustomRole, int, CustomUserRole>,
-    IQueryableRoleStore<CustomRole, int>,
-    IRoleStore<CustomRole, int>, IDisposable
+        : RoleStore<CustomRole, int, CustomUserRole>,
+            IQueryableRoleStore<CustomRole, int>,
+            IRoleStore<CustomRole, int>, IDisposable
     {
         public CustomRoleStore()
             : base(new IdentityDbContext())
