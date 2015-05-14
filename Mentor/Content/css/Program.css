@@ -2,6 +2,12 @@
    /* border: solid black thick;*/
 }
 
+p {
+        word-break: break-all;
+}
+
+
+
 .chat
 {
     list-style: none;

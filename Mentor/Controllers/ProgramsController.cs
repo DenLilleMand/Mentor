@@ -35,6 +35,7 @@ namespace Mentor.Controllers
                 string currentUserIdAsString = User.Identity.GetUserId();
                 int currentUserId = Convert.ToInt32(currentUserIdAsString);
                 programViewModel.CurrentUser = _userRepository.Read(currentUserId);
+                programViewModel.ProgramMessages = _programRepository.GetMessages(id);
                 if (programViewModel.Program != null)
                 {
                     foreach (var user in programViewModel.Program.Mentee)

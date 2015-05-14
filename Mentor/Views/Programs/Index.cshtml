@@ -28,7 +28,28 @@
                     <div class="col-md-8 border">
                         <div class="row border">
                             <div class="panel-body">
-                                <ul class="chat" id="collective-chat"></ul>
+                                <ul class="chat" id="collective-chat">
+                                    @foreach (var item in @Model.ProgramMessages)
+                                    {
+                                         <li class="left clearfix"> 
+                                                <span class="chat-img pull-left">
+                                                    <img src="http://placehold.it/50/55C1E7/fff&text=R" alt="User Avatar" class="img-circle" />
+                                                </span>
+                                                <div class="chat-body clearfix">
+                                                <div class="header">
+                                                    <strong class="primary-font"> @item.User.FirstName @item.User.LastName </strong> 
+                                                    <small class="pull-right text-muted">
+                                                        <span class="glyphicon glyphicon-time"></span>
+                                                        @item.Date 
+                                                    </small>
+                                                </div>
+                                                <p>
+                                                    @item.Message
+                                                </p>
+                                                </div>
+                                          </li>
+                                    }
+                                </ul>
                             </div>
                         </div>
                         <div class="panel-footer">
@@ -112,56 +133,39 @@
     <script src="~/signalr/hubs"></script>
 
     <script>
-    $(function () {
+    $(function() {
         var chat = $.connection.chatHub;
-        var position = "left";
-        chat.client.addNewMessageToPage = function (message) {
-            if (position === "left") {
-                $('#collective-chat').append(
-                    '<li class="left clearfix">' +
-                                        '<span class="chat-img pull-left">' +
-                                            '<img src="http://placehold.it/50/55C1E7/fff&text=R" alt="User Avatar" class="img-circle" />' +
-                                        '</span>' +
-                                        '<div class="chat-body clearfix">' +
-                                            '<div class="header">' +
-                                                '<strong class="primary-font">' + "@Model.CurrentUser.FirstName" + " " + "@Model.CurrentUser.LastName" + '</strong> <small class="pull-right text-muted">' +
-                                                    '<span class="glyphicon glyphicon-time"></span>' + '12 mins ago' +
-                                                '</small>' +
-                                            '</div>' +
-                                            '<p>' +
-                       htmlEncode(message) +
-            '</p>' +
-        '</div>' +
-    '</li>'
-                    );
-            } else {
-                $('#collective-chat').append(
-               '<li class="left clearfix">' +
-                                   '<span class="chat-img pull-right">' +
-                                       '<img src="http://placehold.it/50/55C1E7/fff&text=L" alt="User Avatar" class="img-circle" />' +
-                                   '</span>' +
-                                   '<div class="chat-body clearfix">' +
-                                       '<div class="header">' +
-                                           '<strong class="primary-font">' + "@Model.CurrentUser.FirstName" + " " + "@Model.CurrentUser.LastName" + '</strong> <small class="pull-right text-muted">' +
-                                               '<span class="glyphicon glyphicon-time"></span>' + '12 mins ago' +
-                                           '</small>' +
-                                       '</div>' +
-                                       '<p>' +
-                  htmlEncode(message) +
-       '</p>' +
-   '</div>' +
-'</li>'
-            )
-            }
+        chat.client.addNewMessageToPage = function (message, date, position) {
+
+            $('#collective-chat').append(
+                '<li class="left clearfix">' +
+                '<span class="chat-img pull-left">' +
+                '<img src="http://placehold.it/50/55C1E7/fff&text=R" alt="User Avatar" class="img-circle" />' +
+                '</span>' +
+                '<div class="chat-body clearfix">' +
+                '<div class="header">' +
+                '<strong class="primary-font">' + "@Model.CurrentUser.FirstName" + " " + "@Model.CurrentUser.LastName" + '</strong>' +
+                '<small class="pull-right text-muted">' +
+                '<span class="glyphicon glyphicon-time">' +
+                "</span>" + date +
+                "</small>" +
+                "</div>" +
+                "<p>" +
+                htmlEncode(message) +
+                "</p>" +
+                "</div>" +
+                "</li>"
+                );
         };
         $('#text').focus();
-        $.connection.hub.start().done(function () {
-            $('#sendmessage').click(function () {
+        $.connection.hub.start().done(function() {
+            $('#sendmessage').click(function() {
                 chat.server.send($('#text').val());
                 $('#text').val('').focus();
             });
         });
     });
+
     function htmlEncode(value) {
         var encodedValue = $('<div />').text(value).html();
         return encodedValue;

@@ -11,6 +11,7 @@ namespace Mentor.ViewModels
 
         public List<User> Users { get; set; }
         public User CurrentUser { get; set; }
+        public List<ProgramMessage> ProgramMessages { get; set; } 
         public Program Program { get; set; }
         public Boolean IsAdmin { get; set; }
         public Boolean IsMentor { get; set; }

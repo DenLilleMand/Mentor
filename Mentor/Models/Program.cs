@@ -34,7 +34,7 @@ namespace Mentor.Models
 
         public virtual ICollection<User> Admins { get; set; }
         public virtual ICollection<User> Mentors { get; set; }
-        public virtual ICollection<User> Mentee { get; set; }
+        public virtual ICollection<User> Mentee { get; set; }//shouldve been mentees obviously :/  if any1 has time to fix.
         public virtual ICollection<ProgramMessage> ProgramMessages { get; set; }
 
 

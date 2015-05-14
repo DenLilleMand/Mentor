@@ -50,5 +50,11 @@ namespace Mentor.Models.Repositories.Concrete_Implementation
         {
             return db.Users.Where(n => n.FirstName.Contains(search) || n.LastName.Contains(search));
         }
+
+
+        public List<ProgramMessage> GetMessages(int? id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

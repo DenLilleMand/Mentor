@@ -221,14 +221,16 @@ namespace Mentor.Migrations
                 {
                     Message = "Jeg ved det godt. ",
                     User = user1,
-                    Program = program1
+                    Program = program1,
+                    Date = new DateTime()
                 };
 
                 ProgramMessage message2 = new ProgramMessage()
                 {
-                    Message = "Matti du er en gud.",
+                    Message = "Matti du er en gud. Nanananananananannanann batmaN! nananananannnnnananaa",
                     User = user2,
-                    Program = program1
+                    Program = program1,
+                    Date = new DateTime()
                 };
                 user1.ProgramMessages.Add(message1);
                 user2.ProgramMessages.Add(message2);
