@@ -36,7 +36,6 @@ namespace Mentor.Models
         public virtual ICollection<Notification> NotificationsCreated { get; set; }
 
         public virtual ICollection<Program> CreatorForPrograms { get; set; }
-        public virtual ICollection<Program> CreatorForPrograms { get; set; }
         public virtual ICollection<ProgramMessage> ProgramMessages { get; set; }
 
 
