@@ -36,6 +36,8 @@ namespace Mentor.Models
         public virtual ICollection<Notification> NotificationsCreated { get; set; }
 
         public virtual ICollection<Program> CreatorForPrograms { get; set; } 
+        public virtual ICollection<Program> CreatorForPrograms { get; set; }
+        public virtual ICollection<ProgramMessage> ProgramMessages { get; set; } 
 
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User, int> manager)
@@ -84,10 +86,25 @@ namespace Mentor.Models
               .HasRequired<User>(p => p.Creator)
               .WithMany(u => u.CreatorForPrograms)
               .HasForeignKey(p => p.CreatorId).WillCascadeOnDelete(false); /*i suppose that a program shouldnt be deleted just because the creator is,
-                                                                           but we have to realize that the id, might eventually return false if some1
+                                                                           but we have to realize that the id, might eventually return null if some1
                                                                             * deletes a profile. But maybe we just keep profiles, and make sure that people
-                                                                            can activate them again? kind of like facebook i suppose?*/
+         /*                                                                  can activate them again? kind of like facebook i suppose?
+            modelBuilder.Entity<DeliveryRate>()
+            .HasRequired(e => e.Destination)
+            .WithMany()
+            .HasForeignKey(e => e.DestinationId)
+            .WillCascadeOnDelete(false);
+            
+            */
+            modelBuilder.Entity<ProgramMessage>()
+             .HasRequired<User>(pm => pm.User)
+             .WithMany(u => u.ProgramMessages)
+             .HasForeignKey(pm => pm.UserId).WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<ProgramMessage>()
+           .HasRequired<Program>(pm => pm.Program)
+           .WithMany(u => u.ProgramMessages)
+           .HasForeignKey(pm => pm.ProgramId).WillCascadeOnDelete(false);
 
             modelBuilder.Entity<User>()
                       .HasMany<Interest>(i => i.MenteeInterests)
@@ -197,11 +214,29 @@ namespace Mentor.Models
     public class CustomUserClaim : IdentityUserClaim<int> { }
     public class CustomUserLogin : IdentityUserLogin<int> { }
 
-    public class CustomRole : IdentityRole<int, CustomUserRole>
+    public class CustomRole : IdentityRole<int, CustomUserRole>, IRole<int>
+    {
+        public string Description { get; set; }
+
+        public CustomRole() : base() { }
+        public CustomRole(string name)
+            : this()
+        {
+            this.Name = name;
+        }
+
+        public CustomRole(string name, string description)
+            : this(name)
+        {
+            this.Description = description;
+        }
+    }
+
+/*    public class CustomRole : IdentityRole<int, CustomUserRole>
     {
         public CustomRole() { }
         public CustomRole(string name) { Name = name; }
-    }
+    }*/
 
     public class CustomUserStore : UserStore<User, CustomRole, int, CustomUserLogin, CustomUserRole, CustomUserClaim>
     {
@@ -211,9 +246,26 @@ namespace Mentor.Models
         }
     }
 
-    public class CustomRoleStore : RoleStore<CustomRole, int, CustomUserRole>
+   /* public class CustomRoleStore : RoleStore<CustomRole, int, CustomUserRole>
     {
         public CustomRoleStore(ApplicationDbContext context)
+            : base(context)
+        {
+        }
+    }*/
+
+    public class CustomRoleStore
+    : RoleStore<CustomRole, int, CustomUserRole>,
+    IQueryableRoleStore<CustomRole, int>,
+    IRoleStore<CustomRole, int>, IDisposable
+    {
+        public CustomRoleStore()
+            : base(new IdentityDbContext())
+        {
+            base.DisposeContext = true;
+        }
+
+        public CustomRoleStore(DbContext context)
             : base(context)
         {
         }

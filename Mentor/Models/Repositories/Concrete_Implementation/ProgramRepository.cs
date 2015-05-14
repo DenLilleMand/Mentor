@@ -50,5 +50,16 @@ namespace Mentor.Models.Repositories.Concrete_Implementation
             
             return db.Set<Program>().Where(n => n.Name.Contains(search));
         }
+
+
+        public List<ProgramMessage> GetMessages(int? id)
+        {
+            return db.Set<ProgramMessage>().Where(pm => pm.ProgramId == id).OrderByDescending(pm => pm.Date).ToList();
+        }
+
+        public void SaveProgramChatMessage(ProgramMessage message, User user)
+        {
+
+        }
     }
 }

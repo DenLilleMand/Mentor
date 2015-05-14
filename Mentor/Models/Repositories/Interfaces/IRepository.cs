@@ -17,6 +17,7 @@ namespace Mentor.Models.Repositories.Interfaces
         void Delete(T Object);
         
         IEnumerable<T> Search(string search);
-       
+
+        List<ProgramMessage> GetMessages(int? id);
     }
 }

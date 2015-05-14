@@ -11,10 +11,12 @@ namespace Mentor.Models.Repositories.Concrete_Implementation
     public class UtilityRepository
     {
 
-
+        //Hardcoded dependencies(Unable to mock it), wrong naming conventions(instance variables starts with capital letter). Doesn't implement the IRepository Interface - 
+        //which doesn't exactly make sense for it either, because the only method in this repository we need is search, Makes me wonder, if the UtilityRepository, is actually 
+        //unnessecery, and we should give whatever code that calls this, the access to these repositores it self. food for thought.
         private UserRepository _userRepository = new UserRepository();
         private ProgramRepository _programRepository = new ProgramRepository();
-        private ProfileViewModel profileViewModel = new ProfileViewModel();
+        
 
         public string Search(string input)
         {
@@ -39,7 +41,5 @@ namespace Mentor.Models.Repositories.Concrete_Implementation
         //  System.Drawing.Image returnImage = System.Drawing.Image.FromStream(ms);
         // return returnImage;
         // }
-
-
     }
 }

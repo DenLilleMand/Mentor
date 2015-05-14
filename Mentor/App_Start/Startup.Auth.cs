@@ -6,6 +6,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using Mentor.Models;
+[assembly: OwinStartup(typeof(Mentor.Startup))]
 
 namespace Mentor
 {
@@ -16,6 +17,8 @@ namespace Mentor
         {
             // Configure the db context, user manager and signin manager to use a single instance per request
             app.CreatePerOwinContext(ApplicationDbContext.Create);
+            // Any connection or hub wire up and configuration should go here
+            app.MapSignalR();
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
             app.CreatePerOwinContext<ApplicationSignInManager>(ApplicationSignInManager.Create);
 
@@ -24,6 +27,7 @@ namespace Mentor
             // Configure the sign in cookie
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
+
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
                 LoginPath = new PathString("/Account/Login"),
                 Provider = new CookieAuthenticationProvider
@@ -72,6 +76,7 @@ namespace Mentor
             //    ClientId = "",
             //    ClientSecret = ""
             //});
+
         }
     }
 }

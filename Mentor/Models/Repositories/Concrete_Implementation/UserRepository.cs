@@ -9,7 +9,7 @@ namespace Mentor.Models.Repositories.Concrete_Implementation
 {
     public class UserRepository : IRepository<User>
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly ApplicationDbContext db = new ApplicationDbContext();
 
         public IEnumerable<User> GetDatabase()
         {
@@ -31,9 +31,7 @@ namespace Mentor.Models.Repositories.Concrete_Implementation
         {
             User s = new User();
             s = db.Users.Find(id);
-
            return s;
-            
         }
 
         public void Update(User Object)
@@ -52,6 +50,12 @@ namespace Mentor.Models.Repositories.Concrete_Implementation
         {
            // IEnumerable<User> test = 
             return db.Users.Where(n => n.FirstName.Contains(search) || n.LastName.Contains(search));
+        }
+
+
+        public List<ProgramMessage> GetMessages(int? id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

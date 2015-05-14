@@ -20,7 +20,7 @@ namespace Mentor.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        UserRepository user = new UserRepository();
+        UserRepository _userRepository = new UserRepository();
 
         public AccountController()
         {
@@ -83,7 +83,11 @@ namespace Mentor.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return View("User/Index",model);
+                string currentUserIdAsString = User.Identity.GetUserId();
+                int currentUserId = Convert.ToInt32(currentUserIdAsString);
+                //_userRepository.CurrentUser = _userRepository.Read(currentUserId);
+
+                return View("User/Index", currentUserId);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
