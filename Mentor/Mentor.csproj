@@ -223,6 +223,7 @@
     <Compile Include="Models\Interest.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Notification.cs" />
     <Compile Include="Models\MockRepositories\MockProgramRepository.cs" />
     <Compile Include="Models\Program.cs" />
     <Compile Include="Models\ProgramMessage.cs" />
@@ -284,7 +285,6 @@
     <Content Include="Content\css\header.css" />
     <Content Include="Content\css\index.css" />
     <Content Include="Content\css\register.css" />
-    <Content Include="Content\css\NonMemberProgram.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -314,7 +314,6 @@
     <Content Include="Scripts\npm.js" />
     <Content Include="Scripts\SearchFunction.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Views\favicon.ico" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -355,7 +354,6 @@
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\Shared\_ProfilAndDashBoardLayout.cshtml" />
     <Content Include="Views\Programs\Index.cshtml" />
-    <Content Include="Views\Programs\NonMemberProgram.cshtml" />
     <Content Include="Views\DashBoard\Index.cshtml" />
     <Content Include="Scripts\jquery-2.1.3.min.map" />
     <Content Include="Views\Home\Chat.cshtml" />

@@ -10,20 +10,22 @@
 </head>
 <body>
 <div style="margin-left: 50px;">
-    <table style="position: fixed;background-color: lightgray; width: 10%;height: 100%">
+    <table style="position: fixed;background-color: lightgray; width: 10%;border-collapse:separate;">
         <tr>
             <td style="margin-bottom: 20px"><a style="font-size: xx-small"href="/User/index/@Model.Id"><img src="~/pictures/b.png" class="img-circle" alt="" width="30" height="30"/></a></td>
-            <td><a href="/User/index/@Model.Id">@Model.FirstName @Model.LastName</a></td><br/>
+            <td><a href="/User/index/@Model.Id">@Model.FirstName @Model.LastName</a></td>
 
 
         </tr>
 
-       <tr>
+       <tr style="padding-top: 10px;">
  
-            <td style="display: block; font-size: xx-small; padding-bottom: 10px;">Mentor Programs</td>
+            <td style="display: block; font-size: x-small; padding-bottom: 10px;">Mentor Programs</td>
             @foreach (var mentorPrograms in @Model.MentorPrograms)
             {
-                <td style="float: left"><a href="/Programs/index/@mentorPrograms.Id"></a>@mentorPrograms.Name</td>
+                <td style="float: left"><a href="/Programs/index/@mentorPrograms.Id">
+                    <p style="font-size: xx-small">@mentorPrograms.Name</p></a></td>
+   
             }
 
 
@@ -33,7 +35,7 @@
             <th style="display: block; font-size: xx-small; padding-bottom: 10px;">Mentor Interest</th>
             @foreach (var mentorOffer in @Model.MentorInterests)
             {
-                <td style="float: left"><a href="/Programs/index/??."></a>@mentorOffer.Name</td>
+                <td style="float: left"><a href="/Programs/index/??."><p style="font-size: xx-small">@mentorOffer.Name</p></a></td>
             }
 
         </tr>
@@ -43,15 +45,86 @@
             <th style="display: block; font-size: xx-small; padding-bottom: 10px;">Mentee Interest</th>
             @foreach (var menteeInterest in @Model.MentorInterests)
             {
-                <td style="float: left"><a href="/Programs/index/??."> <@menteeInterest.Name</td></a>
+                <td style="float: left"><a href="/Programs/index/??.">
+                    <p style="font-size: xx-small">@menteeInterest.Name</p></a></td>
+  
             }
 
         </tr>
-        
-    
+      
     </table>
+    <div style="width: 80%; ;float: right; margin-right: 50px;">
+        <div class="dashBoardInfo">
+            @foreach (var mentorInterest in @Model.MentorInterests)
+            {
+                <div class="dashBoardPic">
+                    <a href="">
+                        <img src="~/pictures/480px-Soccer_ball.svg.png" alt="" />
+                    </a>
+                    <p style="text-align: center; margin-bottom: 10px;" class="textBoxHeader">@mentorInterest.Name</p>
+                </div>
+            }
+            
+           
+           
+        </div>
+
+        <div class="dashBoardInfo" style="margin-top: 20px;">
+
+            @foreach (var menteeInterest in @Model.MenteeInterests)
+            {
+                <div class="dashBoardPic">
+                    <a href="">
+                        <img src="~/pictures/480px-Soccer_ball.svg.png" alt=""/>
+                    </a>
+                    <p style="text-align: center; margin-bottom: 10px;" class="textBoxHeader">@menteeInterest.Name</p>
+                </div>
+            }
+
+        </div>
+        <div class="dashBoardInfo" style="margin-top: 20px;">
+
+            @foreach (var menteeInterest in @Model.MenteeInterests)
+            {
+                <div class="dashBoardPic">
+                    <a href="">
+                        <img src="~/pictures/480px-Soccer_ball.svg.png" alt=""/>
+                    </a>
+                    <p style="text-align: center; margin-bottom: 10px;" class="textBoxHeader">@menteeInterest.Name</p>
+                </div>
+            }
+
+        </div>
+        <div class="dashBoardInfo" style="margin-top: 20px;">
+
+            @foreach (var menteeInterest in @Model.MenteeInterests)
+            {
+                <div class="dashBoardPic">
+                    <a href="">
+                        <img src="~/pictures/480px-Soccer_ball.svg.png" alt=""/>
+                    </a>
+                    <p style="text-align: center; margin-bottom: 10px;" class="textBoxHeader">@menteeInterest.Name</p>
+                </div>
+            }
+
+        </div>
+        <div class="dashBoardInfo" style="margin-top: 20px;">
+
+            @foreach (var menteeInterest in @Model.MenteeInterests)
+            {
+                <div class="dashBoardPic">
+                    <a href="">
+                        <img src="~/pictures/480px-Soccer_ball.svg.png" alt="" />
+                    </a>
+                    <p style="text-align: center; margin-bottom: 10px;" class="textBoxHeader">@menteeInterest.Name</p>
+                </div>
+            }
+
+        </div>
+
+    </div>
 
 </div>
-    <div style="height: 1000px; border: 2px black solid;float: right"></div>
+
 </body>
 </html>
