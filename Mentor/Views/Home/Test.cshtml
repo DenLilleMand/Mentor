@@ -2,98 +2,30 @@
 @{
     Layout = "~/Views/Shared/_LoggedInHeader.cshtml";
 }
+<div>
+    Tjhis is the page
 
-@Styles.Render("~/Content/css/jquery.tagit.css")
-@Styles.Render("~/Content/css/tagit.ui-zendesk.css")
-@Styles.Render("~/Content/css/register.css")
-
-<script src="~/Scripts/jquery-ui.js"></script>
-<script src="~/Scripts/tag-it.js"></script>
-
-    <script>
-        $(document).ready(function() {
-            $("#myTags").tagit({
-                removeConfirmation: true,
-                allowSpaces: true
-            });
-
-            var tagArray = []; 
-
-            //I've written out all events..
-            var eventTags = $("#myTags");
-
-            //API
-            eventTags.tagit({
-                beforeTagAdded: function(evt, ui) {
-                    if (!ui.duringInitialization) {
-                        tagArray.push(eventTags.tagit('tagLabel', ui.tag));
-                        console.log(tagArray);
-                    }
-                },
-                afterTagAdded: function(evt, ui) {
-                    if (!ui.duringInitialization) {                        
-                    }
-                },
-                beforeTagRemoved: function (evt, ui) {
-
-                },
-                //we remove 
-                afterTagRemoved: function (evt, ui) {
-                    var removeIndex;
-                    for (var i = 0; i < tagArray.length; i++) {
-                        if (tagArray[i] == eventTags.tagit('tagLabel', ui.tag)) {
-                            removeIndex = i;
-                            break;
-                        }
-                    }
-                    if (removeIndex !== "undefined") {
-                        tagArray.splice(removeIndex, 1);
-                    } else {
-                        console.log("surely, an error happened when deleting the tag");
-                    }
-                },
-                onTagClicked: function(evt, ui) {
-                },
-                onTagExists: function (evt, ui) {
-                    
-                }
-            });
-        });
-
-
-    </script>
-
-<div class="page-wrapper-interests">
-    @using (Html.BeginForm("Interests", "Account", FormMethod.Post, new {@class = "center-align form-group", role = "form"}))
-    {
-        @Html.AntiForgeryToken()
-        <div class="container">
-            <div class="center-div rounded-content center-horizontal">
-                <h2 class="title">
-                    Hi {first name}, please tell us about your interests
-                </h2>
-                <form>
-                    <div class="row">
-                        <div class="form-group col-md-10 center-horizontal input-margin">
-                            Write anything you like to do. Seperate with a tab, comma, or return key
-                            <ul id="myTags"></ul>
-
-                            <div class="row">
-                                <div class="form-group">
-                                    <input value="Continue" class="btn btn--green btn--large col-md-10 center-horizontal input-margin" type="submit" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    }
 </div>
+<div id="showHere"></div>
 
+<script>
 
+    var Programs = [];
 
+    //Use a constructor to construct the programs by passing in parameters
+    var program
 
+    imgArray[0] = new Image();
+    imgArray[0].src = '/Images/mentorLogo.png';
+
+    imgArray[1] = new Image();
+    imgArray[1].src = '/Images/mentorLogo1.png';
+
+    for (var i = 0; i < imgArray.length; i++) {
+        $("#showHere").append(imgArray[i]);
+    }
+
+</script>
 
 
 
