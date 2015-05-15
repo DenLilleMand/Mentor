@@ -237,6 +237,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\dashboard.css" />
+    <Content Include="Content\css\jquery.tagit.css" />
+    <Content Include="Content\css\tagit.ui-zendesk.css" />
     <Content Include="Content\Fonts\fontawesome-webfont.svg" />
     <Content Include="Content\Fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\fullcalendar.css" />
@@ -318,6 +320,7 @@
     <Content Include="Scripts\jquery-2.1.3.min.js" />
     <Content Include="Scripts\jquery-ui-1.11.4.js" />
     <Content Include="Scripts\jquery-ui-1.11.4.min.js" />
+    <Content Include="Scripts\jquery-ui.js" />
     <Content Include="Scripts\jquery.signalR-2.2.0.js" />
     <Content Include="Scripts\jquery.signalR-2.2.0.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
@@ -328,6 +331,7 @@
     <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\npm.js" />
     <Content Include="Scripts\SearchFunction.js" />
+    <Content Include="Scripts\tag-it.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
