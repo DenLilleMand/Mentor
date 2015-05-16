@@ -1,12 +1,31 @@
 ﻿img { max-width:100%; }
 
+
+li {
+  display: inline-block;
+  font-family: Whitney, helvetica, arial, sans-serif;
+  height: 182px;
+  margin-bottom: 18px;
+  position: relative;
+  text-align: left;
+  text-rendering: optimizeLegibility;
+  vertical-align: top;
+}
+
 .page-wrapper {
-    text-align:center;
+    box-sizing: border-box;
+    color: rgba(0, 0, 0, 0.670588);
+    float: left;
+    height: 7731px;
+    min-height: 1px;
+    text-rendering: optimizeLegibility;
+    width: 978px;
+    padding: 0px 18px 0px 0px;
+/*    text-align:center;
     margin: 6em 5em;
-    /*float: none;*/
     border-style: double;
     border-width: 3px;
-    border-bottom-color: red;
+    border-bottom-color: red;*/
 }
 
 .programDiv {
@@ -19,4 +38,9 @@
     margin-right:7em; /* the width of the navigation item*/
     width: 7em;
     position: relative;
+}
+
+
+#myPrograms {
+     
 }

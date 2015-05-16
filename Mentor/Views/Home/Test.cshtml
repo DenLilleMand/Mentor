@@ -8,58 +8,59 @@
 
 
 <div class="page-wrapper">
+    
     <div class="container">
-        
-        <h4 class="pull-right title">
-            Your programs
-        </h4>
-
+        <div class="row">
+            <h4 class="pull-right title">
+                Your programs
+            </h4>
+        </div>
         <div class="item active"></div>
 
 
         <div class="row">
-            <div id="myPrograms"></div>
+            <ul id="myPrograms"></ul>
         </div>
     </div>
 
 
 
-            <h4>
-                Suggested programs
-            </h4>
+    <h4>
+        Suggested programs
+    </h4>
 
 
-            <div class="carousel slide" id="myCarousel">
-                <div class="carousel-inner">
-                    <div class="item active">
-                        <ul class="thumbnails">
-                            <li class="col-sm-3">
-                                <div class="fff">
-                                    <div class="thumbnail">
-                                        <a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-                                    </div>
-                                    <div class="caption">
-                                        <h4>Praesent commodo</h4>
-                                        <p>Nullam Condimentum Nibh Etiam Sem</p>
-                                        <a class="btn btn-mini" href="#">» Read More</a>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+    <div class="carousel slide" id="myCarousel">
+        <div class="carousel-inner">
+            <div class="item active">
+                <ul class="thumbnails">
+                    <li class="col-sm-3">
+                        <div class="fff">
+                            <div class="thumbnail">
+                                <a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+                            </div>
+                            <div class="caption">
+                                <h4>Praesent commodo</h4>
+                                <p>Nullam Condimentum Nibh Etiam Sem</p>
+                                <a class="btn btn-mini" href="#">» Read More</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
-
-
-
-    <div class="container">
-        <div class="row">
-            <div id="suggestedPrograms"></div>
-        </div>
     </div>
-
 </div>
+
+
+
+<div class="container">
+    <div class="row">
+        <div id="suggestedPrograms"></div>
+    </div>
+</div>
+
+
 <script>
 
     $(document).ready(function () {
@@ -88,11 +89,19 @@
     programs.push(program);
     program = new Program('/Images/mentorLogo2.png', "the art of seduction", "this is an excellent program", true, 2, 7);
     programs.push(program);
+    program = new Program('/Images/mentorLogo.png', "computer science", "this is a good program", true, 2, 6);
+    programs.push(program);
+    program = new Program('/Images/mentorLogo1.png', "the art of seduction", "this is an excellent program", true, 2, 7);
+    programs.push(program);
+    program = new Program('/Images/background4.jpg', "skate", "this is a really good program", true, 2, 6);
+    programs.push(program);
+    program = new Program('/Images/mentorLogo2.png', "the art of seduction", "this is an excellent program", true, 2, 7);
+    programs.push(program);
 
     for (var i = 0; i < programs.length; i++) {
         //a container for the shown program
-        var containerDiv = document.createElement("div");
-        containerDiv.className = "col-md-4 programDiv";
+        var containerLi = document.createElement("li");
+        containerLi.className = "col-md-4 programDiv";
 
         //content divs
         var titleDiv = document.createElement("div");
@@ -118,15 +127,15 @@
 
 
         //add content divs to the container div
-        containerDiv.appendChild(titleDiv);
-        containerDiv.appendChild(imageDiv);
-        containerDiv.appendChild(descriptionDiv);
+        containerLi.appendChild(titleDiv);
+        containerLi.appendChild(imageDiv);
+        containerLi.appendChild(descriptionDiv);
 
         //give the containerId the id of the program
-        containerDiv.id = programs[i].programId;
+        containerLi.id = programs[i].programId;
 
         //add the containerDiv to the document
-        document.getElementById("myPrograms").appendChild(containerDiv);
+        document.getElementById("myPrograms").appendChild(containerLi);
     }
 </script>
 
