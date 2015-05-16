@@ -1,0 +1,22 @@
+﻿img { max-width:100%; }
+
+.page-wrapper {
+    text-align:center;
+    margin: 6em 5em;
+    /*float: none;*/
+    border-style: double;
+    border-width: 3px;
+    border-bottom-color: red;
+}
+
+.programDiv {
+    border-style: double;
+    border-width: 3px;
+    border-bottom-color: greenyellow;
+}
+
+.title {
+    margin-right:7em; /* the width of the navigation item*/
+    width: 7em;
+    position: relative;
+}

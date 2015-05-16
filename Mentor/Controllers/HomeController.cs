@@ -31,6 +31,11 @@ namespace Mentor.Controllers
             return View();
         }
 
+        public ActionResult Interests()
+        {
+            return View();
+        }
+
 
 
       

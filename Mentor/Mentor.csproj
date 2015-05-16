@@ -238,6 +238,7 @@
   <ItemGroup>
     <Content Include="Content\css\dashboard.css" />
     <Content Include="Content\css\jquery.tagit.css" />
+    <Content Include="Content\css\MyPrograms.css" />
     <Content Include="Content\css\tagit.ui-zendesk.css" />
     <Content Include="Content\Fonts\fontawesome-webfont.svg" />
     <Content Include="Content\Fonts\glyphicons-halflings-regular.svg" />
