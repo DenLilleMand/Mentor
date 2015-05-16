@@ -6,12 +6,10 @@
 
 @Styles.Render("~/Content/css/MyPrograms.css")
 
-
-<div class="page-wrapper">
     
     <div class="container">
         <div class="row">
-            <h4 class="pull-right title">
+            <h4 class="title">
                 Your programs
             </h4>
         </div>
@@ -50,7 +48,6 @@
             </div>
         </div>
     </div>
-</div>
 
 
 
@@ -81,27 +78,27 @@
         this.title = title;
     }
 
-    program = new Program('/Images/mentorLogo.png', "computer science", "this is a good program", true, 2, 6);
+    program = new Program('/Images/program1.jpg', "computer science", "this is a good program", true, 2, 6);
     programs.push(program);
-    program = new Program('/Images/mentorLogo1.png', "the art of seduction", "this is an excellent program", true, 2, 7);
+    program = new Program('/Images/program2.jpg', "the art of seduction", "this is an excellent program", true, 2, 7);
     programs.push(program);
-    program = new Program('/Images/background4.jpg', "skate", "this is a really good program", true, 2, 6);
+    program = new Program('/Images/program3.jpg', "skate", "this is a really good program", true, 2, 6);
     programs.push(program);
-    program = new Program('/Images/mentorLogo2.png', "the art of seduction", "this is an excellent program", true, 2, 7);
+    program = new Program('/Images/program1.jpg', "the art of seduction", "this is an excellent program", true, 2, 7);
     programs.push(program);
-    program = new Program('/Images/mentorLogo.png', "computer science", "this is a good program", true, 2, 6);
+    program = new Program('/Images/program2.jpg', "computer science", "this is a good program", true, 2, 6);
     programs.push(program);
-    program = new Program('/Images/mentorLogo1.png', "the art of seduction", "this is an excellent program", true, 2, 7);
+    program = new Program('/Images/program3.jpg', "the art of seduction", "this sdfnoaep wraeijfo<åsdfkjaf casdofi jcasdfcasådfopsdmf licfoc åasdfkmxsad fciasdoåfsdvkzmxbmndog sdfåbzmxcb kdsgvåsdpvl<m is an excellent program", true, 2, 7);
     programs.push(program);
-    program = new Program('/Images/background4.jpg', "skate", "this is a really good program", true, 2, 6);
+    program = new Program('/Images/program1.jpg', "skate", "this is a really good program", true, 2, 6);
     programs.push(program);
-    program = new Program('/Images/mentorLogo2.png', "the art of seduction", "this is an excellent program", true, 2, 7);
+    program = new Program('/Images/program2.jpg', "the art of seduction", "this is an excellent program", true, 2, 7);
     programs.push(program);
 
     for (var i = 0; i < programs.length; i++) {
         //a container for the shown program
         var containerLi = document.createElement("li");
-        containerLi.className = "col-md-4 programDiv";
+        containerLi.className = "col-md-3 programDiv";
 
         //content divs
         var titleDiv = document.createElement("div");

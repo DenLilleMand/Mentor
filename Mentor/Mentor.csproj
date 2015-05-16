@@ -282,6 +282,9 @@
     <Content Include="Images\mentorLogo1.png" />
     <Content Include="Images\mentorLogo2.png" />
     <Content Include="Images\profileImg.jpg" />
+    <Content Include="Images\program1.jpg" />
+    <Content Include="Images\program2.jpg" />
+    <Content Include="Images\program3.jpg" />
     <Content Include="Images\simple_logo_detail.gif" />
     <Content Include="pictures\bigstock_Background_concept_word_cloud__18089900_1.jpg" />
     <Content Include="Content\bootstrap-theme.css" />
