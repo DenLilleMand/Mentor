@@ -95,8 +95,14 @@
     text-align: justify;
 }
 
-.page-wrapper {
+.page-wrapper-register {
     background-color: #f7fafa;
+}
+
+.page-wrapper-login {
+    background-color: #f7fafa;
+    margin: 0;
+    height: 100%;
 }
 
 .page-wrapper-interests {

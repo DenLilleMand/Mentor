@@ -296,7 +296,7 @@
     <Content Include="Content\css\footer.css" />
     <Content Include="Content\css\header.css" />
     <Content Include="Content\css\index.css" />
-    <Content Include="Content\css\register.css" />
+    <Content Include="Content\css\account.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -380,9 +380,9 @@
     <Content Include="Views\DashBoard\Index.cshtml" />
     <Content Include="Scripts\jquery-2.1.3.min.map" />
     <Content Include="Views\Home\Chat.cshtml" />
-    <Content Include="Views\Home\Test.cshtml" />
     <Content Include="Views\Shared\_LoggedInHeader.cshtml" />
     <Content Include="Views\Home\Interests.cshtml" />
+    <Content Include="Views\Home\MyPrograms.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

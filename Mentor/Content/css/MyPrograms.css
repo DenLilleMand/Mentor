@@ -1,30 +1,45 @@
 ﻿img { max-width:100%; }
 
 
-li {
+li.programDiv {
   display: inline-block;
   font-family: Whitney, helvetica, arial, sans-serif;
   position: relative;
-  text-align: left;
-  text-rendering: optimizeLegibility;
   vertical-align: top;
 }
 
 
-.programDiv {
-    border-style: double;
-    border-width: 3px;
-    border-bottom-color: greenyellow;
-    margin: 10px;
+.title {
+    float: right;
+    font: bold 30px/50px Helvetica, Sans-Serif; 
 }
 
-.title {
-    margin-right:7em; /* the width of the navigation item*/
-    width: 7em;
-    position: relative;
+h3.title-programs {
+   position: absolute; 
+   bottom: 0px; 
+   width: 100%;
+   color: white;
+   font: bold 30px/50px Helvetica, Sans-Serif; 
+   letter-spacing: -1px;  
+   padding: 5px;
+}
+
+.imageDiv {
+    position: relative; 
+}
+
+.col-centered{
+    float: none;
+    margin: 0 auto;
 }
 
 
 #myPrograms {
-     
+   
+    /* center the ul*/
+    margin: 5px auto;
+}
+
+.page-wrapper {
+    background-color: #f7fafa;
 }

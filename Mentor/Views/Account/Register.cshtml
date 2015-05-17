@@ -1,11 +1,11 @@
 ﻿@model Mentor.Models.RegisterViewModel
-          @{
-               Layout = null;
-          }
-<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-<link href="~/Content/css/register.css" rel="stylesheet" />
+    @{
+        Layout = null;
+    }
+@Styles.Render("~/Content/bootstrap.min.css")
+@Styles.Render("~/Content/css/account.css")
 
-<div class="page-wrapper">
+<div class="page-wrapper-register">
     @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "center-align form-group", role = "form" }))
     {
         @Html.AntiForgeryToken()
@@ -23,30 +23,30 @@
 
                 <div class="row">
                     <div class="form-group col-md-10 center-horizontal input-margin">
-                        @Html.ValidationSummary("", new {@class = "text-danger"})
-                        @Html.TextBoxFor(m => m.Email, new {@id = "user_email", @class = "form-control", @placeholder = "Email"})
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
+                        @Html.TextBoxFor(m => m.Email, new { @id = "user_email", @class = "form-control", @placeholder = "Email" })
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="form-group col-md-10 center-horizontal input-margin">
-                        @Html.TextBoxFor(m => m.ConfirmEmail, new {@id = "user_email_confirmation", @class = "form-control", @placeholder = "Re-enter Email"})
+                        @Html.TextBoxFor(m => m.ConfirmEmail, new { @id = "user_email_confirmation", @class = "form-control", @placeholder = "Re-enter Email" })
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-10 center-horizontal input-margin">
-                        @Html.PasswordFor(m => m.Password, new {@id = "user_password", @class = "form-control", @placeholder = "Password"})
+                        @Html.PasswordFor(m => m.Password, new { @id = "user_password", @class = "form-control", @placeholder = "Password" })
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-10 center-horizontal input-margin">
-                        @Html.PasswordFor(m => m.ConfirmPassword, new {@id = "user_password_confirmation", @class = "form-control", @placeholder = "Re-enter Password"})
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { @id = "user_password_confirmation", @class = "form-control", @placeholder = "Re-enter Password" })
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-md-10 center-horizontal input-margin check">
-                        @Html.CheckBoxFor(m => m.ReceiveNewsLetter, new {@id = "user_newsletter_opt_in", @class = "col-md-1"})
-                        @Html.LabelFor(m => m.ReceiveNewsLetter, new {@id = "user_newsletter", @class = "col-md-11",})
+                        @Html.CheckBoxFor(m => m.ReceiveNewsLetter, new { @id = "user_newsletter_opt_in", @class = "col-md-1" })
+                        @Html.LabelFor(m => m.ReceiveNewsLetter, new { @id = "user_newsletter", @class = "col-md-11", })
                     </div>
                 </div>
                 <div class="row">
@@ -69,11 +69,4 @@
             </div>
         </div>
     }
-    </div>
-
-
-
-  @* @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }*@
-
+</div>
