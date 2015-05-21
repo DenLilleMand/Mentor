@@ -14,7 +14,7 @@ namespace Mentor.Controllers
             return View();
         }
 
-        public ActionResult Test()
+        public ActionResult MyPrograms()
         {
             return View();
         }
@@ -32,6 +32,11 @@ namespace Mentor.Controllers
         }
 
         public ActionResult Interests()
+        {
+            return View();
+        }
+
+        public ActionResult WishList()
         {
             return View();
         }

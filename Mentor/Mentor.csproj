@@ -240,6 +240,7 @@
     <Content Include="Content\css\jquery.tagit.css" />
     <Content Include="Content\css\MyPrograms.css" />
     <Content Include="Content\css\tagit.ui-zendesk.css" />
+    <Content Include="Content\css\WishList.css" />
     <Content Include="Content\Fonts\fontawesome-webfont.svg" />
     <Content Include="Content\Fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\fullcalendar.css" />
@@ -313,6 +314,7 @@
     <Content Include="Content\Fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\Fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\Fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\css\WishListSass.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\fullcalendar.js" />
     <Content Include="Scripts\fullcalendar.min.js" />
@@ -336,6 +338,7 @@
     <Content Include="Scripts\npm.js" />
     <Content Include="Scripts\SearchFunction.js" />
     <Content Include="Scripts\tag-it.js" />
+    <Content Include="Scripts\WishList.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -383,6 +386,7 @@
     <Content Include="Views\Shared\_LoggedInHeader.cshtml" />
     <Content Include="Views\Home\Interests.cshtml" />
     <Content Include="Views\Home\MyPrograms.cshtml" />
+    <Content Include="Views\Home\WishList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

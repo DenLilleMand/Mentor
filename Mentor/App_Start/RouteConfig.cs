@@ -16,7 +16,7 @@ namespace Mentor
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Test", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "WishList", id = UrlParameter.Optional }
             );
         }
     }

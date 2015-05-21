@@ -1,0 +1,106 @@
+﻿
+
+ 
+ul.wishList {
+  list-style-type: none;
+  margin-left: 10%
+}
+
+ 
+ul.wishList li {
+  padding: 10px;
+  overflow: auto;
+  margin: 0 auto;
+}
+ 
+ul.wishList li:hover {
+  background: #eee;
+  cursor: pointer;
+}
+
+ul.wishList li img {
+  float: left;
+  margin: 0 15px 0 0;
+}
+ 
+ul .wishList ul li p {
+  font: 200 12px/1.5 Georgia, Times New Roman, serif;
+}
+
+ 
+h3 {
+  font: bold 20px/1.5 Helvetica, Verdana, sans-serif;
+}
+
+
+@import url(http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic);
+/* try 50% */
+.circle .up {
+  border-radius: 10rem 10rem 0 0; }
+.circle .down {
+  border-radius: 0 0 10rem 10rem; }
+.circle .count {
+  border-radius: 50%; }
+
+.vote-wrapper {
+    vertical-align: middle;
+}
+.vote {
+  display: flex;
+  flex-direction: column;
+  font-family: "Noto Sans";
+  position: relative;
+  width: 15rem;
+  height: 15rem;
+  margin: 1rem; }
+
+.increment {
+  flex: 1 0 0;
+  text-align: center;
+  opacity: 0.5;
+  transition: 0.3s;
+  cursor: pointer; }
+  .increment.up {
+    background: #4BC35F;
+    height: 50%;
+    margin-bottom: 0.25rem; }
+  .increment.down {
+    background: #C15044;
+    height: 50%; }
+  .increment:hover {
+    opacity: 1; }
+
+.count {
+  position: absolute;
+  top: 0;
+  border-radius: 0.1rem;
+  margin: 3.75rem;
+  background: #F6F3E4;
+  width: 7.5rem;
+  font-size: 2.5rem;
+  font-weight: bold;
+  line-height: 7.5rem;
+  text-align: center;
+  box-shadow: 0 0 0 0.5rem #F6F3E4;
+  pointer-events: none;
+}
+
+  .count.upvoted {
+    color: #4BC35F; }
+  .count.downvoted {
+    color: #C15044; }
+
+.bump {
+  animation: bump 200ms; }
+
+@keyframes bump {
+  30% {
+    transform: scale(1.2); }
+
+}
+
+
+
+
+
+/*# sourceMappingURL=WishList.css.map */

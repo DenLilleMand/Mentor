@@ -6,3 +6,4 @@
 /// <reference path="npm.js" />
 /// <reference path="tag-it.js" />
 /// <reference path="jquery-ui.js" />
+/// <reference path="wishlist.js" />

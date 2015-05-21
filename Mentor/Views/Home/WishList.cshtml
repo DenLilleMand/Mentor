@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "WishList";
+    Layout = "~/Views/Shared/_LoggedInHeader.cshtml";
+}
+@Styles.Render("~/Content/css/WishList.css")
+@Scripts.Render("~/Scripts/WishList.js")
+
+<div>
+    <ul class="wishList">
+        <li>
+            <!--class="vertical-align">-->
+            <div class="imageDiv wisListItem">
+                <img src="http://lorempixum.com/100/100/nature/1" class="col-md-2"/>
+                <div class="info col-md-3">
+                    <h3>ASP.NET</h3>
+                    <p>Lorem ipsum dolor sit amet...</p>
+                </div>
+            </div>
+            <div class="vote-wrapper">
+                <div class="vote circle">
+                    <div class="increment up"></div>
+                    <div class="increment down"></div>
+                    <div class="count">
+                        <span class="countNow">6</span>
+                        <span class="total">/8</span>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
