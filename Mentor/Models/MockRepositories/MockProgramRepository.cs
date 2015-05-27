@@ -18,8 +18,9 @@ namespace Mentor.Models.MockRepositories
             throw new NotImplementedException();
         }
 
-        public void Create(Program Object)
+        public int Create(Program Object)
         {
+            return 0;
         }
 
         public Program Read(int? id)

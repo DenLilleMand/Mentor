@@ -18,6 +18,12 @@ namespace Mentor
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "TagsRoute",
+                url: "{controller}/{action}/{tags}",
+                defaults: new { controller = "User", action = "Interests", id = UrlParameter.Optional }
+            );
         }
     }
 }

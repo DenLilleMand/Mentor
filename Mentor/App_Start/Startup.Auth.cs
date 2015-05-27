@@ -1,4 +1,5 @@
 ﻿using System;
+using Mentor.hubs;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
@@ -6,6 +7,9 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using Mentor.Models;
+using Mentor.Models.Repositories.ConcreteImplementation;
+using Microsoft.AspNet.SignalR;
+
 [assembly: OwinStartup(typeof(Mentor.Startup))]
 
 namespace Mentor
@@ -18,7 +22,7 @@ namespace Mentor
             // Configure the db context, user manager and signin manager to use a single instance per request
             app.CreatePerOwinContext(ApplicationDbContext.Create);
             // Any connection or hub wire up and configuration should go here
-            app.MapSignalR();
+
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
             app.CreatePerOwinContext<ApplicationSignInManager>(ApplicationSignInManager.Create);
 
@@ -76,7 +80,10 @@ namespace Mentor
             //    ClientId = "",
             //    ClientSecret = ""
             //});
-
+            ApplicationDbContext dbContext = new ApplicationDbContext();
+            GlobalHost.DependencyResolver.Register(typeof(ProgramChatHub), () => new ProgramChatHub(new ProgramRepository(dbContext), new UserRepository(dbContext)));
+            GlobalHost.DependencyResolver.Register(typeof(MyProgramsHub), () => new MyProgramsHub(new ProgramRepository(dbContext), new UserRepository(dbContext)));
+            app.MapSignalR();
         }
     }
 }

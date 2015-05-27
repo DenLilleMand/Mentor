@@ -1,26 +1,27 @@
-﻿@model Mentor.ViewModels.ProgramViewModel
+﻿@using System.Web.UI.WebControls
+@model Mentor.ViewModels.ProgramViewModel
+
 <head>
     <title>Program</title>
 </head>
 <body>
-    <link href="~/Content/css/NonMemberProgram.css" rel="stylesheet" />
-    <div class="container">
-        <div class="jumbotron">
+<link href="~/Content/css/NonMemberProgram.css" rel="stylesheet"/>
+<div class="container">
+    <div class="jumbotron">
 
-            <h1>@Model.Program.Name</h1>
-            <p>
-                <a class="btn btn-primary btn-lg" href="#" role="button">Request membership as mentor</a>
-                <a class="btn btn-primary btn-lg" href="#" role="button">Request membership as mentee</a>
-
-            </p>
-            <span style="" class="label label-success">
+        <h1>@Model.Program.Name</h1>
+        <p>
+            <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" href="#responsive">Request membership</button>
+            
+        </p>
+        <span style="" class="label label-success">
                 Creator: @Model.Program.Creator.FirstName @Model.Program.Creator.LastName
             </span>
-            <span class="label label-success">
+        <span class="label label-success">
                 Interest: @Model.Program.Interest.Name
             </span>
-        </div>
-<div class="jumbotron">
+    </div>
+    <div class="jumbotron">
         <div class="row">
             <div class="col-xs-6">
                 <h3>Mentors</h3>
@@ -44,9 +45,68 @@
                     }
                 </ul>
             </div>
+        </div>
     </div>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Request membership of @Model.Program.Name</h4>
+                </div>
+                @using (Html.BeginForm("ProgramApplication", "Programs", FormMethod.Post, new { @class = "center-align form-group", role = "form" }))
+                {
+                <div class="modal-body">
+                        @Html.AntiForgeryToken()
+                        <div class="center-div rounded-content center-horizontal">
+                            <div class="row">
+                                <div class="form-group col-md-10 center-horizontal input-margin">
+                                    @Html.HiddenFor(m => m.ProgramId)
+                                    @Html.ValidationSummary("", new {@class = "text-danger"})
+                                    @Html.LabelFor(m => m.ProgramApplication.QualificationsMessage, "Write your previous experiences with the subject")
+                                    @Html.TextAreaFor(m => m.ProgramApplication.QualificationsMessage, new {@id = "message", @class = "form-control", @placeholder = "", @rows = 7, @Style = "resize: none;"})
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-10 center-horizontal input-margin">
+                                    @Html.ValidationSummary("", new {@class = "text-danger"})
+                                    @Html.LabelFor(m => m.ProgramApplication.ReasonMessage, "Why do you want to join this program?")
+                                    @Html.TextAreaFor(m => m.ProgramApplication.ReasonMessage, new {@id = "message", @class = "form-control", @placeholder = "", @rows = 7, @Style = "resize: none;"})
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-10 center-horizontal input-margin">
+                                    @Html.ValidationSummary("", new { @class = "text-danger" })
+                                    <ul style="list-style-type: none;">
+                                        <li>
+                                            @Html.LabelFor(m => m.ProgramApplication.Role, "Mentor")
+                                            @Html.RadioButtonFor(m => m.ProgramApplication.Role, Mentor.Models.Role.Mentor)
+                                        </li>
+                                        <li>
+                                            @Html.LabelFor(m => m.ProgramApplication.Role, "Mentee")
+                                            @Html.RadioButtonFor(m => m.ProgramApplication.Role, Mentor.Models.Role.Mentee)
+                                        </li>
+</ul>
+                                </div>
+                            </div>
+                    </div>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Send</button>
+                </div>
+                    }
+            </div>
+        </div>
+    </div>
+
+   
 </div>
 
-    </div>
+
 
 </body>
+
+

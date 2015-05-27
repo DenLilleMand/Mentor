@@ -1,4 +1,4 @@
-﻿using System.Web;
+using System.Web;
 using System.Web.Optimization;
 
 namespace Mentor
@@ -29,6 +29,7 @@ namespace Mentor
 
             bundles.Add(new ScriptBundle("~/bundles/signalr").Include(
                   "~/Scripts/jquery.signalR-{version}.js"));
+
         }
     }
 }

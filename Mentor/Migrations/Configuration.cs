@@ -134,13 +134,13 @@ namespace Mentor.Migrations
 
                     },
                     MentorUsers = new List<User>
-                {
-                    user1
-                },
+                    {
+                        user1
+                    },
                     MenteeUsers = new List<User>
-                {
-                    user2
-                }
+                    {
+                        user2
+                    }
                 };
 
 
@@ -148,13 +148,13 @@ namespace Mentor.Migrations
                 {
                     Name = "asp.net mvc",
                     UndefinedUsers = new List<User>
-                {
-                   user1
-                },
+                    {
+                        user1
+                    },
                     MentorUsers = new List<User>
-                {
-                     user2
-                },
+                    {
+                        user2
+                    },
                     MenteeUsers = new List<User>
                     {
 
@@ -166,17 +166,17 @@ namespace Mentor.Migrations
                 {
                     Name = "php",
                     UndefinedUsers = new List<User>
-                {
-                    user2
-                },
+                    {
+                        user2
+                    },
                     MentorUsers = new List<User>
                     {
 
                     },
                     MenteeUsers = new List<User>
-                {
-                    user1
-                }
+                    {
+                        user1
+                    }
                 };
                 //not entirely sure if these are nessecery.
                 user1.MentorInterests.Add(interest1);
@@ -197,24 +197,26 @@ namespace Mentor.Migrations
                 {
                     Name = "My Meteor program",
                     Mentors = new List<User>()
-                {
-                    user1
-                },
+                    {
+                        user1
+                    },
                     Mentee = new List<User>()
-                {
-                    user2
-                },
+                    {
+                        user2
+                    },
                     Admins = new List<User>()
-                {
-                    user1
-                },
+                    {
+                        user1
+                    },
                     Creator = user1,
                     Visibility = Visibility.Private,
                     Interest = interest1,
                     ProgramMessages = new List<ProgramMessage>()
                     {
 
-                    }
+                    },
+                    Picture = new byte[1024]
+
                 };
 
                 ProgramMessage message1 = new ProgramMessage()
@@ -241,8 +243,6 @@ namespace Mentor.Migrations
                 user1.MentorPrograms.Add(program1);
                 user1.CreatorForPrograms.Add(program1);
                 user2.MenteePrograms.Add(program1);
-
-
 
                 if (!context.Users.Any(u => u.UserName == "mattinielsen5@hotmail.com"))
                 {

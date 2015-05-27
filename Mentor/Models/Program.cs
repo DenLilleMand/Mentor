@@ -1,29 +1,51 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.Design;
+using Mentor.Models.Repositories.Interfaces;
 
-namespace Mentor.Models
+namespace Mentor.Models 
 {
-    #region testingRegions
+
     public enum Visibility
     {
         Private,
         Public
     }
 
-    public class Program
+    public class Program : IContextEntity
     {
+        #region public
         public Program()
         {
-            this.Mentors = new HashSet<User>();
-            this.Mentee = new HashSet<User>();
-            this.Admins = new HashSet<User>();
-            this.ProgramMessages = new HashSet<ProgramMessage>();
+            Mentors = new HashSet<User>();
+            Mentee = new HashSet<User>();
+            Admins = new HashSet<User>();
+            ProgramMessages = new HashSet<ProgramMessage>();
+            ProgramApplications = new HashSet<ProgramApplication>();
+            Notifications = new HashSet<Notification>();
         }
+
+        public Program(Interest interest, User creator, string description)
+        {
+            Interest = interest;
+            Creator = creator;
+            Description = description;
+            Mentors = new HashSet<User>();
+            Mentee = new HashSet<User>();
+            Admins = new HashSet<User>();
+            ProgramMessages = new HashSet<ProgramMessage>();
+            ProgramApplications = new HashSet<ProgramApplication>();
+            Notifications = new HashSet<Notification>();
+        }
+
 
         public int Id { get; set; }
         public Visibility Visibility { get; set; }
         public string Name { get; set; }
+        public string Description { get; set; }
+        public byte[] Picture { get; set; }
+
 
        
         public int CreatorId { get; set; }
@@ -38,6 +60,7 @@ namespace Mentor.Models
         
         public virtual ICollection<User> Mentee { get; set; }//shouldve been mentees obviously :/  if any1 has time to fix.
         public virtual ICollection<ProgramMessage> ProgramMessages { get; set; }
+        public virtual ICollection<ProgramApplication> ProgramApplications { get; set; }
 
 
         [ForeignKey("CreatorId")]
@@ -45,6 +68,7 @@ namespace Mentor.Models
 
         [ForeignKey("InterestId")]
         public virtual Interest Interest { get; set; }
+        #endregion
     }
-    #endregion
+    
 }

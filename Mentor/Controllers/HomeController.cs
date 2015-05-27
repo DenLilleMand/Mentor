@@ -26,11 +26,17 @@ namespace Mentor.Controllers
             return View();
         }
 
-
-
-      
-
         public ActionResult Profile()
+        {
+            return View();
+        }
+
+        public ActionResult Explore()
+        {
+            return View();
+        }
+
+        public ActionResult Help()
         {
             return View();
         }

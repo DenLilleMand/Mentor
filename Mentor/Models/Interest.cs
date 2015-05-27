@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Mentor.Models;
+using Mentor.Models.Repositories.Interfaces;
 
 namespace Mentor.Models
 {
-    public class Interest
+    public class Interest : IContextEntity
     {
 
         public Interest()
@@ -18,7 +19,17 @@ namespace Mentor.Models
             this.ProgramInterests = new HashSet<Program>();
         }
 
-        public int InterestId { get; set; }
+        public Interest(string interest)
+        {
+            Name = interest;
+            this.MentorUsers = new HashSet<User>();
+            this.MenteeUsers = new HashSet<User>();
+            this.UndefinedUsers = new HashSet<User>();
+
+            this.ProgramInterests = new HashSet<Program>();
+        }
+
+        public int Id { get; set; }
         public string Name { get; set; }
 
 

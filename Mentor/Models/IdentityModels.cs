@@ -6,14 +6,19 @@ using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using Mentor.Models.Repositories.Interfaces;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Mentor.Models
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
-    public class User : IdentityUser<int, CustomUserLogin, CustomUserRole, CustomUserClaim>
+    public class User : IdentityUser<int, CustomUserLogin, CustomUserRole, CustomUserClaim>, IContextEntity
     {
+        public User()
+        {
+        }
+
         /*
          *  IdentityUser allready has an attribut called 'Id', so we dont have to make one,
          *  Thats why we're still able to create foreignkey relationships to other entities with this entity.
@@ -25,6 +30,11 @@ namespace Mentor.Models
         public bool IsMentor { get; set; }
         public bool IsMentee { get; set; }
         public string ProfileText { get; set; }
+        public bool IsOnline { get; set; }
+        public string OnlyFirstName { get; set; }
+
+        [Column(TypeName = "datetime2")]
+        public DateTime? LastLogin { get; set; }
 
         public virtual ICollection<Interest> UndefinedInterests { get; set; }
         public virtual ICollection<Interest> MentorInterests { get; set; }
@@ -34,6 +44,8 @@ namespace Mentor.Models
         public virtual ICollection<Program> AdminForPrograms { get; set; }
         public virtual ICollection<Notification> Notifications { get; set; }
         public virtual ICollection<Notification> NotificationsCreated { get; set; }
+        public virtual ICollection<ProgramApplication> ProgramApplications { get; set; }
+
 
         public virtual ICollection<Program> CreatorForPrograms { get; set; }
         public virtual ICollection<ProgramMessage> ProgramMessages { get; set; }
@@ -90,14 +102,9 @@ namespace Mentor.Models
             /*i suppose that a program shouldnt be deleted just because the creator is,
                                                                            but we have to realize that the id, might eventually return null if some1
                                                                             * deletes a profile. But maybe we just keep profiles, and make sure that people
-         /*                                                                  can activate them again? kind of like facebook i suppose?
-            modelBuilder.Entity<DeliveryRate>()
-            .HasRequired(e => e.Destination)
-            .WithMany()
-            .HasForeignKey(e => e.DestinationId)
-            .WillCascadeOnDelete(false);
+                                                                          can activate them again? kind of like facebook i suppose? */
             
-            */
+          
             modelBuilder.Entity<ProgramMessage>()
                 .HasRequired<User>(pm => pm.User)
                 .WithMany(u => u.ProgramMessages)
@@ -187,6 +194,16 @@ namespace Mentor.Models
                 .HasRequired<Program>(n => n.Program)
                 .WithMany(p => p.Notifications)
                 .HasForeignKey(n => n.ProgramId);
+
+            modelBuilder.Entity<ProgramApplication>()
+                .HasRequired<Program>(pa => pa.ReceiveingProgram)
+                .WithMany(p => p.ProgramApplications)
+                .HasForeignKey(pa => pa.ReceivingProgramId).WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<ProgramApplication>()
+                .HasRequired<User>(pa => pa.SendingUser)
+                .WithMany(u => u.ProgramApplications)
+                .HasForeignKey(pa => pa.SenderId).WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Notification>()
                 .HasRequired<User>(n => n.NotificationCreator)

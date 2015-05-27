@@ -1,6 +1,7 @@
 using Mentor.Models;
 using Mentor.Models.Repositories;
-using Mentor.Models.Repositories.Concrete_Implementation;
+using Mentor.Models.Repositories.AbstractInterfaces;
+using Mentor.Models.Repositories.ConcreteImplementation;
 using Mentor.Models.Repositories.Interfaces;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(Mentor.App_Start.NinjectWebCommon), "Start")]
@@ -49,9 +50,11 @@ namespace Mentor.App_Start
             {
                 kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
-                
-                kernel.Bind<IRepository<Program>>().To<ProgramRepository>();
-                kernel.Bind<IRepository<User>>().To<UserRepository>();
+                //unit of work /// constructor
+                kernel.Bind<ApplicationDbContext>().ToSelf().InRequestScope();
+                kernel.Bind<AbstractIRepository<Program>>().To<ProgramRepository>().WithConstructorArgument("context", context => kernel.Get<ApplicationDbContext>());
+                kernel.Bind<AbstractIRepository<User>>().To<UserRepository>().WithConstructorArgument("context", context => kernel.Get<ApplicationDbContext>());
+                kernel.Bind<AbstractIRepository<Interest>>().To<InterestRepository>().WithConstructorArgument("context", context => kernel.Get<ApplicationDbContext>());
 
                 RegisterServices(kernel);
                 return kernel;

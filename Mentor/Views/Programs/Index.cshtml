@@ -28,27 +28,26 @@
                     <div class="col-md-8 border">
                         <div class="row border">
                             <div class="panel-body">
-                                <ul class="chat" id="collective-chat">
-                                    @foreach (var item in @Model.ProgramMessages)
-                                    {
-                                         <li class="left clearfix"> 
-                                                <span class="chat-img pull-left">
-                                                    <img src="http://placehold.it/50/55C1E7/fff&text=R" alt="User Avatar" class="img-circle" />
-                                                </span>
-                                                <div class="chat-body clearfix">
-                                                <div class="header">
-                                                    <strong class="primary-font"> @item.User.FirstName @item.User.LastName </strong> 
-                                                    <small class="pull-right text-muted">
-                                                        <span class="glyphicon glyphicon-time"></span>
-                                                        @item.Date 
-                                                    </small>
-                                                </div>
-                                                <p>
-                                                    @item.Message
-                                                </p>
-                                                </div>
-                                          </li>
-                                    }
+                                <ul class="chat" id="collective-chat" data-bind="foreach: messages">
+                                    <li class="left clearfix">
+                                        <span class="chat-img pull-left">
+                                            <img src="http://placehold.it/50/55C1E7/fff&text=R" alt="User Avatar" class="img-circle" />
+                                        </span>
+                                        <div class="chat-body clearfix">
+                                            <div class="header">
+                                                <strong class="primary-font" data-bind="text: FullName"> </strong>
+                                                <small class="pull-right text-muted">
+                                                    <span class="glyphicon glyphicon-time"></span>
+                                                    <span data-bind="text: Date">
+
+
+                                                    </span>
+                                                </small>
+                                            </div>
+                                            <p data-bind="html: Message">
+                                            </p>
+                                        </div>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -64,16 +63,11 @@
                         </div>
                     </div>
                     <div class="col-md-4 border">
-                        <ul class="list-group">
-                            <li class="list-group-item"> Online </li>
-                            @foreach (var item in Model.Program.Mentors)
-                            {
-                                <li class="list-group-item"> @item.FirstName @item.LastName </li>
-                            }
-                            @foreach (var item in Model.Program.Mentee)
-                            {
-                                <li class="list-group-item"> @item.FirstName @item.LastName </li>
-                            }
+                        <ul id="users" class="list-group" data-bind="foreach: users">
+                            <li class="list-group-item">
+                                <span data-bind="text: firstName"></span>
+                                <span data-bind="text: lastName"></span>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -129,46 +123,116 @@
 }
 
 @section SignalR {
-    <script src="~/Scripts/jquery.signalR-2.1.0.min.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.2.0.min.js"></script>
+    <script src="~/Scripts/custom/userAndChatstate.js"></script>
     <script src="~/signalr/hubs"></script>
 
     <script>
     $(function() {
-        var chat = $.connection.chatHub;
-        chat.client.addNewMessageToPage = function (message, date, position) {
+        var chatViewModel = new userAndChatstate.ChatViewModel;
+        var usersViewModel = new userAndChatstate.UsersViewModel;
+        console.log(chatViewModel);
+        console.log(usersViewModel);
+        console.log(@Html.Raw(Json.Encode(@Model.CurrentUser.Id)));
+        var currentUser = new userAndChatstate.User(@Html.Raw(Json.Encode(@Model.CurrentUser.Id)), @Html.Raw(Json.Encode(@Model.CurrentUser.FirstName)), @Html.Raw(Json.Encode(@Model.CurrentUser.LastName)));
 
-            $('#collective-chat').append(
-                '<li class="left clearfix">' +
-                '<span class="chat-img pull-left">' +
-                '<img src="http://placehold.it/50/55C1E7/fff&text=R" alt="User Avatar" class="img-circle" />' +
-                '</span>' +
-                '<div class="chat-body clearfix">' +
-                '<div class="header">' +
-                '<strong class="primary-font">' + "@Model.CurrentUser.FirstName" + " " + "@Model.CurrentUser.LastName" + '</strong>' +
-                '<small class="pull-right text-muted">' +
-                '<span class="glyphicon glyphicon-time">' +
-                "</span>" + date +
-                "</small>" +
-                "</div>" +
-                "<p>" +
-                htmlEncode(message) +
-                "</p>" +
-                "</div>" +
-                "</li>"
-                );
+        var chatHub = $.connection.programChatHub;
+        /*chatHub.id = currentUser.id;*/
+        console.log('currentuser:');
+        console.log(currentUser);
+        console.log("connect id(user ID) but thats how JS works??");
+        console.log(chatHub.id);
+        chatHub.client.onMessageReceived = function(programMessage) {
+            var programMessageJson = $.parseJSON(programMessage);
+            console.log('program message:');
+            console.log(programMessageJson);
+            chatViewModel.messages.push(programMessageJson);
         };
-        $('#text').focus();
-        $.connection.hub.start().done(function() {
-            $('#sendmessage').click(function() {
-                chat.server.send($('#text').val());
-                $('#text').val('').focus();
-            });
-        });
-    });
 
-    function htmlEncode(value) {
-        var encodedValue = $('<div />').text(value).html();
-        return encodedValue;
-    }
-</script>
+        chatHub.client.leaves = function(userId, firstName, lastName) {
+            var disconnectedUser = new userAndChatstate.User(userId, firstName, lastName);
+            usersViewModel.customRemove(disconnectedUser);
+            console.log('leave was called');
+        }
+
+        chatHub.client.joins = function(user) {
+            var connectedUser = new userAndChatstate.User(user.Id, user.FirstName, user.LastName);
+            usersViewModel.users.push(connectedUser);
+            console.log('joins was called');
+        }
+
+
+        function sendMessage() {
+            var message = $("#text").val();
+            if (message !== "" && message !== null) {
+                chatHub.server.send(message, @Html.Raw(Json.Encode(@Model.Program.Id)), @Html.Raw(Json.Encode(@Model.CurrentUser.Id))).done(function() {
+                    $('#text').val('').focus();
+                }).fail(function(e) {
+                    console.log(e);
+                });
+            }
+        }
+
+        function retrieveMessageHistory() {
+            chatHub.server.retrieveProgramMessagesAsJson(@Html.Raw(Json.Encode(@Model.Program.Id)))
+                    .done(function(programMessagesAsJson) {
+                        ko.utils.arrayForEach(programMessagesAsJson, function(item) {
+                            chatViewModel.messages.push(new userAndChatstate.ProgramMessage(item.Message, item.FullName, item.Date));
+                        });
+
+                    });
+            };
+
+            $('#sendmessage').click(function() {
+                sendMessage();
+                /*                $("#collective-chat").animate({
+                                    scrollTop: $("#collective-chat")[0].scrollHeight - $("#collective-chat").height()
+                                }, 1000, function() {
+
+                                });*/
+            });
+
+
+            $('#text').keypress(function(e) {
+                if (e.which === 13) {
+                    sendMessage();
+                }
+            });
+
+            $('#text').focus();
+
+            $.connection.hub.start().done(function() {
+                retrieveMessageHistory();
+                console.log("calling get connected mentors");
+                chatHub.server.getConnectedMentors().done(function(connectedMentorUsers) {
+                    console.log(connectedMentorUsers);
+                    ko.utils.arrayForEach(conntectedMentorsUsersAsJson, function(item) {
+                        usersViewModel.users.push(new userAndChatstate.User(item.Id, item.FirstName, item.LastName));
+                    });
+                });
+                console.log("calling get connected mentees");
+                chatHub.server.getConnectedMentees()
+                    .done(function(connectedMenteeUsers) {
+                        console.log(connectedMenteeUsers);
+                        ko.utils.arrayForEach(connectedMenteeUsers, function(item) {
+                            usersViewModel.users.push(new userAndChatstate.User(item.Id, item.FirstName, item.LastName));
+                        });
+                        console.log('calling server.joined');
+
+                        console.log('calling server.Joined() so we should see our selfes on the list?');
+
+                        console.log('calling retrieve message history:');
+                    });
+                chatHub.server.joined(@Html.Raw(Json.Encode(@Model.CurrentUser.Id)));
+                ko.applyBindings(usersViewModel, $("#users")[0]);
+                ko.applyBindings(chatViewModel, $("#collective-chat")[0]);
+
+            });
+
+            function htmlEncode(value) {
+                var encodedValue = $('<div />').text(value).html();
+                return encodedValue;
+            }
+        });
+    </script>
 }

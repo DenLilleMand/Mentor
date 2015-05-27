@@ -69,16 +69,18 @@ namespace Mentor.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [DataType(DataType.EmailAddress)]
-        [Display(Name = "Confirm Email")]
-        [Compare("Email", ErrorMessage = "The emails you have entered does not match.")]
-        public string ConfirmEmail { get; set; }
         
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 8)]
+        [StringLength(100, ErrorMessage = "Last name has to be atleast 2 and maximum 50 characters.", MinimumLength = 8)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
+
+        [Required]
+        [StringLength(50, ErrorMessage = "Full name has to be atleast 2 and maximum 50 characters.", MinimumLength = 2)]
+        [DataType(DataType.Text)]
+        [Display(Name = "Full Name")]
+        public string FullName { get; set; }
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
